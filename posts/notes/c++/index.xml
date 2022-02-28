@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>北大郭玮《程序设计实习c&#43;&#43;版》笔记 on de_Abigaïl</title>
+    <link>https://abigail1985.github.io/posts/notes/c&#43;&#43;/</link>
+    <description>Recent content in 北大郭玮《程序设计实习c&#43;&#43;版》笔记 on de_Abigaïl</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 30 Mar 2021 16:58:46 +0800</lastBuildDate><atom:link href="https://abigail1985.github.io/posts/notes/c++/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PKUCpp-2</title>
+      <link>https://abigail1985.github.io/essay/pkucpp-2/</link>
+      <pubDate>Tue, 30 Mar 2021 16:58:46 +0800</pubDate>
+      
+      <guid>https://abigail1985.github.io/essay/pkucpp-2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PKUCpp-1</title>
+      <link>https://abigail1985.github.io/essay/pkucpp-1/</link>
+      <pubDate>Mon, 29 Mar 2021 16:58:46 +0800</pubDate>
+      
+      <guid>https://abigail1985.github.io/essay/pkucpp-1/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

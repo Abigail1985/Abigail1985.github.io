@@ -1,0 +1,1204 @@
+<!doctype html><html lang=zh dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>PKUCpp-1 | de_Abigaïl</title>
+<meta name=keywords content="C++ ">
+<meta name=description content="PKUCpp-1 - de_Abigaïl">
+<meta name=author content="Abigail">
+<link rel=canonical href=https://abigail1985.github.io/essay/pkucpp-1/>
+<link crossorigin=anonymous href=/assets/css/stylesheet.min.842c2a49f4946cd14e0b90c75dd69c37283b7c5e3fd3e7fb5bb176d096f2e306.css integrity="sha256-hCwqSfSUbNFOC5DHXdacNyg7fF4/0+f7W7F20Jby4wY=" rel="preload stylesheet" as=style>
+<script defer crossorigin=anonymous src=/assets/js/highlight.min.a3f672ba2597cf5d0a97d35c02ca273c23ffd63073757c9e0d4f13bd63f2b00a.js integrity="sha256-o/ZyuiWXz10Kl9NcAsonPCP/1jBzdXyeDU8TvWPysAo=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=https://abigail1985.github.io/images/favicon.png>
+<link rel=icon type=image/png sizes=16x16 href=https://abigail1985.github.io/images/favicon.png>
+<link rel=icon type=image/png sizes=32x32 href=https://abigail1985.github.io/images/favicon.png>
+<link rel=apple-touch-icon href=https://abigail1985.github.io/images/favicon.png>
+<link rel=mask-icon href=https://abigail1985.github.io/images/favicon.png>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<meta name=generator content="Hugo 0.87.0">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css integrity=sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X crossorigin=anonymous>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js integrity=sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4 crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js integrity=sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa crossorigin=anonymous onload=renderMathInElement(document.body)></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-163991976-1','auto'),ga('send','pageview'))</script><meta property="og:title" content="PKUCpp-1">
+<meta property="og:description" content>
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://abigail1985.github.io/essay/pkucpp-1/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-03-29T16:58:46+08:00">
+<meta property="article:modified_time" content="2021-03-29T16:58:46+08:00"><meta property="og:site_name" content="de_Abigaïl">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="PKUCpp-1">
+<meta name=twitter:description content>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"分类","item":"https://abigail1985.github.io/posts/"},{"@type":"ListItem","position":2,"name":"笔记","item":"https://abigail1985.github.io/posts/notes/"},{"@type":"ListItem","position":3,"name":"北大郭玮《程序设计实习c++版》笔记","item":"https://abigail1985.github.io/posts/notes/c++/"},{"@type":"ListItem","position":4,"name":"PKUCpp-1","item":"https://abigail1985.github.io/essay/pkucpp-1/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"PKUCpp-1","name":"PKUCpp-1","description":"","keywords":["C++ "],"articleBody":"[TOC]\n预处理指令 https://www.cnblogs.com/zi-xing/p/4550246.html\n本文主要记录了C/C++预处理指令，常见的预处理指令如下：\n #空指令，无任何效果 #include包含一个源代码文件 #define定义宏 #undef取消已定义的宏 #if如果给定条件为真，则编译下面代码 #ifdef如果宏已经定义，则编译下面代码 #ifndef如果宏没有定义，则编译下面代码 #elif如果前面的#if给定条件不为真，当前条件为真，则编译下面代码 #endif结束一个#if……#else条件编译块 #error停止编译并显示错误信息  什么是预处理指令? 预处理指令是以#号开头的代码行。#号必须是该行除了任何空白字符外的第一个字符。#后是指令关键字，在关键字和#号之间允许存在任意个数的空白字符。整行语句构成了一条预处理指令，该指令将在编译器进行编译之前对源代码做某些转换。\n以前没有在意的学者注意了,预处理指令是在编译器进行编译之前进行的操作.预处理过程扫描源代码，对其进行初步的转换，产生新的源代码提供给编译器。可见预处理过程先于编译器对源代码进行处理。在很多编程语言中，并没有任何内在的机制来完成如下一些功能：在编译时包含其他源文件、定义宏、根据条件决定编译时是否包含某些代码(防止重复包含某些文件)。要完成这些工作，就需要使用预处理程序。尽管在目前绝大多数编译器都包含了预处理程序，但通常认为它们是独立于编译器的。预处理过程读入源代码，检查包含预处理指令的语句和宏定义，并对源代码进行响应的转换。预处理过程还会删除程序中的注释和多余的空白字符。\n预编译指令 #ifdef,#ifndef,#endif…\n以上这些预编译指令，都是条件编译指令，也就是说，将决定那些代码被编译，而哪些不被编译\nExemple1:\n#include #include #define DEBUG int main(void) { int i = 0; char c; while(1) { i++; c = getchar(); if('\\n' != c) { getchar(); } if('q' == c || 'Q' == c) { #ifdef DEBUG//判断DEBUG是否被定义了  printf(\"We get:%c,about to exit.\\n\",c); #endif  break; } else { printf(\"i = %d\",i); #ifdef DEBUG  printf(\",we get:%c\",c); #endif  printf(\"\\n\"); } } printf(\"Hello World!\\n\"); return 0; } /*#endif用于终止#if预处理指令。*/ Exemple2:\n#include #define DEBUG void main() { #ifdef DEBUG  printf(\"yes \"); #endif #ifndef DEBUG  printf(\"no \"); #endif } //#ifdefined等价于#ifdef; //#if!defined等价于#ifndef 从C到C++ c++对c扩展主要是为了实现面向对象，但有一些简单的扩展与面向对象关系不大，在这一节中介绍\n引用 int n=4; int \u0026r=n;//r引用了n，r的类型是int   r引用了n，r跟n就是一回事了：改变n，r也会改变，反之亦然。\n  定义引用时，一定要将其初始化。\n  为什么我们要使用”引用“？？\n 可以更方便的交换两个变量值  C中的swap函数：\nvoid swap(int *a,int *b)//参数是两个指针 { int tmp; tmp=*a;*a=*b;*b=temp; } int n1,n2; swap(\u0026n1,\u0026n2)//传入的参数是两个变量的地址 C++中的swap函数：\nvoid swap(int \u0026a,int \u0026b) //参数是两个变量的引用（直接在函数声明中创建） { int tmp; tmp=a;a=b;b=tmp; } int n1,n2; swap(n1,n2); 引用作为函数的返回值  int n=4; int \u0026SetValue(){return n;} int main() { SetValue()=40; coutn; return 0; }//输出：40   常引用\n不能通过常引用去修改他引用的内容，但他引用的内容可以改变\nint n=100; const int \u0026r=n; r=200;//编译错误 n=300;//没有问题   const关键字   常量 const int r=2\n  常量指针\nint n,m; const int *p=\u0026n;//p是指向n的常量指针 *p=5;//不能通过常量指针去修改其指向的内容--编译出错 n=4; p=\u0026m;//常量指针的指向可以变化--编译通过 const int*p1; int *p2; p2=p1;//不能把常量指针赋值给非常量指针--编译错误 p1=p2;//反过来可以--编译通过 p2=(int*)p1;//强制类型转换--编译通过   3.常引用\n动态内存分配 c中的malloc可以实现；\nc++中的new可以实现：\n  分配一个变量\nP=new int\nint：类型名\nP：类型为int*的指针\nnew将一片大小为sizeof（int）字节的内存空间的地址赋值给P。\n  分配一个数组\nP=new int[N]\nN:要分配的数组元素的个数\n  注意：new T/new T[N]的返回值都是T*，所以 int *p=new p是成立的\nc++用delete释放被new动态分配的内存空间：\n  释放一个变量\ndelete必须指向new出来的空间；\n一个内存空间不能被delete两次\n  释放一个数组\nint* p=new int[20]; p[0]=1; delete[]p;//不要忘记这个中括号   练习：神秘的数组初始化 #include using namespace std; int main() { int * a[] = {NULL,NULL,new int,new int[6]}; //上面大括号中是初始化的内容 \t*a[2] = 123; a[3][5] = 456; if(! a[0] ) { cout  * a[2]  \",\"  a[3][5]; } return 0; } 内联函数和重载函数 内联函数\n  函数调用是有时间开销的。如果函数本身只有几条语 句，执行非常快，而且函数被反复执行很多次，相比 之下调用函数所产生的这个开销就会显得比较大。\n  为了减少函数调用的开销，引入了内联函数机制。编 译器处理对内联函数的调用语句时，是将整个函数的 代码插入到调用语句处，而不会产生调用函数的语句。\n  在函数定义前加关键字inline，即可定义内联函数\n  重载函数\n一个或多个函数，名字相同，然而参数个数或参数类型不相同，这叫做函数的重载。 以下三个函数是重载关系：\n(1)int Max(double f1,double f2){} (2)int Max(int n1,int n2) {} (3)int Max(int n1,int n2,int n3) {}  函数重载使得函数命名变得简单 编译器根据调用语句的中的实参的个数和类型判断应 该调用哪个函数。  Max(3.4,2.5); //调用 (1) Max(2,4); //调用 (2) Max(1,2,3); //调用 (3) Max(3,2.4);//error,二义性 函数的缺省参数\n  C++中，定义函数的时候可以让最右边的连续若干个参 数有缺省值，那么调用函数的时候，若相应位置不写参 数，参数就是缺省值。\nvoid func( int x1, int x2 = 2, int x3 = 3) { } func(10 ) ; //等效于 func(10,2,3) func(10,8) ; //等效于 func(10,8,3) func(10, , 8) ; //不行,只能最右边的连续若干个参数缺省   函数参数可缺省的目的在于提高程序的可扩充性。\n  即如果某个写好的函数要添加新的参数，而原先那些 调用该函数的语句，未必需要使用新增的参数，那么 为了避免对原先那些函数调用语句的修改，就可以使用缺省参数。\n  类和对象的基本概念（1） 结构化程序设计：\n  c使用：程序=数据结构+算法\n  不足：结构混乱，没有封装和隐藏的概念，难以debug，不能重用类似的代码。\n  面向对象的程序设计：\n  c++使用：程序=类+类+类+...+类\n  特点：抽象，封装，继承，多态\n设计方法：\n归纳：将某类客观事物属性归纳出来（用变量描述属性）\n抽象：将这类事物能进行的操作归纳出来（用函数描述操作）\n封装：将属性和函数捆绑在一起，形成一个类\n  通过类定义来的变量就叫做对象，C中的struct也是类，他定义出的变量也叫做对象。\n  C++中，可以像使用基本类型int，char一样使用类\n  类和对象基础 类和对象的基本概念（2）   类成员的可访问范围\nprivate：只能在成员函数内访问（缺省定义）\npublic：可以在任何地方访问\nprotected：以后再说\n  “隐藏”机制的好处：\n强制对成员变量的访问一定要通过成员函数进行\nclass CEmployee{ private: char szName[30];//名字，sz是char字符串前缀  public: int salary; void setName(char *name) void getName(char *name) void averageSalary(CEmployee e1,CEmployee e2) }; void CEmployee::setName(char * name){strcpy(szName,name);} void CEmployee::getName(char * name){strcpy(name,szName);} /*在类的成员函数内部，能够访问当前对象的全部变量/函数*/ void CEmployee::averageSalary(CEmployee e1,CEmployee e2){ coute1.szName; salary=(e1.salary+e2.salary)/2; //在类的成员函数内部，能够访问同类其他对象的全部变量/函数 } int main(){ CEemployee e; strcpy(e.szName,\"Tom123456789\");❌❌❌ //在类的成员函数外部，只能访问该类对象的公有变量/函数，szName是私有变量  e.setName(\"Tom\");🆗 e.salary=5000;🆗 //setName是公有函数，salary是公有变量  return 0； } 若将上述程序移植到内存紧张的手持设备上，希望将char szName[30]改为char szName[5]：\n由于不存在strcpy(e.szName,\"Tom123456789\")这种语句，所以只需要在setName中加一个判断语句，当输入多于5个符号时报错即可。\n  成员函数的重载，参数缺省\n  成员函数可以重载，也可以缺省\n  使用缺省参数时要注意避免函数重载导致的歧义\nclass location{ private:int x,y; public:void init(int x=0,int y=0) void valueX(int val=0){x=val;} void valueX(){return x;} }; location A; A.valueX();❌❌❌ //编译器无法判断调用哪个valueX     构造函数   什么是构造函数？\n构造函数名字与类的名字相同，可以有参数，不可以有返回值\nclass Complex{ private:double real,imag; public:Complex(double r,double i=0); //构造函数名字与类名相同，无返回值——连void都没有！！！ }; Complex::Complex(double r,double i=0){real=r;imag=i;} Complex c1；❌ Complex* ptr_c2=new Complex;❌ Complex c3(2);🆗//i有缺省值0 Complex* ptr_c4=new Complex(3,4);🆗//c++中变量名可以含有下划线_   为什么需要构造函数？\n对象没被初始化就使用会导致程序出错！\n在用类定义对象时，构造函数可以自动进行初始化操作（就像ios捷径里的自动化！），不必担心忘记初始化。\n  如果定义类时没有写构造函数，编译器会自动生成无参数构造函数\nclass Complex{ private:double real,imag; public:void Set(double r,double i) //编译器自动生成默认构造函数 }; Complex c1；🆗 Complex* pc2=new Complex;🆗//c++中指针前缀：p   可以有多个构造函数，需要参数个数/类型不同。(这些构造函数间是重载的关系)\nclass Complex{ private:double real,imag; public:Complex(double r,double i) Complex(double r); Complex(Complex c1,Complex c2); void Set(double r,double i); }; Complex::Complex(double r,double i){real=r;imag=i;} Complex::Complex(double r){real=r;imag=0;} Complex::Complex(Complex c1,Complex c2) { real=c1.real+c2.real; imag=c1.imag+c2.imag; } Complex c1(3,1),c2(4),c3(c1,c2); //c1={3,1},c2={4,0}c3={7,1}   构造函数在数组中的使用\nclass Test{ public:Test(int n){}//(1)  Test(int n,int m){}//(2)  Test(){}//(3) }; Test array1[3]={1,Test(1,2)}; //三个元素分别用(1)(2)(3)初始化 Test* pArray2[3]={new Test(4),new Test(1,2)}; //👉两个元素👈分别用(1)(2)初始化   复制构造函数   什么是复制构造函数？\n一种特殊的构造函数，其形式参数必须为引用类型\n  如果定义类时没有写，编译器会自动生成无参数复制构造函数\n  复制构造函数被调用时，可以不进行复制工作，见4.2的例子\n  什么时候用到复制构造函数？\n  用一个对象去初始化同类的另一个对象时\nComplex c1; Complex c2(c1);   如果函数有一参数是类A的对象，当该函数被调用时，类A的复制构造函数被调用\nclass A{ public:A(){};//构造函数  A(A\u0026 a){cout\"Copy constructor called\"endl;}//复制构造函数 }; void Func(A a1){} int main() { A a2; Func(a2);//此时复制构造函数被调用，但并没有把a1变成a2复制品！  return 0; } //输出：Copy constructor called   如果函数的返回值是类A的对象，当该函数返回值时，leiA的复制构造函数被调用\nclass A{ public:int v; A(int n){v=n;} A(const A\u0026 a){ v=a.v;//和之前的代码不同，此处进行了复制工作  cout\"Copy constructor called\"endl;} }; A Func(){ A b(4);//此处使用类A的构造函数，参数是4  return b; } int main() { coutFunc().vendl; //此处复制构造函数被调用，且将Func().v变成了b的复制品  return 0; } //输出：Copy constructor called 4     对象间赋值并不导致复制构造函数被调用\n 假设A 是一个类的名字，下面哪段程序不会调用A的复制构造函数？\n A. A a1,a2; a1 = a2; B.void func( A a) { cout « “good” « endl; } C. A func( ) { A tmp; return tmp; } D.A a1; A a2(a1);  正确答案：A你选对了\n   为什么我们要在复制构造函数中使用常量引用参数A(const A\u0026 a)\nvoid test(A a){cout\"Test\"endl;} 这样的函数，调用时生成形参会引发复制构造函数调用，开销比较大。\n👉所以可以考虑使用CMyclass \u0026 引用类型作为参数。 👉为了确保实参的值在函数中不被改变，那么可以加上const 关键字：\nclass A{ public:A(){} A(const A\u0026 a){}//定义时就使用const }; void test(const A\u0026 a){cout\"Test\"endl;} //函数中任何试图改变a值的语句都将是变成非法   为什么我们要自己写复制构造函数？？？？？\n👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇\n  类型转换构造函数   什么是类型转换构造函数？\n只有一个参数，且这参数不是引用类型的，一般就是转换构造函数\n此类函数目的是实现类型的自动转换\n  实例：\n#includeusing namespace std; class Complex{ public: double real,imag; Complex(int i);//类型转换构造函数  Complex(double r,double i){real=r;imag=i;} }; Complex::Complex(int i) { cout\"IntConstructor called\"endl; real=i;imag=0;//此处实现了“将int类型转化为Complex类型” } int main() { Complex c1(7,8); Complex c2=12;//直接调用类型转换构造函数  c1=9;//9被自动转换为一个👉临时👈Complex对象  coutc1.real\",\"c1.imag\"\\n\"c2.real\",\"c2.imagendl; return 0; } IntConstructor called IntConstructor called 9,0 12,0 析构函数   析构函数是什么？\nclass Ctest{ public: ~Ctest(){cout\"destructor called\"endl；} //析构函数与类名相同，前有一\"~\"号  //析构函数没有参数，没有返回值  //一个类只能有一个析构函数 }; int main(){ Ctest array[2];//生成一个含有两个Ctest类的对象的数组  cout\"End Main\"endl; return 0; //此时main函数结束，array消亡，其中每个元素的析构函数都被调用 } End Main destructor called destructor called   析构函数与delete\n对象：\nCtest *pTest; pTest=new Ctest;//构造函数调用 delete Ctest;//此时析构函数被调用！！ 对象数组：\nCtest *pTest; pTest= new Ctest[3]; delete [] Ctest;//👉必须写[]！👈否则只delete一个对象（调用一次析构函数）！！！！   析构函数在对象作为函数返回值返回后被调用\nclass Ctest{ public: ~Ctest(){cout\"destructor called\"endl;} }; Ctest Func(Ctest t){return t;}//作为参数的对象t消亡时，调用析构  int main(){ Ctest t1; t1=Func(t1);//函数返回的临时对象Func(t1)被用过后，调用析构  return 0;//main函数结束t1消亡，调用析构 } destructor called destructor called destructor called   构造/析构函数什么时候被调用？ class Demo{ int id; public: Demo(int i);//类型转换构造函数  ~Demo();//析构函数 }; Demo::Demo(int i){ id=i; cout\"id=\"id\"constructed\"endl;} Demo::~Demo(){ cout\"id=\"id\"destructed\"endl;} Demo d1(1); //d1定义在这里，说明这是一个全局对象  void Func() { static Demo d2(2); Demo d3(3); cout  \"func\"  endl; } int main () { Demo d4(4); d4 = 6; //这个语句成立是因为有类型转换构造函数  cout  \"main\"  endl; {Demo d5(5);}//d5定义在花括号里，说明这是一个局部对象  Func(); cout  \"main ends\"  endl; return 0; } 输出：\nid=1constructed id=4constructed id=6constructed id=6destructed main id=5constructed id=5destructed id=2constructed id=3constructed func id=3destructed main ends id=6destructed id=2destructed id=1destructed 类和对象提高 This指针   为什么引入This指针？\n  刚开始没有c++编译器，需要把c++翻译成c用c编译器编译。\n  由于c++的成员函数在c中并没有对应概念，因此发明了This指针，该指针可以指向成员函数作用的对象，能将一个全局函数转变为成员函数\n    This指针在c++中的作用\n非静态成员函数中可以直接使用this来代表指向该函数作用的对象的指针\nclass A { int i; public: void Hello(){ cout  \"hello\"  endl; } }; //用this翻译：void Hello(A*this){ cout  int main() { A * p = NULL; p-Hello(); //用this翻译：Hello(p); }//结果会怎样？输出：hello class A { int i; public: void Hello(){ cout  i  \"hello\"  endl; } }; //用this翻译：void Hello(A*this){ cout i  //this若为NULL，则出错！！ int main() { A * p = NULL; p-Hello();//用this翻译：Hello(p); } // 结果会怎样？编译出错！！！！！   静态成员变量和静态成员函数   定义和性质\n  普通成员变量每个对象各自有一份，静态成员变量一共就一份，所有对象共享\n  sizeof运算符不会计算静态成员变量\nclass CMyclass { int n; static int s; }; //sizeof(CMyclass)=4   普通成员函数必须具体作用于某个对象，静态成员函数不具体作用于某个对象\n  静态成员不需要通过对象就能访问\n  静态成员变量本质上是全局变量，哪怕一个对象都不存在，类 的静态成员变量也存在。\n  静态成员函数本质上是全局函数。\n  设置静态成员这种机制的目的是将和某些类紧密相关的全局变量和函数写到类里面，看上去像一个整体，易于维护和理解。\n    如何访问静态成员\n  类名::成员名CRectangle::PrintTotal()\n  对象名.成员名CRectangle r;r.PrintTotal()\n  指针-成员名CRectangle* p;p-PrintTotal()\n  引用.成员名CRectangle\u0026 ref;int n=ref.nTotalNumber;\n虽然后三个的形式与普通成员变量相同，但并不意味着该成员是属于那个对象的，要判断静态还是普通需要看成员的定义\n    静态成员实例\n考虑一个需要随时知道矩形总数和总面积的图形处理程序 可以用全局变量来记录总数和总面积 用静态成员将这两个变量封装进类中，就更容易理解和维护\nclass CRectangle { private: int w,h; static int nTotalArea; static int nTotalNumber; public: CRectangle(int w_,int h_); ~CRectangle(); static void PrintTotal(); CRectangle(CRectangle \u0026 r )//复制构造函数 }; CRectangle::CRectangle(int w_,int h_) { w = w_; h = h_; nTotalNumber ++; nTotalArea += w * h; } CRectangle::~CRectangle() { nTotalNumber --; nTotalArea -= w * h; } void CRectangle::PrintTotal() { cout  nTotalNumber  \",\"  } CRectangle::CRectangle(CRectangle \u0026 r ) { w = r.w; h = r.h; nTotalNumber ++; nToTalArea+=w*h; }/*💢💢💢不要忘了定义复制构造函数！！！！！ 👉在使用CRectangle类时，有时会调用复制构造函数 生成临时的隐藏的CRectangle对象： 调用一个以CRectangle类对象作为参数的函数时， 调用一个以CRectangle类对象作为返回值的函数时 👉临时对象在消亡时会调用析构函数，减少nTotalNumber 和 nTotalArea的值，可是这些临时对象在生成时却没有增加nTotalNumber 和 nTotalArea的值。 int CRectangle::nTotalNumber = 0; int CRectangle::nTotalArea = 0; // 必须在定义类的文件中对静态成员变量进行一次说明或初始化。否则编译能通过，链接不能通过。 int main() { CRectangle r1(3,3), r2(2,2); /*cout CRectangle::PrintTotal(); r1.PrintTotal(); //虽然这样写，但不代表PrintTotal是普通成员函数  return 0; } Output:\n2,13 2,13   静态成员函数不能访问非静态成员变量，不能调用非静态成员函数\nvoid CRectangle::PrintTotal() { cout  w  \",\"  nTotalNumber  \",\"  nTotalArea  endl; //wrong } CRetangle::PrintTotal(); //解释不通，w 到底是属于那个对象的？ //同理，非静态成员函数会访问非静态成员变量，调用了非静态函数就等于访问了非静态变量   成员对象和封闭类   有成员对象的类称之为封闭类（enclosing）\n  任何生成封闭类对象的语句，都要让编译器知道封闭类中的成员对象如何初始化，所以我们一定要添加封闭类构造函数的初始化列表\n例子：\n class Ctyre{ private: int radius; int width; public:CTyre(int r,int w):radius(r),width(w){} //上方的构造函数添加了初始化列表，将 radius 初始化成 r，width 初始化成 w。这种写法比在函数体内用 r 和 w 对 radius 和 width 进行赋值的风格更好。建议对成员变量的初始化都使用这种写法 }; class Cengine{}; class Ccar{ private: int price；//成员变量  Cengine engine;//成员对象  Ctyre tyre;//成员对象  public: CCar(int p,int tr,int tw);//Ccar的初始化函数 }; CCar::CCar(int p,int tr,int tw):price(p),tyre(tr,w){}; //:和{之间的内容即为Ccar的构造函数的初始化列表，如果没有这列表，“CCar car”这句话就会编译出错，因为tyre的构造函数需要参数，但那句话并没有给出参数，因此无法构造tpre，因此无法构造car  int main(){ Ccar car(20000,17,225); return 0; } 详细解释看这篇文章：http://c.biancheng.net/view/167.html\n   封闭类对象生成时，先执行成员对象的构造函数，在执行封闭类的成员函数\n👇👇👇\n对象成员构造函数的顺序与其在封闭类中的说明顺序一致\n👇👇👇\n封闭类对象消亡时，先执行封闭类的析构函数，再执行成员对象的析构函数\n👉👉👉**就像汽车一样，造汽车时先造轮胎和引擎，再组装汽车；拆汽车时先把汽车拆成零件，再去把零件拆散**\n  封闭类对象如果用默认复制构造函数初始化，那么其成员对象也会用复制构造函数初始化\n例子：\n class A{ public:A(){cout  \"default\"  endl;} A(A\u0026 r){cout  \"copy\"  endl;} }; class B{A a;}; int main(){ B b1; B b2(b1); return 0; } Output：\ndefault copy//说明b2.a是用类A的复制构造函数初始化的，而且调用复制构造函数时的实参就是b1.a    常量成员函数和常量对象   常量对象\n如果不希望某个对象的值被改变，则定义该对象时可以在前面加const关键字\nclass Demo{...} const Demo Obj;//常量对象   常量成员函数\n如果不希望成员函数执行期间修改其作用的对象，则定义该函数时可以在后面加const关键字\n❗❗❗常量成员函数不能使用普通函数/变量，可以使用静态函数/成员，因为静态函数/成员不具体作用于任何对象\nclass Sample { public: int value; void GetValue() const;//常量成员函数  void func(){}; Sample(){}; }; void Sample::GetValue()const { value=0;//❌❌❌不能访问普通成员变量  func();//❌❌❌不能调用普通成员函数 } int main() { const Sample o; o.value=100;//❌常量对象不能被修改  o.func();//❌常量对象上不能执行非常量成员函数，因为电脑不知道那函数会不会改变这个对象  o.GetValue();//✅常量对象上可以执行常量成员函数 }   注意：两个成员函数，名字和参数表一样，但一个是const一个不是，算重载\n  常引用\n用对象的引用作为参数，不必调用复制构造函数，又比指针做参数好看\nclass Sample{...}; void PrintfObj(const Sample\u0026 o){...} //这样函数中能确保不会无意间更改o的值   友元（friends）   友元这个机制算是对c语言程序员的一种妥协，为关系相近的类提供了一种调用函数的方便。友元函数不属于该类的成员函数，他是定义在类外的普通函数，只是在类中声明该函数可以直接访问类中的private或者protected成员\n  友元函数：一个类的友元函数可以访问该类的私有成员\nclass CCar；//提前声明CCar类，以便后面的CDriver使用  class CDriver { public:void ModifyCar(CCar* pCar); //'改装汽车'函数的参数是一个指向CCar类对象的指针，这里就用到了CCar类 }; class CCar { private: int price; friend void CDriver::ModifyCar(CCar* pCar); //可以将一个类A的成员函数(包括构造/析构函数)说明为另一个类B的友元：friend_返回值_A::func()  friend int MostExpensiveCar(CCar cars[],int total); //上面两函数是CCar类的友元函数，可以访问CCar的私有变量price }; //定义第一个友元函数 void CDriver::ModifyCar(CCar* pCar) { pCar-price+=1000;//汽车改装后价值增加 } //定义第二个友元函数 int MostExpensiveCar(CCar cars[],int total) { int tmpMax=-1; for(int i=0;itotal;++i) if(cars[i].pricetmpMax) tmpMax=cars[i].price; return tmpMax; } int main(){return 0;}   友元类：一个类的友元类可以访问该类的私有成员\nclass CCar { private:int price; friend class CDriver;//声明CDriver为友元类 }; class CDriver { public: CCar myCar; void ModifyCar(){myCar.price+=1000;} //因CDriver是CCar的友元类，故可以访问CCar的私有成员 }; int main(){return 0;}   友元类之间的关系不能传递，不能继承\n ","wordCount":"1320","inLanguage":"zh","datePublished":"2021-03-29T16:58:46+08:00","dateModified":"2021-03-29T16:58:46+08:00","author":{"@type":"Person","name":"Abigail"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://abigail1985.github.io/essay/pkucpp-1/"},"publisher":{"@type":"Organization","name":"de_Abigaïl","logo":{"@type":"ImageObject","url":"https://abigail1985.github.io/images/favicon.png"}}}</script>
+</head>
+<body id=top>
+<script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
+<noscript>
+<style type=text/css>#theme-toggle,.top-link{display:none}</style>
+<style>@media(prefers-color-scheme:dark){:root{--theme:#1d1e20;--entry:#2e2e33;--primary:rgba(255, 255, 255, 0.84);--secondary:rgba(255, 255, 255, 0.56);--tertiary:rgba(255, 255, 255, 0.16);--content:rgba(255, 255, 255, 0.74);--hljs-bg:#2e2e33;--code-bg:#37383e;--border:#333}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
+</noscript>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<a href=https://abigail1985.github.io/ accesskey=h title="de_Abigaïl (Alt + H)">de_Abigaïl</a>
+<span class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)">
+<png id=moon xmlns=http://www.w3.org/2000/png width=24 height=24 viewbox="0 0 24 24" fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round>
+<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+</png>
+<png id=sun xmlns=http://www.w3.org/2000/png width=24 height=24 viewbox="0 0 24 24" fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round>
+<circle cx=12 cy=12 r=5></circle>
+<line x1=12 y1=1 x2=12 y2=3></line>
+<line x1=12 y1=21 x2=12 y2=23></line>
+<line x1=4.22 y1=4.22 x2=5.64 y2=5.64></line>
+<line x1=18.36 y1=18.36 x2=19.78 y2=19.78></line>
+<line x1=1 y1=12 x2=3 y2=12></line>
+<line x1=21 y1=12 x2=23 y2=12></line>
+<line x1=4.22 y1=19.78 x2=5.64 y2=18.36></line>
+<line x1=18.36 y1=5.64 x2=19.78 y2=4.22></line>
+</png>
+</button>
+</span>
+</div>
+<ul id=menu>
+<li>
+<a href=https://abigail1985.github.io/posts/ title=分类>
+<span>分类</span>
+</a>
+</li>
+<li>
+<a href=https://abigail1985.github.io/archives/ title=归档>
+<span>归档</span>
+</a>
+</li>
+<li>
+<a href=https://abigail1985.github.io/tags/ title=标签>
+<span>标签</span>
+</a>
+</li>
+<li>
+<a href=https://abigail1985.github.io/search/ title="搜索 (Alt + /)" accesskey=/>
+<span>搜索</span>
+</a>
+</li>
+</ul>
+</nav>
+</header>
+<main class=main>
+<article class=post-single>
+<header class=post-header>
+<div class=breadcrumbs><a href=https://abigail1985.github.io/>主页</a>&nbsp;»&nbsp;<a href=https://abigail1985.github.io/posts/>分类</a>&nbsp;»&nbsp;<a href=https://abigail1985.github.io/posts/notes/>笔记</a>&nbsp;»&nbsp;<a href=https://abigail1985.github.io/posts/notes/c++/>北大郭玮《程序设计实习c++版》笔记</a></div>
+<h1 class=post-title>
+PKUCpp-1
+</h1>
+<div class=post-meta>March 29, 2021&nbsp;·&nbsp;7 分钟&nbsp;·&nbsp;Abigail
+</div>
+</header> <div class=toc>
+<details open>
+<summary accesskey=c title="(Alt + C)">
+<div class=details>目录</div>
+</summary>
+<div class=inner><ul>
+<li>
+<a href=#%e9%a2%84%e5%a4%84%e7%90%86%e6%8c%87%e4%bb%a4 aria-label=预处理指令>预处理指令</a><ul>
+<li>
+<a href=#%e4%bb%80%e4%b9%88%e6%98%af%e9%a2%84%e5%a4%84%e7%90%86%e6%8c%87%e4%bb%a4 aria-label=什么是预处理指令?>什么是预处理指令?</a></li>
+<li>
+<a href=#%e9%a2%84%e7%bc%96%e8%af%91%e6%8c%87%e4%bb%a4 aria-label=预编译指令>预编译指令</a></li></ul>
+</li>
+<li>
+<a href=#%e4%bb%8ec%e5%88%b0c aria-label=从C到C++>从C到C++</a><ul>
+<li>
+<a href=#%e5%bc%95%e7%94%a8 aria-label=引用>引用</a></li>
+<li>
+<a href=#const%e5%85%b3%e9%94%ae%e5%ad%97 aria-label=const关键字>const关键字</a></li>
+<li>
+<a href=#%e5%8a%a8%e6%80%81%e5%86%85%e5%ad%98%e5%88%86%e9%85%8d aria-label=动态内存分配>动态内存分配</a><ul>
+<li>
+<a href=#%e7%bb%83%e4%b9%a0%e7%a5%9e%e7%a7%98%e7%9a%84%e6%95%b0%e7%bb%84%e5%88%9d%e5%a7%8b%e5%8c%96 aria-label=练习：神秘的数组初始化>练习：神秘的数组初始化</a></li></ul>
+</li>
+<li>
+<a href=#%e5%86%85%e8%81%94%e5%87%bd%e6%95%b0%e5%92%8c%e9%87%8d%e8%bd%bd%e5%87%bd%e6%95%b0 aria-label=内联函数和重载函数>内联函数和重载函数</a></li>
+<li>
+<a href=#%e7%b1%bb%e5%92%8c%e5%af%b9%e8%b1%a1%e7%9a%84%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b51 aria-label=类和对象的基本概念（1）>类和对象的基本概念（1）</a></li></ul>
+</li>
+<li>
+<a href=#%e7%b1%bb%e5%92%8c%e5%af%b9%e8%b1%a1%e5%9f%ba%e7%a1%80 aria-label=类和对象基础>类和对象基础</a><ul>
+<li>
+<a href=#%e7%b1%bb%e5%92%8c%e5%af%b9%e8%b1%a1%e7%9a%84%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b52 aria-label=类和对象的基本概念（2）>类和对象的基本概念（2）</a></li>
+<li>
+<a href=#%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0 aria-label=构造函数>构造函数</a></li>
+<li>
+<a href=#%e5%a4%8d%e5%88%b6%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0 aria-label=复制构造函数>复制构造函数</a></li>
+<li>
+<a href=#%e7%b1%bb%e5%9e%8b%e8%bd%ac%e6%8d%a2%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0 aria-label=类型转换构造函数>类型转换构造函数</a></li>
+<li>
+<a href=#%e6%9e%90%e6%9e%84%e5%87%bd%e6%95%b0 aria-label=析构函数>析构函数</a></li>
+<li>
+<a href=#%e6%9e%84%e9%80%a0%e6%9e%90%e6%9e%84%e5%87%bd%e6%95%b0%e4%bb%80%e4%b9%88%e6%97%b6%e5%80%99%e8%a2%ab%e8%b0%83%e7%94%a8 aria-label=构造/析构函数什么时候被调用？>构造/析构函数什么时候被调用？</a></li></ul>
+</li>
+<li>
+<a href=#%e7%b1%bb%e5%92%8c%e5%af%b9%e8%b1%a1%e6%8f%90%e9%ab%98 aria-label=类和对象提高>类和对象提高</a><ul>
+<li>
+<a href=#this%e6%8c%87%e9%92%88 aria-label=This指针>This指针</a></li>
+<li>
+<a href=#%e9%9d%99%e6%80%81%e6%88%90%e5%91%98%e5%8f%98%e9%87%8f%e5%92%8c%e9%9d%99%e6%80%81%e6%88%90%e5%91%98%e5%87%bd%e6%95%b0 aria-label=静态成员变量和静态成员函数>静态成员变量和静态成员函数</a></li>
+<li>
+<a href=#%e6%88%90%e5%91%98%e5%af%b9%e8%b1%a1%e5%92%8c%e5%b0%81%e9%97%ad%e7%b1%bb aria-label=成员对象和封闭类>成员对象和封闭类</a></li>
+<li>
+<a href=#%e5%b8%b8%e9%87%8f%e6%88%90%e5%91%98%e5%87%bd%e6%95%b0%e5%92%8c%e5%b8%b8%e9%87%8f%e5%af%b9%e8%b1%a1 aria-label=常量成员函数和常量对象>常量成员函数和常量对象</a></li>
+<li>
+<a href=#%e5%8f%8b%e5%85%83friends aria-label=友元（friends）>友元（friends）</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</details>
+</div>
+<div class=post-content><p>[TOC]</p>
+<h1 id=预处理指令>预处理指令<a hidden class=anchor aria-hidden=true href=#预处理指令>#</a></h1>
+<p><a href=https://www.cnblogs.com/zi-xing/p/4550246.html>https://www.cnblogs.com/zi-xing/p/4550246.html</a></p>
+<p>本文主要记录了C/C++预处理指令，常见的预处理指令如下：</p>
+<ol>
+<li>#空指令，无任何效果</li>
+<li>#include包含一个源代码文件</li>
+<li>#define定义宏</li>
+<li>#undef取消已定义的宏</li>
+<li>#if如果给定条件为真，则编译下面代码</li>
+<li>#ifdef如果宏已经定义，则编译下面代码</li>
+<li>#ifndef如果宏没有定义，则编译下面代码</li>
+<li>#elif如果前面的#if给定条件不为真，当前条件为真，则编译下面代码</li>
+<li>#endif结束一个#if……#else条件编译块</li>
+<li>#error停止编译并显示错误信息</li>
+</ol>
+<h2 id=什么是预处理指令>什么是预处理指令?<a hidden class=anchor aria-hidden=true href=#什么是预处理指令>#</a></h2>
+<p>预处理指令是以#号开头的代码行。#号必须是该行除了任何空白字符外的第一个字符。#后是指令关键字，在关键字和#号之间允许存在任意个数的空白字符。整行语句构成了一条预处理指令，该指令将在编译器进行编译之前对源代码做某些转换。</p>
+<p>以前没有在意的学者注意了,预处理指令是在编译器进行编译之前进行的操作.预处理过程扫描源代码，对其进行初步的转换，产生新的源代码提供给编译器。可见预处理过程先于编译器对源代码进行处理。在很多编程语言中，并没有任何内在的机制来完成如下一些功能：在编译时包含其他源文件、定义宏、根据条件决定编译时是否包含某些代码(防止重复包含某些文件)。要完成这些工作，就需要使用预处理程序。尽管在目前绝大多数编译器都包含了预处理程序，但通常认为它们是独立于编译器的。预处理过程读入源代码，检查包含预处理指令的语句和宏定义，并对源代码进行响应的转换。预处理过程还会删除程序中的注释和多余的空白字符。</p>
+<h2 id=预编译指令>预编译指令<a hidden class=anchor aria-hidden=true href=#预编译指令>#</a></h2>
+<p>#ifdef,#ifndef,#endif&mldr;</p>
+<p>以上这些预编译指令，都是条件编译指令，也就是说，将决定那些代码被编译，而哪些不被编译</p>
+<p><strong>Exemple1</strong>:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;stdio.h&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;stdlib.h&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#define DEBUG
+</span><span style=color:#75715e></span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(<span style=color:#66d9ef>void</span>)
+{
+    <span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+    <span style=color:#66d9ef>char</span> c;
+    <span style=color:#66d9ef>while</span>(<span style=color:#ae81ff>1</span>)
+    {
+        i<span style=color:#f92672>++</span>;
+        c <span style=color:#f92672>=</span> getchar();
+        <span style=color:#66d9ef>if</span>(<span style=color:#e6db74>&#39;\n&#39;</span> <span style=color:#f92672>!=</span> c)
+        {
+            getchar();
+        }
+        <span style=color:#66d9ef>if</span>(<span style=color:#e6db74>&#39;q&#39;</span> <span style=color:#f92672>==</span> c <span style=color:#f92672>||</span> <span style=color:#e6db74>&#39;Q&#39;</span> <span style=color:#f92672>==</span> c)
+        {
+<span style=color:#75715e>#ifdef DEBUG</span><span style=color:#75715e>//判断DEBUG是否被定义了
+</span><span style=color:#75715e></span>            printf(<span style=color:#e6db74>&#34;We get:%c,about to exit.</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>,c);
+<span style=color:#75715e>#endif
+</span><span style=color:#75715e></span>            <span style=color:#66d9ef>break</span>;
+        }
+        <span style=color:#66d9ef>else</span>
+        {
+            printf(<span style=color:#e6db74>&#34;i = %d&#34;</span>,i);
+<span style=color:#75715e>#ifdef DEBUG
+</span><span style=color:#75715e></span>            printf(<span style=color:#e6db74>&#34;,we get:%c&#34;</span>,c);
+<span style=color:#75715e>#endif
+</span><span style=color:#75715e></span>            printf(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>);
+        }
+    }
+    printf(<span style=color:#e6db74>&#34;Hello World!</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>);
+    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+
+<span style=color:#75715e>/*#endif用于终止#if预处理指令。*/</span>
+</code></pre></div><p><strong>Exemple2</strong>:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;stdio.h&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#define DEBUG
+</span><span style=color:#75715e></span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>()
+{
+<span style=color:#75715e>#ifdef DEBUG
+</span><span style=color:#75715e></span>    printf(<span style=color:#e6db74>&#34;yes &#34;</span>);
+<span style=color:#75715e>#endif
+</span><span style=color:#75715e>#ifndef DEBUG
+</span><span style=color:#75715e></span>    printf(<span style=color:#e6db74>&#34;no &#34;</span>);
+<span style=color:#75715e>#endif
+</span><span style=color:#75715e></span>}
+<span style=color:#75715e>//#ifdefined等价于#ifdef;
+</span><span style=color:#75715e>//#if!defined等价于#ifndef
+</span></code></pre></div><h1 id=从c到c>从C到C++<a hidden class=anchor aria-hidden=true href=#从c到c>#</a></h1>
+<p>c++对c扩展主要是为了实现面向对象，但有一些简单的扩展与面向对象关系不大，在这一节中介绍</p>
+<h2 id=引用>引用<a hidden class=anchor aria-hidden=true href=#引用>#</a></h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>int</span> n<span style=color:#f92672>=</span><span style=color:#ae81ff>4</span>;
+<span style=color:#66d9ef>int</span> <span style=color:#f92672>&amp;</span>r<span style=color:#f92672>=</span>n;<span style=color:#75715e>//r引用了n，r的类型是int
+</span></code></pre></div><ul>
+<li>
+<p>r引用了n，r跟n就是一回事了：<strong>改变n，r也会改变，反之亦然</strong>。</p>
+</li>
+<li>
+<p>定义引用时，一定要将其<strong>初始化</strong>。</p>
+</li>
+<li>
+<p>为什么我们要使用”引用“？？</p>
+<ol>
+<li><strong>可以更方便的交换两个变量值</strong></li>
+</ol>
+<p>C中的swap函数：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c data-lang=c><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>swap</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>a,<span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>b)<span style=color:#75715e>//参数是两个指针
+</span><span style=color:#75715e></span>{
+    <span style=color:#66d9ef>int</span> tmp;
+    tmp<span style=color:#f92672>=*</span>a;<span style=color:#f92672>*</span>a<span style=color:#f92672>=*</span>b;<span style=color:#f92672>*</span>b<span style=color:#f92672>=</span>temp;
+}
+<span style=color:#66d9ef>int</span> n1,n2;
+swap(<span style=color:#f92672>&amp;</span>n1,<span style=color:#f92672>&amp;</span>n2)<span style=color:#75715e>//传入的参数是两个变量的地址
+</span></code></pre></div><p>C++中的swap函数：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>swap</span>(<span style=color:#66d9ef>int</span> <span style=color:#f92672>&amp;</span>a,<span style=color:#66d9ef>int</span> <span style=color:#f92672>&amp;</span>b)
+<span style=color:#75715e>//参数是两个变量的引用（直接在函数声明中创建）
+</span><span style=color:#75715e></span>{
+    <span style=color:#66d9ef>int</span> tmp;
+    tmp<span style=color:#f92672>=</span>a;a<span style=color:#f92672>=</span>b;b<span style=color:#f92672>=</span>tmp;
+}
+<span style=color:#66d9ef>int</span> n1,n2;
+swap(n1,n2);
+</code></pre></div><ol start=2>
+<li><strong>引用作为函数的返回值</strong></li>
+</ol>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c data-lang=c><span style=color:#66d9ef>int</span> n<span style=color:#f92672>=</span><span style=color:#ae81ff>4</span>;
+<span style=color:#66d9ef>int</span> <span style=color:#f92672>&amp;</span>SetValue(){<span style=color:#66d9ef>return</span> n;}
+<span style=color:#66d9ef>int</span> main()
+{
+    SetValue()<span style=color:#f92672>=</span><span style=color:#ae81ff>40</span>;
+    cout<span style=color:#f92672>&lt;&lt;</span>n;
+    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}<span style=color:#75715e>//输出：40
+</span></code></pre></div></li>
+<li>
+<p><strong>常引用</strong></p>
+<p>不能通过常引用去修改他引用的内容，但他引用的内容可以改变</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>int</span> n<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>;
+<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> <span style=color:#f92672>&amp;</span>r<span style=color:#f92672>=</span>n;
+r<span style=color:#f92672>=</span><span style=color:#ae81ff>200</span>;<span style=color:#75715e>//编译错误
+</span><span style=color:#75715e></span>n<span style=color:#f92672>=</span><span style=color:#ae81ff>300</span>;<span style=color:#75715e>//没有问题
+</span></code></pre></div></li>
+</ul>
+<h2 id=const关键字>const关键字<a hidden class=anchor aria-hidden=true href=#const关键字>#</a></h2>
+<ol>
+<li>
+<p>常量
+<code>const int r=2</code></p>
+</li>
+<li>
+<p>常量指针</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>int</span> n,m;
+<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>p<span style=color:#f92672>=&amp;</span>n;<span style=color:#75715e>//p是指向n的常量指针
+</span><span style=color:#75715e></span><span style=color:#f92672>*</span>p<span style=color:#f92672>=</span><span style=color:#ae81ff>5</span>;<span style=color:#75715e>//不能通过常量指针去修改其指向的内容--&gt;编译出错
+</span><span style=color:#75715e></span>n<span style=color:#f92672>=</span><span style=color:#ae81ff>4</span>;
+p<span style=color:#f92672>=&amp;</span>m;<span style=color:#75715e>//常量指针的指向可以变化--&gt;编译通过
+</span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>*</span>p1;
+<span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span>p2;
+p2<span style=color:#f92672>=</span>p1;<span style=color:#75715e>//不能把常量指针赋值给非常量指针--&gt;编译错误
+</span><span style=color:#75715e></span>p1<span style=color:#f92672>=</span>p2;<span style=color:#75715e>//反过来可以--&gt;编译通过
+</span><span style=color:#75715e></span>p2<span style=color:#f92672>=</span>(<span style=color:#66d9ef>int</span><span style=color:#f92672>*</span>)p1;<span style=color:#75715e>//强制类型转换--&gt;编译通过
+</span></code></pre></div></li>
+</ol>
+<p>3.常引用</p>
+<h2 id=动态内存分配>动态内存分配<a hidden class=anchor aria-hidden=true href=#动态内存分配>#</a></h2>
+<p>c中的malloc可以实现；</p>
+<p>c++中的new可以实现：</p>
+<ol>
+<li>
+<p><strong>分配一个变量</strong></p>
+<p><code>P=new int</code></p>
+<p>int：类型名</p>
+<p>P：类型为int*的<strong>指针</strong></p>
+<p>new将一片大小为sizeof（int）字节的内存空间的<strong>地址</strong>赋值给P。</p>
+</li>
+<li>
+<p><strong>分配一个数组</strong></p>
+<p><code>P=new int[N]</code></p>
+<p>N:要分配的数组元素的个数</p>
+</li>
+</ol>
+<p><strong>注意</strong>：new T/new T[N]的返回值都是T*，所以 <code>int *p=new p</code>是成立的</p>
+<p>c++用delete释放被new动态分配的内存空间：</p>
+<ol>
+<li>
+<p><strong>释放一个变量</strong></p>
+<p>delete必须指向new出来的空间；</p>
+<p>一个内存空间不能被delete两次</p>
+</li>
+<li>
+<p><strong>释放一个数组</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>int</span><span style=color:#f92672>*</span> p<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span>[<span style=color:#ae81ff>20</span>];
+p[<span style=color:#ae81ff>0</span>]<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>;
+<span style=color:#66d9ef>delete</span>[]p;<span style=color:#75715e>//不要忘记这个中括号
+</span></code></pre></div></li>
+</ol>
+<h3 id=练习神秘的数组初始化>练习：神秘的数组初始化<a hidden class=anchor aria-hidden=true href=#练习神秘的数组初始化>#</a></h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e></span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+{
+	<span style=color:#66d9ef>int</span> <span style=color:#f92672>*</span> a[] <span style=color:#f92672>=</span> {NULL,NULL,<span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span>,<span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span>[<span style=color:#ae81ff>6</span>]};
+	<span style=color:#75715e>//上面大括号中是初始化的内容
+</span><span style=color:#75715e></span>	<span style=color:#f92672>*</span>a[<span style=color:#ae81ff>2</span>] <span style=color:#f92672>=</span> <span style=color:#ae81ff>123</span>;
+	a[<span style=color:#ae81ff>3</span>][<span style=color:#ae81ff>5</span>] <span style=color:#f92672>=</span> <span style=color:#ae81ff>456</span>;
+	<span style=color:#66d9ef>if</span>(<span style=color:#f92672>!</span> a[<span style=color:#ae81ff>0</span>] ) {
+		cout <span style=color:#f92672>&lt;&lt;</span> <span style=color:#f92672>*</span> a[<span style=color:#ae81ff>2</span>] <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;,&#34;</span> <span style=color:#f92672>&lt;&lt;</span> a[<span style=color:#ae81ff>3</span>][<span style=color:#ae81ff>5</span>];
+	}
+	<span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><h2 id=内联函数和重载函数>内联函数和重载函数<a hidden class=anchor aria-hidden=true href=#内联函数和重载函数>#</a></h2>
+<p><strong>内联函数</strong></p>
+<ul>
+<li>
+<p>函数调用是有时间开销的。如果函数本身只有几条语 句，执行非常快，而且函数被反复执行很多次，相比 之下调用函数所产生的这个开销就会显得比较大。</p>
+</li>
+<li>
+<p>为了<strong>减少函数调用的开销</strong>，引入了内联函数机制。编 译器处理对内联函数的调用语句时，是将整个函数的
+代码插入到调用语句处，而不会产生调用函数的语句。</p>
+</li>
+<li>
+<p>在函数定义前加关键字<code>inline</code>，即可定义内联函数</p>
+</li>
+</ul>
+<p><strong>重载函数</strong></p>
+<p><strong>一个或多个函数，名字相同，然而参数个数或参数类型不相同，这叫做函数的重载。</strong>
+以下三个函数是重载关系：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c data-lang=c>(<span style=color:#ae81ff>1</span>)<span style=color:#66d9ef>int</span> Max(<span style=color:#66d9ef>double</span> f1,<span style=color:#66d9ef>double</span> f2){}
+(<span style=color:#ae81ff>2</span>)<span style=color:#66d9ef>int</span> Max(<span style=color:#66d9ef>int</span> n1,<span style=color:#66d9ef>int</span> n2) {} 
+(<span style=color:#ae81ff>3</span>)<span style=color:#66d9ef>int</span> Max(<span style=color:#66d9ef>int</span> n1,<span style=color:#66d9ef>int</span> n2,<span style=color:#66d9ef>int</span> n3) {}
+</code></pre></div><ul>
+<li>函数重载<strong>使得函数命名变得简单</strong></li>
+<li>编译器根据调用语句的中的实参的个数和类型判断应
+该调用哪个函数。</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>Max(<span style=color:#ae81ff>3.4</span>,<span style=color:#ae81ff>2.5</span>); <span style=color:#75715e>//调用 (1) 
+</span><span style=color:#75715e></span>Max(<span style=color:#ae81ff>2</span>,<span style=color:#ae81ff>4</span>); <span style=color:#75715e>//调用 (2) 
+</span><span style=color:#75715e></span>Max(<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>2</span>,<span style=color:#ae81ff>3</span>); <span style=color:#75715e>//调用 (3)
+</span><span style=color:#75715e></span>Max(<span style=color:#ae81ff>3</span>,<span style=color:#ae81ff>2.4</span>);<span style=color:#75715e>//error,二义性
+</span></code></pre></div><p><strong>函数的缺省参数</strong></p>
+<ul>
+<li>
+<p>C++中，定义函数的时候可以让最右边的<strong>连续</strong>若干个参 数有缺省值，那么调用函数的时候，若相应位置不写参 数，参数就是缺省值。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>func</span>( <span style=color:#66d9ef>int</span> x1, <span style=color:#66d9ef>int</span> x2 <span style=color:#f92672>=</span> <span style=color:#ae81ff>2</span>, <span style=color:#66d9ef>int</span> x3 <span style=color:#f92672>=</span> <span style=color:#ae81ff>3</span>) { }
+func(<span style=color:#ae81ff>10</span> ) ; <span style=color:#75715e>//等效于 func(10,2,3) 
+</span><span style=color:#75715e></span>func(<span style=color:#ae81ff>10</span>,<span style=color:#ae81ff>8</span>) ; <span style=color:#75715e>//等效于 func(10,8,3)
+</span><span style=color:#75715e></span>func(<span style=color:#ae81ff>10</span>, , <span style=color:#ae81ff>8</span>) ; <span style=color:#75715e>//不行,只能最右边的连续若干个参数缺省
+</span></code></pre></div></li>
+<li>
+<p>函数参数可缺省的目的在于提高程序的<strong>可扩充性</strong>。</p>
+</li>
+<li>
+<p>即如果某个写好的函数要添加新的参数，而原先那些 调用该函数的语句，未必需要使用新增的参数，那么 为了避免对原先那些函数调用语句的修改，就可以使用缺省参数。</p>
+</li>
+</ul>
+<h2 id=类和对象的基本概念1>类和对象的基本概念（1）<a hidden class=anchor aria-hidden=true href=#类和对象的基本概念1>#</a></h2>
+<p><strong>结构化程序设计</strong>：</p>
+<ul>
+<li>
+<p>c使用：<code>程序=数据结构+算法</code></p>
+</li>
+<li>
+<p>不足：结构混乱，没有封装和隐藏的概念，难以debug，不能重用类似的代码。</p>
+</li>
+</ul>
+<p><strong>面向对象的程序设计</strong>：</p>
+<ul>
+<li>
+<p>c++使用：<code>程序=类+类+类+...+类</code></p>
+</li>
+<li>
+<p>特点：抽象，封装，继承，多态</p>
+<p>设计方法：</p>
+<p>归纳：将某类客观事物属性归纳出来（用<strong>变量</strong>描述属性）</p>
+<p>抽象：将这类事物能进行的操作归纳出来（用<strong>函数</strong>描述操作）</p>
+<p>封装：将属性和函数捆绑在一起，形成一个<strong>类</strong></p>
+</li>
+<li>
+<p>通过<strong>类</strong>定义来的<strong>变量</strong>就叫做<strong>对象</strong>，C中的struct也是类，他定义出的变量也叫做对象。</p>
+</li>
+<li>
+<p>C++中，可以像使用基本类型<code>int</code>，<code>char</code>一样使用类</p>
+</li>
+</ul>
+<h1 id=类和对象基础>类和对象基础<a hidden class=anchor aria-hidden=true href=#类和对象基础>#</a></h1>
+<h2 id=类和对象的基本概念2>类和对象的基本概念（2）<a hidden class=anchor aria-hidden=true href=#类和对象的基本概念2>#</a></h2>
+<ol>
+<li>
+<p>类成员的可访问范围</p>
+<p>private：只能在成员函数内访问（缺省定义）</p>
+<p>public：可以在任何地方访问</p>
+<p>protected：以后再说</p>
+</li>
+<li>
+<p>“隐藏”机制的好处：</p>
+<p><strong>强制对成员变量的访问一定要通过成员函数进行</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CEmployee</span>{
+    <span style=color:#66d9ef>private</span><span style=color:#f92672>:</span>
+           <span style=color:#66d9ef>char</span> szName[<span style=color:#ae81ff>30</span>];<span style=color:#75715e>//名字，sz是char字符串前缀
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+           <span style=color:#66d9ef>int</span> salary;
+           <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setName</span>(<span style=color:#66d9ef>char</span> <span style=color:#f92672>*</span>name)
+           <span style=color:#66d9ef>void</span> getName(<span style=color:#66d9ef>char</span> <span style=color:#f92672>*</span>name)
+           <span style=color:#66d9ef>void</span> averageSalary(CEmployee e1,CEmployee e2)
+};
+
+<span style=color:#66d9ef>void</span> CEmployee<span style=color:#f92672>::</span>setName(<span style=color:#66d9ef>char</span> <span style=color:#f92672>*</span> name){strcpy(szName,name);} <span style=color:#66d9ef>void</span> CEmployee<span style=color:#f92672>::</span>getName(<span style=color:#66d9ef>char</span> <span style=color:#f92672>*</span> name){strcpy(name,szName);} <span style=color:#75715e>/*在类的成员函数内部，能够访问当前对象的全部变量/函数*/</span> 
+<span style=color:#66d9ef>void</span> CEmployee<span style=color:#f92672>::</span>averageSalary(CEmployee e1,CEmployee e2){
+    cout<span style=color:#f92672>&lt;&lt;</span>e1.szName;
+    salary<span style=color:#f92672>=</span>(e1.salary<span style=color:#f92672>+</span>e2.salary)<span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>;
+    <span style=color:#75715e>//在类的成员函数内部，能够访问同类其他对象的全部变量/函数
+</span><span style=color:#75715e></span>}
+
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(){
+    CEemployee e;
+    strcpy(e.szName,<span style=color:#e6db74>&#34;Tom123456789&#34;</span>);<span style=color:#960050;background-color:#1e0010>❌❌❌</span>
+    <span style=color:#75715e>//在类的成员函数外部，只能访问该类对象的公有变量/函数，szName是私有变量
+</span><span style=color:#75715e></span>    e.setName(<span style=color:#e6db74>&#34;Tom&#34;</span>);<span style=color:#960050;background-color:#1e0010>🆗</span>
+    e.salary<span style=color:#f92672>=</span><span style=color:#ae81ff>5000</span>;<span style=color:#960050;background-color:#1e0010>🆗</span>
+    <span style=color:#75715e>//setName是公有函数，salary是公有变量
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span><span style=color:#960050;background-color:#1e0010>；</span>
+}
+</code></pre></div><p>若将上述程序移植到内存紧张的手持设备上，希望将<code>char szName[30]</code>改为<code>char szName[5]</code>：</p>
+<p>由于不存在<code>strcpy(e.szName,"Tom123456789")</code>这种语句，所以只需要在<code>setName</code>中加一个判断语句，当输入多于5个符号时报错即可。</p>
+</li>
+<li>
+<p>成员函数的重载，参数缺省</p>
+<ul>
+<li>
+<p>成员函数可以重载，也可以缺省</p>
+</li>
+<li>
+<p><strong>使用缺省参数时要注意避免函数重载导致的歧义</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>location</span>{
+    <span style=color:#66d9ef>private</span><span style=color:#f92672>:</span><span style=color:#66d9ef>int</span> x,y;
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span><span style=color:#66d9ef>void</span> init(<span style=color:#66d9ef>int</span> x<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>,<span style=color:#66d9ef>int</span> y<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>)
+           <span style=color:#66d9ef>void</span> valueX(<span style=color:#66d9ef>int</span> val<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>){x<span style=color:#f92672>=</span>val;}
+           <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>valueX</span>(){<span style=color:#66d9ef>return</span> x;}
+};
+
+location A;
+A.valueX();<span style=color:#960050;background-color:#1e0010>❌❌❌</span>
+<span style=color:#75715e>//编译器无法判断调用哪个valueX
+</span></code></pre></div></li>
+</ul>
+</li>
+</ol>
+<h2 id=构造函数>构造函数<a hidden class=anchor aria-hidden=true href=#构造函数>#</a></h2>
+<ol>
+<li>
+<p>什么是构造函数？</p>
+<p><strong>构造函数名字与类的名字相同</strong>，可以有参数，<strong>不可以</strong>有返回值</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Complex</span>{
+    <span style=color:#66d9ef>private</span><span style=color:#f92672>:</span><span style=color:#66d9ef>double</span> real,imag;
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>Complex(<span style=color:#66d9ef>double</span> r,<span style=color:#66d9ef>double</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>);
+    <span style=color:#75715e>//构造函数名字与类名相同，无返回值——连void都没有！！！
+</span><span style=color:#75715e></span>};
+
+Complex<span style=color:#f92672>::</span>Complex(<span style=color:#66d9ef>double</span> r,<span style=color:#66d9ef>double</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>){real<span style=color:#f92672>=</span>r;imag<span style=color:#f92672>=</span>i;}
+
+Complex c1<span style=color:#960050;background-color:#1e0010>；❌</span>
+Complex<span style=color:#f92672>*</span> ptr_c2<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> Complex;<span style=color:#960050;background-color:#1e0010>❌</span>
+Complex c3(<span style=color:#ae81ff>2</span>);<span style=color:#960050;background-color:#1e0010>🆗</span><span style=color:#75715e>//i有缺省值0
+</span><span style=color:#75715e></span>Complex<span style=color:#f92672>*</span> ptr_c4<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> Complex(<span style=color:#ae81ff>3</span>,<span style=color:#ae81ff>4</span>);<span style=color:#960050;background-color:#1e0010>🆗</span><span style=color:#75715e>//c++中变量名可以含有下划线_
+</span></code></pre></div></li>
+<li>
+<p>为什么需要构造函数？</p>
+<p>对象没被初始化就使用会导致程序出错！</p>
+<p>在用类定义对象时，构造函数可以<strong>自动进行初始化</strong>操作（就像ios捷径里的自动化！），不必担心忘记初始化。</p>
+</li>
+<li>
+<p>如果定义类时没有写构造函数，编译器会自动生成<strong>无参数构造函数</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Complex</span>{
+    <span style=color:#66d9ef>private</span><span style=color:#f92672>:</span><span style=color:#66d9ef>double</span> real,imag;
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span><span style=color:#66d9ef>void</span> Set(<span style=color:#66d9ef>double</span> r,<span style=color:#66d9ef>double</span> i)
+    <span style=color:#75715e>//编译器自动生成默认构造函数
+</span><span style=color:#75715e></span>};
+Complex c1<span style=color:#960050;background-color:#1e0010>；🆗</span>
+Complex<span style=color:#f92672>*</span> pc2<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> Complex;<span style=color:#960050;background-color:#1e0010>🆗</span><span style=color:#75715e>//c++中指针前缀：p
+</span></code></pre></div></li>
+<li>
+<p>可以有多个构造函数，<strong>需要参数个数/类型不同</strong>。(这些构造函数间是重载的关系)</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Complex</span>{
+    <span style=color:#66d9ef>private</span><span style=color:#f92672>:</span><span style=color:#66d9ef>double</span> real,imag;
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>Complex(<span style=color:#66d9ef>double</span> r,<span style=color:#66d9ef>double</span> i)
+           Complex(<span style=color:#66d9ef>double</span> r);
+           Complex(Complex c1,Complex c2);
+           <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>Set</span>(<span style=color:#66d9ef>double</span> r,<span style=color:#66d9ef>double</span> i);
+};
+
+Complex<span style=color:#f92672>::</span>Complex(<span style=color:#66d9ef>double</span> r,<span style=color:#66d9ef>double</span> i){real<span style=color:#f92672>=</span>r;imag<span style=color:#f92672>=</span>i;}
+Complex<span style=color:#f92672>::</span>Complex(<span style=color:#66d9ef>double</span> r){real<span style=color:#f92672>=</span>r;imag<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;}
+Complex<span style=color:#f92672>::</span>Complex(Complex c1,Complex c2)
+{
+    real<span style=color:#f92672>=</span>c1.real<span style=color:#f92672>+</span>c2.real;
+    imag<span style=color:#f92672>=</span>c1.imag<span style=color:#f92672>+</span>c2.imag;
+}
+
+
+Complex <span style=color:#a6e22e>c1</span>(<span style=color:#ae81ff>3</span>,<span style=color:#ae81ff>1</span>),c2(<span style=color:#ae81ff>4</span>),c3(c1,c2);
+<span style=color:#75715e>//c1={3,1},c2={4,0}c3={7,1}
+</span></code></pre></div></li>
+<li>
+<p>构造函数在数组中的使用</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Test</span>{
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>Test(<span style=color:#66d9ef>int</span> n){}<span style=color:#75715e>//(1)
+</span><span style=color:#75715e></span>           Test(<span style=color:#66d9ef>int</span> n,<span style=color:#66d9ef>int</span> m){}<span style=color:#75715e>//(2)
+</span><span style=color:#75715e></span>           Test(){}<span style=color:#75715e>//(3)
+</span><span style=color:#75715e></span>};
+
+Test array1[<span style=color:#ae81ff>3</span>]<span style=color:#f92672>=</span>{<span style=color:#ae81ff>1</span>,Test(<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>2</span>)};
+<span style=color:#75715e>//三个元素分别用(1)(2)(3)初始化
+</span><span style=color:#75715e></span>Test<span style=color:#f92672>*</span> pArray2[<span style=color:#ae81ff>3</span>]<span style=color:#f92672>=</span>{<span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Test</span>(<span style=color:#ae81ff>4</span>),<span style=color:#66d9ef>new</span> Test(<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>2</span>)};
+<span style=color:#75715e>//👉两个元素👈分别用(1)(2)初始化
+</span></code></pre></div></li>
+</ol>
+<h2 id=复制构造函数>复制构造函数<a hidden class=anchor aria-hidden=true href=#复制构造函数>#</a></h2>
+<ol>
+<li>
+<p>什么是复制构造函数？</p>
+<p>一种特殊的构造函数，其形式参数必须为<strong>引用</strong>类型</p>
+</li>
+<li>
+<p>如果定义类时没有写，编译器会自动生成<strong>无参数复制构造函数</strong></p>
+</li>
+<li>
+<p><strong>复制构造函数被调用时，可以不进行复制工作，见4.2的例子</strong></p>
+</li>
+<li>
+<p>什么时候用到复制构造函数？</p>
+<ul>
+<li>
+<p>用一个对象去初始化同类的另一个对象时</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>Complex c1;
+Complex <span style=color:#a6e22e>c2</span>(c1);
+</code></pre></div></li>
+<li>
+<p>如果函数有一参数是类A的对象，当该函数被调用时，类A的复制构造函数被调用</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>A</span>{
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>A(){};<span style=color:#75715e>//构造函数
+</span><span style=color:#75715e></span>           A(A<span style=color:#f92672>&amp;</span> a){cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;Copy constructor called&#34;</span><span style=color:#f92672>&lt;&lt;</span>endl;}<span style=color:#75715e>//复制构造函数
+</span><span style=color:#75715e></span>};
+
+<span style=color:#66d9ef>void</span> <span style=color:#a6e22e>Func</span>(A a1){}
+
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+{
+    A a2;
+    Func(a2);<span style=color:#75715e>//此时复制构造函数被调用，但并没有把a1变成a2复制品！
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+<span style=color:#75715e>//输出：Copy constructor called
+</span></code></pre></div></li>
+<li>
+<p>如果函数的返回值是类A的对象，当该函数返回值时，leiA的复制构造函数被调用</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>A</span>{
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span><span style=color:#66d9ef>int</span> v;
+           A(<span style=color:#66d9ef>int</span> n){v<span style=color:#f92672>=</span>n;}
+           A(<span style=color:#66d9ef>const</span> A<span style=color:#f92672>&amp;</span> a){
+               v<span style=color:#f92672>=</span>a.v;<span style=color:#75715e>//和之前的代码不同，此处进行了复制工作
+</span><span style=color:#75715e></span>               cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;Copy constructor called&#34;</span><span style=color:#f92672>&lt;&lt;</span>endl;}
+};
+
+A <span style=color:#a6e22e>Func</span>(){
+    A b(<span style=color:#ae81ff>4</span>);<span style=color:#75715e>//此处使用类A的构造函数，参数是4
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>return</span> b;
+}
+
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+{
+    cout<span style=color:#f92672>&lt;&lt;</span>Func().v<span style=color:#f92672>&lt;&lt;</span>endl;
+    <span style=color:#75715e>//此处复制构造函数被调用，且将Func().v变成了b的复制品
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+<span style=color:#75715e>//输出：Copy constructor called 4
+</span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p>对象间赋值并不导致复制构造函数被调用</p>
+<blockquote>
+<p>假设A 是一个类的名字，下面哪段程序不会调用A的复制构造函数？</p>
+<ul>
+<li>A. A a1,a2; a1 = a2;</li>
+<li>B.void func( A a) { cout &#171; &ldquo;good&rdquo; &#171; endl; }</li>
+<li>C. A func( ) { A tmp; return tmp; }</li>
+<li>D.A a1; A a2(a1);</li>
+</ul>
+<p>正确答案：A你选对了</p>
+</blockquote>
+</li>
+<li>
+<p>为什么我们要在复制构造函数中使用常量引用参数<code>A(const A& a)</code></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>test</span>(A a){cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;Test&#34;</span><span style=color:#f92672>&lt;&lt;</span>endl;}
+</code></pre></div><p>这样的函数，调用时生成形参会引发复制构造函数调用，<strong>开销比较大</strong>。</p>
+<p>👉所以可以考虑使用<code>CMyclass &</code> 引用类型作为参数。
+👉<strong>为了确保实参的值在函数中不被改变</strong>，那么可以加上<code>const</code> 关键字：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>A</span>{
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>A(){}
+           A(<span style=color:#66d9ef>const</span> A<span style=color:#f92672>&amp;</span> a){}<span style=color:#75715e>//定义时就使用const
+</span><span style=color:#75715e></span>};
+
+<span style=color:#66d9ef>void</span> <span style=color:#a6e22e>test</span>(<span style=color:#66d9ef>const</span> A<span style=color:#f92672>&amp;</span> a){cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;Test&#34;</span><span style=color:#f92672>&lt;&lt;</span>endl;}
+<span style=color:#75715e>//函数中任何试图改变a值的语句都将是变成非法
+</span></code></pre></div></li>
+<li>
+<p><strong><font color=red>为什么我们要自己写复制构造函数？？？？？</font></strong></p>
+<p>👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇</p>
+</li>
+</ol>
+<h2 id=类型转换构造函数>类型转换构造函数<a hidden class=anchor aria-hidden=true href=#类型转换构造函数>#</a></h2>
+<ol>
+<li>
+<p>什么是类型转换构造函数？</p>
+<p><strong>只有一个参数</strong>，且这参数<strong>不是引用类型的</strong>，<strong>一般</strong>就是转换构造函数</p>
+<p>此类函数目的是实现类型的自动转换</p>
+</li>
+</ol>
+<p>实例：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e></span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std; 
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Complex</span>{
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+    <span style=color:#66d9ef>double</span> real,imag;
+    Complex(<span style=color:#66d9ef>int</span> i);<span style=color:#75715e>//类型转换构造函数
+</span><span style=color:#75715e></span>    Complex(<span style=color:#66d9ef>double</span> r,<span style=color:#66d9ef>double</span> i){real<span style=color:#f92672>=</span>r;imag<span style=color:#f92672>=</span>i;}
+}; 
+
+Complex<span style=color:#f92672>::</span>Complex(<span style=color:#66d9ef>int</span> i)
+{
+    cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;IntConstructor called&#34;</span><span style=color:#f92672>&lt;&lt;</span>endl;
+    real<span style=color:#f92672>=</span>i;imag<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;<span style=color:#75715e>//此处实现了“将int类型转化为Complex类型”
+</span><span style=color:#75715e></span>}
+
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+{
+    Complex c1(<span style=color:#ae81ff>7</span>,<span style=color:#ae81ff>8</span>);
+    Complex c2<span style=color:#f92672>=</span><span style=color:#ae81ff>12</span>;<span style=color:#75715e>//直接调用类型转换构造函数
+</span><span style=color:#75715e></span>    c1<span style=color:#f92672>=</span><span style=color:#ae81ff>9</span>;<span style=color:#75715e>//9被自动转换为一个👉临时👈Complex对象
+</span><span style=color:#75715e></span>    cout<span style=color:#f92672>&lt;&lt;</span>c1.real<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;,&#34;</span><span style=color:#f92672>&lt;&lt;</span>c1.imag<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span><span style=color:#f92672>&lt;&lt;</span>c2.real<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;,&#34;</span><span style=color:#f92672>&lt;&lt;</span>c2.imag<span style=color:#f92672>&lt;&lt;</span>endl;
+    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><pre><code>IntConstructor called
+IntConstructor called
+9,0
+12,0
+</code></pre><h2 id=析构函数>析构函数<a hidden class=anchor aria-hidden=true href=#析构函数>#</a></h2>
+<ol>
+<li>
+<p>析构函数是什么？</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Ctest</span>{
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+    <span style=color:#f92672>~</span>Ctest(){cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;destructor called&#34;</span><span style=color:#f92672>&lt;&lt;</span>endl<span style=color:#960050;background-color:#1e0010>；</span>}
+    <span style=color:#75715e>//析构函数与类名相同，前有一&#34;~&#34;号
+</span><span style=color:#75715e></span>    <span style=color:#75715e>//析构函数没有参数，没有返回值
+</span><span style=color:#75715e></span>    <span style=color:#75715e>//一个类只能有一个析构函数
+</span><span style=color:#75715e></span>};
+
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(){
+    Ctest array[<span style=color:#ae81ff>2</span>];<span style=color:#75715e>//生成一个含有两个Ctest类的对象的数组
+</span><span style=color:#75715e></span>    cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;End Main&#34;</span><span style=color:#f92672>&lt;&lt;</span>endl;
+    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+    <span style=color:#75715e>//此时main函数结束，array消亡，其中每个元素的析构函数都被调用
+</span><span style=color:#75715e></span>}
+</code></pre></div><pre><code>End Main 
+destructor called
+destructor called
+</code></pre></li>
+<li>
+<p>析构函数与delete</p>
+<p>对象：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>Ctest <span style=color:#f92672>*</span>pTest;
+pTest<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> Ctest;<span style=color:#75715e>//构造函数调用
+</span><span style=color:#75715e></span><span style=color:#66d9ef>delete</span> Ctest;<span style=color:#75715e>//此时析构函数被调用！！
+</span></code></pre></div><p>对象数组：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>Ctest <span style=color:#f92672>*</span>pTest;
+pTest<span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Ctest[<span style=color:#ae81ff>3</span>];
+<span style=color:#66d9ef>delete</span> [] Ctest;<span style=color:#75715e>//👉必须写[]！👈否则只delete一个对象（调用一次析构函数）！！！！
+</span></code></pre></div></li>
+<li>
+<p>析构函数在对象作为函数返回值返回后被调用</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Ctest</span>{
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+    <span style=color:#f92672>~</span>Ctest(){cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;destructor called&#34;</span><span style=color:#f92672>&lt;&lt;</span>endl;}
+};
+
+Ctest <span style=color:#a6e22e>Func</span>(Ctest t){<span style=color:#66d9ef>return</span> t;}<span style=color:#75715e>//作为参数的对象t消亡时，调用析构
+</span><span style=color:#75715e></span>
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(){
+    Ctest t1;
+    t1<span style=color:#f92672>=</span>Func(t1);<span style=color:#75715e>//函数返回的临时对象Func(t1)被用过后，调用析构
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;<span style=color:#75715e>//main函数结束t1消亡，调用析构
+</span><span style=color:#75715e></span>}
+</code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>destructor called
+destructor called
+destructor called
+</code></pre></div></li>
+</ol>
+<h2 id=构造析构函数什么时候被调用>构造/析构函数什么时候被调用？<a hidden class=anchor aria-hidden=true href=#构造析构函数什么时候被调用>#</a></h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Demo</span>{
+    <span style=color:#66d9ef>int</span> id;
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+         Demo(<span style=color:#66d9ef>int</span> i);<span style=color:#75715e>//类型转换构造函数
+</span><span style=color:#75715e></span>        <span style=color:#f92672>~</span>Demo();<span style=color:#75715e>//析构函数
+</span><span style=color:#75715e></span>};
+
+Demo<span style=color:#f92672>::</span>Demo(<span style=color:#66d9ef>int</span> i){
+    id<span style=color:#f92672>=</span>i;
+    cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;id=&#34;</span><span style=color:#f92672>&lt;&lt;</span>id<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;constructed&#34;</span><span style=color:#f92672>&lt;&lt;</span>endl;}
+Demo<span style=color:#f92672>::~</span>Demo(){
+    cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;id=&#34;</span><span style=color:#f92672>&lt;&lt;</span>id<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;destructed&#34;</span><span style=color:#f92672>&lt;&lt;</span>endl;}
+</code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>Demo <span style=color:#a6e22e>d1</span>(<span style=color:#ae81ff>1</span>); <span style=color:#75715e>//d1定义在这里，说明这是一个全局对象
+</span><span style=color:#75715e></span>
+<span style=color:#66d9ef>void</span> <span style=color:#a6e22e>Func</span>() {
+    <span style=color:#66d9ef>static</span> Demo d2(<span style=color:#ae81ff>2</span>); 
+    Demo d3(<span style=color:#ae81ff>3</span>); 
+    cout <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;func&#34;</span> <span style=color:#f92672>&lt;&lt;</span> endl;
+} 
+
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span> () {
+    Demo d4(<span style=color:#ae81ff>4</span>); 
+    d4 <span style=color:#f92672>=</span> <span style=color:#ae81ff>6</span>; <span style=color:#75715e>//这个语句成立是因为有类型转换构造函数
+</span><span style=color:#75715e></span>    cout <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;main&#34;</span> <span style=color:#f92672>&lt;&lt;</span> endl;
+    {Demo d5(<span style=color:#ae81ff>5</span>);}<span style=color:#75715e>//d5定义在花括号里，说明这是一个局部对象
+</span><span style=color:#75715e></span>    Func(); 
+    cout <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;main ends&#34;</span> <span style=color:#f92672>&lt;&lt;</span> endl; 
+    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><p>输出：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>id<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>constructed
+id<span style=color:#f92672>=</span><span style=color:#ae81ff>4</span>constructed
+id<span style=color:#f92672>=</span><span style=color:#ae81ff>6</span>constructed
+id<span style=color:#f92672>=</span><span style=color:#ae81ff>6</span>destructed
+main
+id<span style=color:#f92672>=</span><span style=color:#ae81ff>5</span>constructed
+id<span style=color:#f92672>=</span><span style=color:#ae81ff>5</span>destructed
+id<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>constructed
+id<span style=color:#f92672>=</span><span style=color:#ae81ff>3</span>constructed
+func
+id<span style=color:#f92672>=</span><span style=color:#ae81ff>3</span>destructed
+main ends
+id<span style=color:#f92672>=</span><span style=color:#ae81ff>6</span>destructed
+id<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>destructed
+id<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>destructed
+</code></pre></div><h1 id=类和对象提高>类和对象提高<a hidden class=anchor aria-hidden=true href=#类和对象提高>#</a></h1>
+<h2 id=this指针>This指针<a hidden class=anchor aria-hidden=true href=#this指针>#</a></h2>
+<ol>
+<li>
+<p><strong>为什么引入This指针？</strong></p>
+<ul>
+<li>
+<p>刚开始没有c++编译器，需要把c++翻译成c用c编译器编译。</p>
+</li>
+<li>
+<p>由于<strong>c++的成员函数在c中并没有对应概念</strong>，因此发明了This指针，该指针可以<strong>指向成员函数作用的对象</strong>，能将一个<strong>全局函数转变为成员函数</strong></p>
+<p><img loading=lazy src=https://i.loli.net/2021/08/29/1DtZqnkvdQl2p8B.png alt>
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>This指针在c++中的作用</strong></p>
+<p><strong>非静态</strong>成员函数中可以直接使用this来代表<font color=red>指向该函数作用的对象的指针</font></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>A</span> {
+            <span style=color:#66d9ef>int</span> i; 
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>void</span> Hello(){ cout <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;hello&#34;</span> <span style=color:#f92672>&lt;&lt;</span> endl; }
+}; <span style=color:#75715e>//用this翻译：void Hello(A*this){ cout &lt;&lt; &#34;hello&#34; &lt;&lt; endl; }
+</span><span style=color:#75715e></span>
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
+    A <span style=color:#f92672>*</span> p <span style=color:#f92672>=</span> NULL;
+    p<span style=color:#f92672>-&gt;</span>Hello(); <span style=color:#75715e>//用this翻译：Hello(p);
+</span><span style=color:#75715e></span>}<span style=color:#75715e>//结果会怎样？输出：hello
+</span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>A</span> {
+            <span style=color:#66d9ef>int</span> i; 
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>void</span> Hello(){ cout <span style=color:#f92672>&lt;&lt;</span> i <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;hello&#34;</span> <span style=color:#f92672>&lt;&lt;</span> endl; }
+}; <span style=color:#75715e>//用this翻译：void Hello(A*this){ cout &lt;&lt; this-&gt;i &lt;&lt; &#34;hello&#34; &lt;&lt; endl;}
+</span><span style=color:#75715e></span>
+<span style=color:#75715e>//this若为NULL，则出错！！
+</span><span style=color:#75715e></span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
+     A <span style=color:#f92672>*</span> p <span style=color:#f92672>=</span> NULL; 
+     p<span style=color:#f92672>-&gt;</span>Hello();<span style=color:#75715e>//用this翻译：Hello(p);
+</span><span style=color:#75715e></span>} <span style=color:#75715e>// 结果会怎样？编译出错！！！！！
+</span></code></pre></div></li>
+</ol>
+<h2 id=静态成员变量和静态成员函数>静态成员变量和静态成员函数<a hidden class=anchor aria-hidden=true href=#静态成员变量和静态成员函数>#</a></h2>
+<ol>
+<li>
+<p>定义和性质</p>
+<ul>
+<li>
+<p>普通成员变量每个对象各自有一份，静态成员变量一共就一份，所有对象共享</p>
+</li>
+<li>
+<p>sizeof运算符不会计算静态成员变量</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CMyclass</span> { 
+    <span style=color:#66d9ef>int</span> n; 
+    <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>int</span> s;
+};
+<span style=color:#75715e>//sizeof(CMyclass)=4
+</span></code></pre></div></li>
+<li>
+<p>普通成员函数必须具体作用于某个对象，静态成员函数<strong>不具体作用于某个对象</strong></p>
+</li>
+<li>
+<p><strong>静态成员不需要通过对象就能访问</strong></p>
+</li>
+<li>
+<p>静态成员变量本质上是全局变量，哪怕一个对象都不存在，类 的静态成员变量也存在。</p>
+</li>
+<li>
+<p>静态成员函数本质上是全局函数。</p>
+</li>
+<li>
+<p>设置静态成员这种机制的目的是<strong>将和某些类紧密相关的全局变量和函数写到类里面，看上去像一个整体，易于维护和理解。</strong></p>
+</li>
+</ul>
+</li>
+<li>
+<p>如何访问静态成员</p>
+<ul>
+<li>
+<p><strong>类名::成员名</strong><code>CRectangle::PrintTotal()</code></p>
+</li>
+<li>
+<p><strong>对象名.成员名</strong><code>CRectangle r;r.PrintTotal()</code></p>
+</li>
+<li>
+<p><strong>指针->成员名</strong><code>CRectangle* p;p->PrintTotal()</code></p>
+</li>
+<li>
+<p><strong>引用.成员名</strong><code>CRectangle& ref;int n=ref.nTotalNumber;</code></p>
+<p><font color=red>虽然后三个的形式与普通成员变量相同，但并不意味着该成员是属于那个对象的，要判断静态还是普通需要看成员的定义</font></p>
+</li>
+</ul>
+</li>
+<li>
+<p>静态成员实例</p>
+<p>考虑一个需要随时知道矩形总数和总面积的图形处理程序
+可以用全局变量来记录<strong>总数和总面积</strong>
+用静态成员将这两个变量封装进类中，就更容易理解和维护</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CRectangle</span>
+{
+    <span style=color:#66d9ef>private</span><span style=color:#f92672>:</span>
+           <span style=color:#66d9ef>int</span> w,h;
+           <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>int</span> nTotalArea;
+           <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>int</span> nTotalNumber;
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+          CRectangle(<span style=color:#66d9ef>int</span> w_,<span style=color:#66d9ef>int</span> h_);
+         <span style=color:#f92672>~</span>CRectangle();
+          <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>PrintTotal</span>();
+          CRectangle(CRectangle <span style=color:#f92672>&amp;</span> r )<span style=color:#75715e>//复制构造函数
+</span><span style=color:#75715e></span>};
+</code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>CRectangle<span style=color:#f92672>::</span>CRectangle(<span style=color:#66d9ef>int</span> w_,<span style=color:#66d9ef>int</span> h_) {
+    w <span style=color:#f92672>=</span> w_; 
+    h <span style=color:#f92672>=</span> h_; 
+    nTotalNumber <span style=color:#f92672>++</span>; 
+    nTotalArea <span style=color:#f92672>+=</span> w <span style=color:#f92672>*</span> h;
+}
+CRectangle<span style=color:#f92672>::~</span>CRectangle() {
+    nTotalNumber <span style=color:#f92672>--</span>; 
+    nTotalArea <span style=color:#f92672>-=</span> w <span style=color:#f92672>*</span> h;
+}
+<span style=color:#66d9ef>void</span> CRectangle<span style=color:#f92672>::</span>PrintTotal() {
+    cout <span style=color:#f92672>&lt;&lt;</span> nTotalNumber <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;,&#34;</span> <span style=color:#f92672>&lt;&lt;</span>
+}
+CRectangle<span style=color:#f92672>::</span>CRectangle(CRectangle <span style=color:#f92672>&amp;</span> r ) {
+    w <span style=color:#f92672>=</span> r.w;
+    h <span style=color:#f92672>=</span> r.h;
+    nTotalNumber <span style=color:#f92672>++</span>;
+    nToTalArea<span style=color:#f92672>+=</span>w<span style=color:#f92672>*</span>h;
+}<span style=color:#75715e>/*💢💢💢不要忘了定义复制构造函数！！！！！
+</span><span style=color:#75715e>
+</span><span style=color:#75715e>👉在使用CRectangle类时，有时会调用复制构造函数 生成临时的隐藏的CRectangle对象：
+</span><span style=color:#75715e>
+</span><span style=color:#75715e>    调用一个以CRectangle类对象作为参数的函数时， 
+</span><span style=color:#75715e>    调用一个以CRectangle类对象作为返回值的函数时
+</span><span style=color:#75715e>
+</span><span style=color:#75715e>👉临时对象在消亡时会调用析构函数，减少nTotalNumber 和 nTotalArea的值，可是这些临时对象在生成时却没有增加nTotalNumber 和 nTotalArea的值。
+</span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>int</span> CRectangle<span style=color:#f92672>::</span>nTotalNumber <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; 
+<span style=color:#66d9ef>int</span> CRectangle<span style=color:#f92672>::</span>nTotalArea <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; 
+<span style=color:#75715e>// 必须在定义类的文件中对静态成员变量进行一次说明或初始化。否则编译能通过，链接不能通过。 
+</span><span style=color:#75715e></span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
+    CRectangle r1(<span style=color:#ae81ff>3</span>,<span style=color:#ae81ff>3</span>), r2(<span style=color:#ae81ff>2</span>,<span style=color:#ae81ff>2</span>); 
+    <span style=color:#75715e>/*cout &lt;&lt; CRectangle::nTotalNumber;  👉Wrong , 私有*/</span>
+    CRectangle<span style=color:#f92672>::</span>PrintTotal(); 
+    r1.PrintTotal(); <span style=color:#75715e>//虽然这样写，但不代表PrintTotal是普通成员函数
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><p>Output:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#ae81ff>2</span>,<span style=color:#ae81ff>13</span>
+<span style=color:#ae81ff>2</span>,<span style=color:#ae81ff>13</span>
+</code></pre></div></li>
+<li>
+<p><strong>静态成员函数不能访问非静态成员变量，不能调用非静态成员函数</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>void</span> CRectangle<span style=color:#f92672>::</span>PrintTotal() {
+     cout <span style=color:#f92672>&lt;&lt;</span> w <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;,&#34;</span> <span style=color:#f92672>&lt;&lt;</span> nTotalNumber <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;,&#34;</span> <span style=color:#f92672>&lt;&lt;</span> nTotalArea <span style=color:#f92672>&lt;&lt;</span> endl; <span style=color:#75715e>//wrong
+</span><span style=color:#75715e></span>}
+CRetangle<span style=color:#f92672>::</span>PrintTotal(); 
+<span style=color:#75715e>//解释不通，w 到底是属于那个对象的？
+</span><span style=color:#75715e>//同理，非静态成员函数会访问非静态成员变量，调用了非静态函数就等于访问了非静态变量
+</span></code></pre></div></li>
+</ol>
+<h2 id=成员对象和封闭类>成员对象和封闭类<a hidden class=anchor aria-hidden=true href=#成员对象和封闭类>#</a></h2>
+<ul>
+<li>
+<p>有<strong>成员对象</strong>的类称之为<strong>封闭类（enclosing）</strong></p>
+</li>
+<li>
+<p>任何生成封闭类对象的语句，都要让编译器知道封闭类中的成员对象如何初始化，所以我们一定要添加<strong>封闭类构造函数的初始化列表</strong></p>
+<p><img loading=lazy src=https://i.loli.net/2021/08/29/6bEQwUTmguLPqvH.png alt>
+</p>
+<p><strong>例子</strong>：</p>
+<blockquote>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Ctyre</span>{
+   <span style=color:#66d9ef>private</span><span style=color:#f92672>:</span>
+           <span style=color:#66d9ef>int</span> radius;
+           <span style=color:#66d9ef>int</span> width;
+   <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>CTyre(<span style=color:#66d9ef>int</span> r,<span style=color:#66d9ef>int</span> w)<span style=color:#f92672>:</span>radius(r),width(w){}
+   <span style=color:#75715e>//上方的构造函数添加了初始化列表，将 radius 初始化成 r，width 初始化成 w。这种写法比在函数体内用 r 和 w 对 radius 和 width 进行赋值的风格更好。建议对成员变量的初始化都使用这种写法
+</span><span style=color:#75715e></span>};
+
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Cengine</span>{};
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Ccar</span>{
+   <span style=color:#66d9ef>private</span><span style=color:#f92672>:</span>
+           <span style=color:#66d9ef>int</span> price<span style=color:#960050;background-color:#1e0010>；</span><span style=color:#75715e>//成员变量
+</span><span style=color:#75715e></span>           Cengine engine;<span style=color:#75715e>//成员对象
+</span><span style=color:#75715e></span>           Ctyre tyre;<span style=color:#75715e>//成员对象
+</span><span style=color:#75715e></span>   <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+           CCar(<span style=color:#66d9ef>int</span> p,<span style=color:#66d9ef>int</span> tr,<span style=color:#66d9ef>int</span> tw);<span style=color:#75715e>//Ccar的初始化函数
+</span><span style=color:#75715e></span>};
+CCar<span style=color:#f92672>::</span>CCar(<span style=color:#66d9ef>int</span> p,<span style=color:#66d9ef>int</span> tr,<span style=color:#66d9ef>int</span> tw)<span style=color:#f92672>:</span>price(p),tyre(tr,w){};
+<span style=color:#75715e>//:和{之间的内容即为Ccar的构造函数的初始化列表，如果没有这列表，“CCar car”这句话就会编译出错，因为tyre的构造函数需要参数，但那句话并没有给出参数，因此无法构造tpre，因此无法构造car
+</span><span style=color:#75715e></span>
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(){
+ Ccar car(<span style=color:#ae81ff>20000</span>,<span style=color:#ae81ff>17</span>,<span style=color:#ae81ff>225</span>);
+ <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><p>详细解释看这篇文章：http://c.biancheng.net/view/167.html</p>
+</blockquote>
+</li>
+<li>
+<p>封闭类对象生成时，先执行成员对象的构造函数，在执行封闭类的成员函数</p>
+<p>👇👇👇</p>
+<p>对象成员构造函数的顺序与其<strong>在封闭类中的说明顺序一致</strong></p>
+<p>👇👇👇</p>
+<p>封闭类对象消亡时，先执行封闭类的析构函数，再执行成员对象的析构函数</p>
+<p>👉👉👉**<font color=red>就像汽车一样，造汽车时先造轮胎和引擎，再组装汽车；拆汽车时先把汽车拆成零件，再去把零件拆散</font>**</p>
+</li>
+<li>
+<p>封闭类对象如果用默认复制构造函数初始化，那么其成员对象也会用复制构造函数初始化</p>
+<p><strong>例子</strong>：</p>
+<blockquote>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>A</span>{
+<span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>A(){cout <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;default&#34;</span> <span style=color:#f92672>&lt;&lt;</span> endl;}
+    A(A<span style=color:#f92672>&amp;</span> r){cout <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;copy&#34;</span> <span style=color:#f92672>&lt;&lt;</span> endl;}
+};
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>B</span>{A a;};
+
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(){
+B b1;
+B b2(b1);
+<span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><p>Output：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>default</span>
+copy<span style=color:#75715e>//说明b2.a是用类A的复制构造函数初始化的，而且调用复制构造函数时的实参就是b1.a
+</span></code></pre></div></blockquote>
+</li>
+</ul>
+<h2 id=常量成员函数和常量对象>常量成员函数和常量对象<a hidden class=anchor aria-hidden=true href=#常量成员函数和常量对象>#</a></h2>
+<ul>
+<li>
+<p><strong>常量对象</strong></p>
+<p>如果<strong>不希望某个对象的值被改变</strong>，则定义该对象时可以在<strong>前面</strong>加const关键字</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Demo</span>{...}
+<span style=color:#66d9ef>const</span> Demo Obj;<span style=color:#75715e>//常量对象
+</span></code></pre></div></li>
+<li>
+<p><strong>常量成员函数</strong></p>
+<p>如果<strong>不希望成员函数执行期间修改其作用的对象</strong>，则定义该函数时可以在<strong>后面</strong>加const关键字</p>
+<p>❗❗❗<font color=red>常量成员函数不能使用普通函数/变量，可以使用静态函数/成员，因为静态函数/成员不具体作用于任何对象</font></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Sample</span>
+{
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+        <span style=color:#66d9ef>int</span> value;
+        <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>GetValue</span>() <span style=color:#66d9ef>const</span>;<span style=color:#75715e>//常量成员函数
+</span><span style=color:#75715e></span>        <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>func</span>(){};
+        Sample(){};
+};
+
+<span style=color:#66d9ef>void</span> Sample<span style=color:#f92672>::</span>GetValue()<span style=color:#66d9ef>const</span>
+{
+    value<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;<span style=color:#75715e>//❌❌❌不能访问普通成员变量
+</span><span style=color:#75715e></span>    func();<span style=color:#75715e>//❌❌❌不能调用普通成员函数
+</span><span style=color:#75715e></span>}
+</code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+{
+    <span style=color:#66d9ef>const</span> Sample o;
+    o.value<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>;<span style=color:#75715e>//❌常量对象不能被修改
+</span><span style=color:#75715e></span>    o.func();<span style=color:#75715e>//❌常量对象上不能执行非常量成员函数，因为电脑不知道那函数会不会改变这个对象
+</span><span style=color:#75715e></span>    o.GetValue();<span style=color:#75715e>//✅常量对象上可以执行常量成员函数
+</span><span style=color:#75715e></span>}
+</code></pre></div></li>
+</ul>
+<p><font color=red><strong>注意：两个成员函数，名字和参数表一样，但一个是const一个不是，算重载</strong></font></p>
+<p><img loading=lazy src=https://i.loli.net/2021/08/29/XKjUQAymG5IR76r.png alt>
+</p>
+<ul>
+<li>
+<p><strong>常引用</strong></p>
+<p>用对象的引用作为参数，不必调用复制构造函数，又比指针做参数好看</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Sample</span>{...};
+<span style=color:#66d9ef>void</span> <span style=color:#a6e22e>PrintfObj</span>(<span style=color:#66d9ef>const</span> Sample<span style=color:#f92672>&amp;</span> o){...}
+<span style=color:#75715e>//这样函数中能确保不会无意间更改o的值
+</span></code></pre></div></li>
+</ul>
+<h2 id=友元friends>友元（friends）<a hidden class=anchor aria-hidden=true href=#友元friends>#</a></h2>
+<ul>
+<li>
+<p>友元这个机制算是对c语言程序员的一种妥协，为关系相近的类提供了一种调用函数的方便。友元函数不属于该类的成员函数，他是定义在类外的普通函数，只是在类中声明该函数可以直接访问类中的private或者protected成员</p>
+</li>
+<li>
+<p><strong>友元函数</strong>：一个类的友元函数可以访问该类的私有成员</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CCar</span><span style=color:#960050;background-color:#1e0010>；</span><span style=color:#75715e>//提前声明CCar类，以便后面的CDriver使用
+</span><span style=color:#75715e></span>
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CDriver</span>
+{
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span><span style=color:#66d9ef>void</span> ModifyCar(CCar<span style=color:#f92672>*</span> pCar);
+    <span style=color:#75715e>//&#39;改装汽车&#39;函数的参数是一个指向CCar类对象的指针，这里就用到了CCar类
+</span><span style=color:#75715e></span>};
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CCar</span>
+{
+    <span style=color:#66d9ef>private</span><span style=color:#f92672>:</span>
+            <span style=color:#66d9ef>int</span> price;
+    <span style=color:#66d9ef>friend</span> <span style=color:#66d9ef>void</span> CDriver<span style=color:#f92672>::</span>ModifyCar(CCar<span style=color:#f92672>*</span> pCar);
+    <span style=color:#75715e>//可以将一个类A的成员函数(包括构造/析构函数)说明为另一个类B的友元：friend_返回值_A::func()
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>friend</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>MostExpensiveCar</span>(CCar cars[],<span style=color:#66d9ef>int</span> total);
+    <span style=color:#75715e>//上面两函数是CCar类的友元函数，可以访问CCar的私有变量price
+</span><span style=color:#75715e></span>};
+<span style=color:#75715e>//定义第一个友元函数
+</span><span style=color:#75715e></span><span style=color:#66d9ef>void</span> CDriver<span style=color:#f92672>::</span>ModifyCar(CCar<span style=color:#f92672>*</span> pCar)
+{
+    pCar<span style=color:#f92672>-&gt;</span>price<span style=color:#f92672>+=</span><span style=color:#ae81ff>1000</span>;<span style=color:#75715e>//汽车改装后价值增加
+</span><span style=color:#75715e></span>}
+<span style=color:#75715e>//定义第二个友元函数
+</span><span style=color:#75715e></span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>MostExpensiveCar</span>(CCar cars[],<span style=color:#66d9ef>int</span> total)
+{
+    <span style=color:#66d9ef>int</span> tmpMax<span style=color:#f92672>=-</span><span style=color:#ae81ff>1</span>;
+    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;i<span style=color:#f92672>&lt;</span>total;<span style=color:#f92672>++</span>i)
+        <span style=color:#66d9ef>if</span>(cars[i].price<span style=color:#f92672>&gt;</span>tmpMax)
+            tmpMax<span style=color:#f92672>=</span>cars[i].price;
+    <span style=color:#66d9ef>return</span> tmpMax;
+}
+
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(){<span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;}
+</code></pre></div></li>
+<li>
+<p>友元类：一个类的友元类可以访问该类的私有成员</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CCar</span>
+{
+    <span style=color:#66d9ef>private</span><span style=color:#f92672>:</span><span style=color:#66d9ef>int</span> price;
+    <span style=color:#66d9ef>friend</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CDriver</span>;<span style=color:#75715e>//声明CDriver为友元类
+</span><span style=color:#75715e></span>};
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CDriver</span>
+{
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+           CCar myCar;
+           <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>ModifyCar</span>(){myCar.price<span style=color:#f92672>+=</span><span style=color:#ae81ff>1000</span>;}
+           <span style=color:#75715e>//因CDriver是CCar的友元类，故可以访问CCar的私有成员       
+</span><span style=color:#75715e></span>};
+
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(){<span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;}
+</code></pre></div></li>
+<li>
+<p>友元类之间的关系不能传递，不能继承</p>
+</li>
+</ul>
+</div>
+<footer class=post-footer>
+<ul class=post-tags>
+<li><a href=https://abigail1985.github.io/tags/c++/>C++ </a></li>
+</ul>
+<nav class=paginav>
+<a class=prev href=https://abigail1985.github.io/essay/pkucpp-2/>
+<span class=title>« 上一页</span>
+<br>
+<span>PKUCpp-2</span>
+</a>
+<a class=next href=https://abigail1985.github.io/essay/obsidian-devonthink/>
+<span class=title>下一页 »</span>
+<br>
+<span>Devonthink+Obsidian管理知识体系</span>
+</a>
+</nav>
+<div class=share-buttons>
+<a target=_blank rel="noopener noreferrer" aria-label="share PKUCpp-1 on twitter" href="https://twitter.com/intent/tweet/?text=PKUCpp-1&url=https%3a%2f%2fabigail1985.github.io%2fessay%2fpkucpp-1%2f&hashtags=C%2b%2b">
+<png version=1.1 viewbox="0 0 512 512" xml:space=preserve>
+<path d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z">
+</png>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share PKUCpp-1 on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fabigail1985.github.io%2fessay%2fpkucpp-1%2f&title=PKUCpp-1&summary=PKUCpp-1&source=https%3a%2f%2fabigail1985.github.io%2fessay%2fpkucpp-1%2f">
+<png version=1.1 viewbox="0 0 512 512" xml:space=preserve>
+<path d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z">
+</png>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share PKUCpp-1 on reddit" href="https://reddit.com/submit?url=https%3a%2f%2fabigail1985.github.io%2fessay%2fpkucpp-1%2f&title=PKUCpp-1">
+<png version=1.1 viewbox="0 0 512 512" xml:space=preserve>
+<path d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z">
+</png>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share PKUCpp-1 on facebook" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fabigail1985.github.io%2fessay%2fpkucpp-1%2f">
+<png version=1.1 viewbox="0 0 512 512" xml:space=preserve>
+<path d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z">
+</png>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share PKUCpp-1 on whatsapp" href="https://api.whatsapp.com/send?text=PKUCpp-1%20-%20https%3a%2f%2fabigail1985.github.io%2fessay%2fpkucpp-1%2f">
+<png version=1.1 viewbox="0 0 512 512" xml:space=preserve>
+<path d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z">
+</png>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share PKUCpp-1 on telegram" href="https://telegram.me/share/url?text=PKUCpp-1&url=https%3a%2f%2fabigail1985.github.io%2fessay%2fpkucpp-1%2f">
+<png version=1.1 xml:space=preserve viewbox="2 2 28 28">
+<path d=M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z>
+</png>
+</a>
+</div>
+</footer><script src=https://cdn.jsdelivr.net/npm/@waline/client></script>
+<div id=waline></div>
+<script>Waline({el:'#waline',serverURL:'https://blog-api-theta.vercel.app/',copyright:!1,login:'force',dark:'.dark',locale:{placeholder:'登录以评论'}})</script>
+</article>
+</main>
+<footer class=footer>
+<span>&copy; 2022 <a href=https://abigail1985.github.io/>de_Abigaïl</a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
+</span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)">
+<button class=top-link id=top-link type=button accesskey=g>
+<png xmlns=http://www.w3.org/2000/png viewbox="0 0 12 6" fill=currentColor>
+<path d="M12 6H0l6-6z">
+</png>
+</button>
+</a>
+<script>let menu=document.getElementById('menu');menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+<script>document.querySelectorAll('pre > code').forEach(b=>{const c=b.parentNode.parentNode,a=document.createElement('button');a.classList.add('copy-code'),a.innerText='复制';function d(){a.innerText='已复制！',setTimeout(()=>{a.innerText='复制'},2e3)}a.addEventListener('click',e=>{if('clipboard'in navigator){navigator.clipboard.writeText(b.textContent),d();return}const a=document.createRange();a.selectNodeContents(b);const c=window.getSelection();c.removeAllRanges(),c.addRange(a);try{document.execCommand('copy'),d()}catch(a){}c.removeRange(a)}),c.classList.contains("highlight")?c.appendChild(a):c.parentNode.firstChild==c||(b.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?b.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(a):b.parentNode.appendChild(a))})</script>
+</body>
+</html>

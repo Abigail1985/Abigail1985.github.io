@@ -1,0 +1,2125 @@
+<!doctype html><html lang=zh dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>PKUCpp-2 | de_Abigaïl</title>
+<meta name=keywords content="C++ ">
+<meta name=description content="PKUCpp-2 - de_Abigaïl">
+<meta name=author content="Abigail">
+<link rel=canonical href=https://abigail1985.github.io/essay/pkucpp-2/>
+<link crossorigin=anonymous href=/assets/css/stylesheet.min.842c2a49f4946cd14e0b90c75dd69c37283b7c5e3fd3e7fb5bb176d096f2e306.css integrity="sha256-hCwqSfSUbNFOC5DHXdacNyg7fF4/0+f7W7F20Jby4wY=" rel="preload stylesheet" as=style>
+<script defer crossorigin=anonymous src=/assets/js/highlight.min.a3f672ba2597cf5d0a97d35c02ca273c23ffd63073757c9e0d4f13bd63f2b00a.js integrity="sha256-o/ZyuiWXz10Kl9NcAsonPCP/1jBzdXyeDU8TvWPysAo=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=https://abigail1985.github.io/images/favicon.png>
+<link rel=icon type=image/png sizes=16x16 href=https://abigail1985.github.io/images/favicon.png>
+<link rel=icon type=image/png sizes=32x32 href=https://abigail1985.github.io/images/favicon.png>
+<link rel=apple-touch-icon href=https://abigail1985.github.io/images/favicon.png>
+<link rel=mask-icon href=https://abigail1985.github.io/images/favicon.png>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<meta name=generator content="Hugo 0.87.0">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css integrity=sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X crossorigin=anonymous>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js integrity=sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4 crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js integrity=sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa crossorigin=anonymous onload=renderMathInElement(document.body)></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-163991976-1','auto'),ga('send','pageview'))</script><meta property="og:title" content="PKUCpp-2">
+<meta property="og:description" content>
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://abigail1985.github.io/essay/pkucpp-2/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-03-30T16:58:46+08:00">
+<meta property="article:modified_time" content="2021-03-30T16:58:46+08:00"><meta property="og:site_name" content="de_Abigaïl">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="PKUCpp-2">
+<meta name=twitter:description content>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"分类","item":"https://abigail1985.github.io/posts/"},{"@type":"ListItem","position":2,"name":"笔记","item":"https://abigail1985.github.io/posts/notes/"},{"@type":"ListItem","position":3,"name":"北大郭玮《程序设计实习c++版》笔记","item":"https://abigail1985.github.io/posts/notes/c++/"},{"@type":"ListItem","position":4,"name":"PKUCpp-2","item":"https://abigail1985.github.io/essay/pkucpp-2/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"PKUCpp-2","name":"PKUCpp-2","description":"","keywords":["C++ "],"articleBody":"[TOC]\n运算符重载 运算符重载的基本概念   为什么引入运算符重载？\n在数学上，两个复数可以直接进行+、-等运算。但在C++中，直接将+或-用于复数对象是不允许的。有时会希望，让对象也能通过运算符进行运算。这样代码更简洁，容易理解。\n例如：\n complex_a和complex_b是两个复数对象；\n求两个复数的和, 希望能直接写： complex_a + complex_b\n   运算符重载是什么？\n  运算符重载，就是对已有的运算符(C++中预定义的运算符)赋予多重的含义，使同一运算符作用于不同类型的数据时导致不同类型的行为。\n  运算符重载的目的是：扩展C++中提供的运算符的适用范围，使之能作用于对象。\n  同一个运算符，对不同类型的操作数，所发生的行为不同。\n complex_a + complex_b =新的复数对象\n5 + 4 = 9\n     运算符重载的形式？\n  本质是函数重载\n  可以重载为普通函数，也可以重载为成员函数\n  把含运算符的表达式转换成对运算符函数的调用。\n  把运算符的操作数转换成运算符函数的参数。\n  运算符被多次重载时，根据实参的类型决定调用哪个运算符函数。\n返回值类型 operator 运算符 (形参表) { ... }     例子：\nclass Complex { public: double real,imag; Complex(double r=0.0,double r=0.0):real(r),imag(i){} //上方的构造函数添加了初始化列表，将real初始化为r，将imag初始化为i，这种风格比在函数体内直接用r，i赋值的风格更好 }; //重载成普通函数，参数个数为运算符目数 Complex operator+(const Complex\u0026 a,const Complex\u0026 b) {return Complex(a.real+b.real,a.imag+b.imag);} //返回一个Complex类的临时对象  //重载成成员函数，参数个数为运算符目数-1,因为此时一个参数已经确定了，就是这个重载归属的那个类定义的对象 Complex Complex::operator-(const Complex\u0026 c) {return Complex(real-c.real,imag+c.imag);} //返回一个Complex类的临时对象  int main() { Complex a(4,4),b(1,1),c; c=a+b; //等价于c=operator+(a,b);  coutc.real\",\"c.imagendl; cout(a-b).real\",\"(a-b).imagendl; //a-b等价于a.operator-(b)，operator-被固定的那个变量就是对象a  return 0; } Output:\n5,5 3,3 小结：\n  重载成普通函数，参数个数为运算符目数；\n重载成成员函数，参数个数为运算符目数-1\n  c=a+b等价于c=operator+(a,b);\na-b等价于a.operator-(b)\n  赋值运算符的重载 为什么引入赋值运算符重载？ 有时候希望赋值运算符两边的类型可以不匹配\n比如，把一个int类型变量赋值给一个Complex对象， 或把一个 char * 类型的字符串赋值给一个字符串对象,此时就需要重载赋值运算符“=”。\n赋值运算符”=“只能重载为成员函数\n例子\nclass String { private:char* str; public:String():str(new char[1]){str[0]=0;} //上面的构造函数添加了初始化列表，which new了一个只有一个元素的字符串数组，然后用这个数组的地址初始化str。在构造函数中往str写入一个0。最终str指向一个空字符串  const char* c_str(){return str;}; //上面的成员函数没有参数，返回一个指向常量字符串的指针，也就是str  String\u0026 operator=(const char* s); //将“=”重载为读取一个指向char型数据的指针，返回一个String类临时对象的引用  String::~String(){delete[]str;} //由于str指向的字符串数组是被new出来的，所以删除时必须使用delete[] }; //下面的重载是为了使得obj=\"hello\"能够成立 String\u0026 String::operator=(const char* s) { delete[]str; //先删除对象String中变量str原本指向的字符串数组  str=new char[strlen(s)+1]; //初始化str，令str指向一个new出来的字符串数组，该数组大小为“=”参数数组长度+1  strcpy(str,s); //上上句新建好str后，这句把s的内容拷贝到了str里面  return *this; //返回这个成员函数作用的对象String的引用 } int main() { String s; s=\"Good Luck,\";//等价于s.operator=(\"Good Luck,\");  couts.c_str()endl; //String s2=\"hello!\";  //这句话不注释掉就会出错，因为这句话不是赋值语句，而是初始化语句，会调用构造函数，但我们之前的构造函数不接受参数  s=\"Shenzhou 8!\"; couts.c_str()endl; return 0; } Output:\nGood Luck, Shenzhou 8! 浅拷贝和深拷贝 class String { private:char* str; public:String():str(new char[1]){str[0]=0;} const char* c_str(){return str;}; String\u0026 operator=(const char* s); String::~String(){delete[]str;} }; String\u0026 String::operator=(const char* s) { delete[]str; str=new char[strlen(s)+1]; strcpy(str,s); return *this; } 还是这个例子，但此时我们想要实现：\n String S1，S2；\nS1=“this”；\nS2=“that”；\nS1=S2；\n 如果不改变上面的代码(也就是浅拷贝)，实际执行情况是下面这样的：\n这导致以下几种问题：\n 如不定义自己的赋值运算符，那么S1=S2实际上导致 S1.str和 S2.str 指向同一地方。原先S1指向的地方无法删除被浪费掉。 如果S1对象消亡，析构函数将释放 S1.str指向的空间，则S2消亡时还 要释放一次，但一片被new出来的空间只能被delete一次。 另外，如果执行 S1 = “other”；会导致S2.str指向的地方被delete  因此要在 class String里添加成员函数:\nString\u0026 operator=(const String\u0026 s) { delete[]str; str=new char[strlen(s.str)+1]; strcpy(str,s.str); return *this; } 但是这样还不够，考虑下面的语句\n String s;\ns = “Hello”;\ns = s;\n 如果等号两边的对象一样，=应该什么都不做。所以重载“=”应为：\nString\u0026 operator=(const String\u0026 s) { if(this==\u0026s) return *this； delete[]str; str=new char[strlen(s.str)+1]; strcpy(str,s.str); return *this; } 上面的重载即实现了深拷贝。\n扩展：https://www.zhihu.com/question/36370072/answer/67181275\n 那么如果原来的物体销毁了，但是现在拷贝的物体还在，那么这时候你拷贝后的物体的成员指针就是一个悬挂指针，指向了不再存在的物体，那么你访问的话，那就不知道会发生什么了。\n而对于深拷贝，这一个勤奋的人，他不会只做表面，他会把每一个细节都照顾好。于是，当他遇到指针的时候，他会知道new出来一块新的内存，然后把原来指针指向的值拿过来，这样才是真正的完成了克隆体和原来的物体的完美分离，如果物体比作人的话，那么原来的人的每一根毛细血管都被完美的拷贝了过来，而绝非只是表面。所以，这样的代价会比浅拷贝耗费的精力更大，付出的努力更多，但是是值得的。当原来的物体销毁后，克隆体也可以活的很好。\n 对operator=返回值的讨论 对运算符进行重载的时候，好的风格应该尽量保留运算符原本的特性\n  返回值为什么不能是void？\na=b=c等价于a.operator=(b.operator=(c))\n若b.operator=(c)返回值为void，则a=void，不可\n  返回值为什么不能是String？\n(a=b)=c等价于(a.operator=(b)).operator=(c)\n若a.operator=(b)返回值是a，下一步就会让a=c的值。也就是这句话先让a=b的值，再让a=c的值，最终b并没有等于a和c，不可\n  复制构造函数的相同困境 为 String类编写复制构造函数的时候，会面临和 = 同样的问 题，用同样的方法处理。\nString( String \u0026 s) { str = new char[strlen(s.str)+1]; strcpy(str,s.str); } 运算符重载为友元函数   为什么要将运算符重载为友元？\n有时，重载为成员函数不能满足使用要求，重载为普通函数，又不能访问类的私有成员，所以需要将运算符重载为友元。\n例子：\nclass Complex { double real,imag; public: Complex( double r, double i):real(r),imag(i){ }; Complex operator+( double r ); }; Complex Complex::operator+( double r ) { //能解释 c+5  return Complex(real + r,imag); } 经过上述重载后：\n Complex c ;\nc = c + 5; //有定义，相当于 c = c.operator +(5);\nc = 5 + c; //编译出错\n 所以，为了使得上述的表达式能成立，需要将 + 重载为普通函数。\nComplex operator+ (double r,const Complex \u0026 c) { //能解释 5+c  return Complex( c.real + r, c.imag); } 但是普通函数又不能访问私有成员，所以，需要将运算符 + 重载为友元。\nclass Complex { double real,imag; public: Complex( double r, double i):real(r),imag(i){ }; Complex operator+( double r ); friend Complex operator + (double r,const Complex \u0026 c); };   实例：可变长数组的实现 要编写可变长整型数组类，使之能如下使用\nint main() { CArray a;//开始时数组是空的  for(int i=0;i5;++i) a.push_back(i); //❗要用动态分配的内存来存放数组元素，需要一个指针成员变量  CArray a2,a3; a2=a; //❗要重载“=”  for(int i=0;ia.length();++i) couta2[i]\" \"; //❗要重载中括号[]  a2=a3;//a2变成空的  for(int i=0;ia2.length();++i)//此时a2.length返回0  couta2[i]\" \"; coutendl; a[3]=100;//将数组a的第三个数改为100  CArray a4(a); //❗要自己写一个复制构造函数，不能用缺省的  for(int i=0;ia4.length();++i) couta4[i]\" \"; return 0; } Output:\n0 1 2 3 4 0 1 2 100 4 该怎么写这个数组类？？\nclass CArray { int size;//数组元素的个数  int* ptr;//指向动态分配的数组  public CArray(int s=0);//构造函数，s代表数组元素的个数  CArray(CArray\u0026 a);//复制构造函数  ~CArray();//析构函数  void push_back(int v);//用于在数组尾部添加一个元素v  CArray\u0026 operator=(const CArray\u0026 a);//用于数组对象间的赋值  int length(){return size;}//返回数组元素个数  int\u0026 CArray::operator[](int i){return ptr[i];} //用于支持根据下标访问数组元素，如n=a[i]和a[i]=4这样的语句  //❗❗❗对于返回值的解释，看下面解释 } 对于int\u0026 CArray::operator[](int i){return ptr[i];}要注意：\n返回值类型必须是int\u0026，不能是int！！！这是因为如果一个函数的返回值不是引用，不能将它写在等号左边，所以a[i]=4这句话将编译出错\n/**********************构造函数**********************************/ CArray::CArray(int s):size(s) //这个初始化列表用s初始化size，s的缺省值是0(即不给参数时使用的s值) { if(s==0) ptr=NULL; else ptr=new int[s]; } /**********************复制构造函数*******************************/ CArray::CArray(CArray\u0026 a) { //如果a.ptr指向空数组，就令ptr指向空数组  if(!a.ptr){ ptr=NULL; size=0; return; } //如果a.ptr指向非空数组，就创建一个同样大小的空间复制上a.ptr的内容并将地址赋给ptr  ptr=new int[a.size]; memcpy(ptr,a.ptr,sizeof(int)*a.size); size=a.size; }//上面这个复制构造函数完成了深拷贝的工作  /**********************析构函数**********************************/ CArray::~CArray() { if(ptr) delete[]ptr; } /**********************“=”的重载函数*****************************/ //赋值号的作用是使“=”左边对象里存放的数组，大小和内容都和右边的对象一样 CArray\u0026 CArray::operator=(const CArray\u0026 a) { if(ptr==a.ptr)//防止a=a这样的赋值出错  return *this; if(a.ptr==NULL){//如果a里面的数组是空的  if(ptr)//如果ptr指向的数组不是空的  delete[]ptr; ptr=NULL; size=0; return *this; } if(sizea.size){//如果原有空间不够用，就需要分配新的空间  if(ptr) delete[]ptr; ptr=new int[a.size]; } memcpy(ptr,a.ptr,sizeof(int)*a.size); //如果原有空间够大，就不分配新的空间  size=a.size; return *this; } /**********************push_back函数*****************************/ void CArrary::push_back(int v) { /*下面做分配空间的工作*/ if(ptr){//原数组不空  int* tmpPtr=new int[size+1];//创造一个比原数组多一个空间的数组  memcpy(tmpPtr,ptr,sizeof(int)*size);//拷贝原数组到tmpPtr里  delete[]ptr;//原数组被复制好后就可以删除释放空间  ptr=tmpPtr;//现在的ptr指向的空间比原来的大1  } else//原数组是空的  ptr=new int[1]; /*下面做加入新的数组元素的工作*/ ptr[size++]=v; } 流插入运算符和流提取运算符的重载 流插入运算符(左移运算符)：« cout是在iostream中定义的，ostream类的对象。“«”能用在cout上是因为再iostream中对“«”进行了重载。\n  ostream类中对«的重载（头文件中别人已经写好的代码）\n 考虑怎么重载才能使得下列语句成立：\n  cout«5;\ncout«“this”;\ncout«5«“this”;\n 按照以下方式重载成ostream类的成员函数，返回值是ostream类的引用\nostream\u0026 ostream::operator(int n) { ...//输出n的代码  return *this； } ostream\u0026 ostream::operator(const char* s) { ...//输出s的代码  return *this； } cout等价于cout.operator\n  将«重载为全局函数(需要自己写的）\n 假定下面程序输出为5hello，我们该如何补写？\nclass CStudent{ public:int nAge; }; int main() { CStudent s ; s.nAge = 5; cout  s \"hello\"; return 0; }  ostream\u0026 ostream(ostream\u0026 o,const CStudent\u0026 s) { os.nAge; return o; } 正如：\n 重载成普通函数，参数个数为运算符目数；\n重载成成员函数，参数个数为运算符目数-1\n «被重载成全局函数，第一个参数就是cout，因此第一个参数类型必须为ostream或ostream\u0026\n由于我们需要继续输出“hello”，因此返回值必须为cout，故返回值类型为ostream\u0026\n  将«重载为全局函数，且定义成相关类的友元函数（需要自己写的）\n这样可以访问指定类的私有成员\n 假定c是Complex复数类的对象，现在希望 写cout ，就能以a+bi的形 式输出c的值，写cinc;，就能从键 盘接受a+bi形式的输入，并且使得 c.real = a,c.imag = b\nint main() { Complex c; int n; cincn; coutc\",\"n; return 0; } 示例输入/输出\ninput:13.2+133i 87 output:13.2+133i,87  我们编写Complex类如下：\n#include#include#includeusing namespace std; class Complex{ double real,imag; public: Complex(double r=0,double i=0):real(r),imag(i){}; friend ostream\u0026 operator(ostream\u0026 os,const Complex\u0026 c); friend istream\u0026 operator(istream\u0026 is,const Complex\u0026 c); //上面语句将重载为Complex类的友元，可以访问Complex类的私有成员real，imag }; /****************对 ostream\u0026 operator(ostream\u0026 os,Complex\u0026 c) { osc.real\"+\"c.imag\"i\";//以“a+bi”的形式输出  return os; } /****************对的重载***********************************/ istream\u0026 operator(istream\u0026 is,Complex\u0026 c) { //将“a+bi”作为字符串读入，“a+bi”中间不能有空格  string s; iss; //确定实部和虚部的分界点  int pos=s.find(\"+\",0); //分离出代表实部的字符串  string sTmp=s.substr(0,pos); c.real=atof(sTmp.c_str()); //atof库函数能将const char*指针指向的内容转换成float  //分离出代表虚部的字符串  sTmp=s.substr(pos+1,s.length()-pos-2); c.imag=atof(sTmp.c_str()); return is; } ❗❗❗c_str()：\n该函数返回一个指向正规C字符串的指针常量, 内容与本string串相同。 这是为了与c语言兼容，在c语言中没有string类型，故必须通过string类对象的成员函数c_str()把string 对象转换成c中的字符串\n  类型转换运算符的重载 #includeusing namespace std; class Complex { double real,imag; public: Complex(double r=0,double i=0):real(r),imag(i){}; operator double(){return real;} //重载了 强制类型转换运算符 double }; int main() { Complex c(1.2,3.4); /*显式转换*/ cout(double)cendl;//输出1.2  /*隐式转换*/ double n=2+c;//等价于double n=2+c.operator double()  coutn;//输出3.2 } 自增自减运算符的重载   如何将前置/后置的++，–区分开？\n自增运算符++、自减运算符–有前置/后置之分，为了区分所重载的是前置运算符还是后置运算符，C++规定：\n  前置运算符作为一元运算符重载\n  重载为成员函数\nT\u0026 operator++() T\u0026 operator--()   重载为全局函数\nT1\u0026 operator++(T2); T1\u0026 operator--(T2); //重载为全局函数时需要的参数个数比成员函数时多一个     后置运算符作为二元运算符重载,要多写一个没用的参数\n  重载为成员函数\nT operator++(int); T operator--(int);   重载为全局函数\nT1 operator++(int,T2); T1 operator--(int,T2); //重载为全局函数时需要的参数个数比成员函数时多一个       重载运算符的返回值\n 重载的原则:对运算符的重载要尽量维持运算符原本的属性 c++中内置的++a返回值是a的引用, a++返回值是临时变量a 这也是为什么可以有(++a)=1,但不能有(a++)=1,(函数的返回值如果不是引用,不能放在等好的左边) 为了维持上面那种性质,前置运算符的返回值是对象,后置运算符的返回值是临时变量    例子:\nint main() { CDemo d(5); cout(d++)\",\"; coutd\",\"; cout(++d)\",\"; coutd\"endl\"; cout(d--)\",\"; coutd\",\"; cout(++d)\",\"; coutd\"endl\"; return 0; } 要求输出结果为\n 5,6,7,7 7,6,5,5\n 该如何编写CDemo?\nclass Demo { private: int n; public: CDemo(int i=0):n(i){}//初始化列表用i初始化n  operator int(){return n;}s.int() //强制类型转换运算符的重载,使得(int)s等价于s.int()  //类型强制转换运算符重载时不能写返回值类型,实际上其返回值类型就是该运算符代表的类型  CDemo\u0026 operator++();//前置成员  CDemo operator++(int)//后置成员  friend CDemo\u0026 operator--(CDemo\u0026);//前置全局  friend CDemo operator--(CDemo\u0026,int);//后置全局 }; /*************************++a重载为成员函数*********************************/ CDemo\u0026 CDemo::operator++() { n++;//这个n是operator++()作用的那个对象的私有变量n  return *this;//返回修改后的对象的引用 } //++s等价于s.operator++()  /*************************a++重载为成员函数*********************************/ CDemo CDemo::operator++(int k)//k是一个没用的参数 { CDemo tmp(*this);//用复制构造函数构造一个临时对象,将修改前的对象的n值赋给他  n++; return tmp;//返回修改前的对象 }//s++等价于s.operator++(0)  /*************************--a重载为全局函数*********************************/ CDemo\u0026 operator--(CDemo\u0026 d)//对一个全局函数,传进来的参数必须是引用才能修改他的值 { d.n++; return d; }//--s等价于operator--(s)  /*************************a--重载为全局函数*********************************/ CDemo operator--(CDemo\u0026 d) { CDemo tmp(d); n++; return tmp; }//s--等价于operator--(s,0) 注意事项  C++不允许定义新的运算符 ； 重载后运算符的含义应该符合日常习惯:  complex_a + complex_b word_a  word_b date_b = date_a + n   运算符重载不改变运算符的优先级； 以下运算符不能被重载：“.”、“.*”、“::”、“?:”、sizeof； 重载运算符()、[]、-或者赋值运算符=时，运算符重载函数必须声明为 类的成员函数。  继承   继承:\n 在定义一个新的类B时,如果该类与某个已有的类A相似(指的是B拥有A的全部特点),那么可以把A作为一个基类而把B作为基类的一个派生类  这是为了避免重复定义相似的类的麻烦\n  派生类的性质:\n  派生类中可以添加新的成员变量和成员函数\n  派生类一经定义可以独立使用\n  派生类拥有基类的全部成员**(但是依旧不能访问private)**\n    例子-学生管理系统\nclass CStudent{ private: string sName; int nAge; public: bool IsThreeGood(){}; void SetName(const string \u0026name)//\u0026表示引用  {sName=name;} }; //派生类的写法:类名:public基类名 class CundergraduateStudent:public CStudent{ private: int nDepartement; public: bool IsThreeGood(){...};//这个新的成员函数将基类的覆盖了  bool CanBaoYan(){...}; }; class CGraduatedStudent:public CStudent{ private: int nDepartement; char szMentorName[20]; public: int CountSalary(){...}; };   派生类对象的内存空间:\n派生类对象体积=基类对象体积+派生类对象自己的成员变量体积\n基类对象的存储位置位于派生类对象新增成员变量之前\nclass CBase{ int v1,v2; }; class CDerived:public CBase{ int v3; } //CDerived体积为12个字节   继承示例程序:学籍管理\n#include#include using namespace std; class CStudent{ private: string name; string id; char gender; int age; public: void PrintInfo(); void Setnfo(const string \u0026 name_,const string \u0026 id_,int age_.char gender_); //\u0026参数是引用  string GetName(){return name;} }; class CUndergraduateStudent:public CStudent{ private: string department; public: void QualifiedForBaoyan(){ cout\"qualified for baoyan\"endl; } //PrintInfo对于基类的同名函数是覆盖的关系  void PrintInfo(){ CStudent::PrintInfo();//调用基类的  cout\"Department:\"departementendl; void SetInfo(const string\u0026 name_,const string\u0026 id_,int age_,char gender_,const string\u0026 department_){ CStudent::SetInfo(name_,id_,age_,gender_);//调用基类的  department=department_; } } };   继承关系和复合关系   继承:\"是“关系\nA是基类,B是A的派生类\n逻辑上要求:一个B对象也是一个A对象\n  复合:\"有“关系\n逻辑上要求:A对象是B对象的成员变量\n例子:几何形体程序中,需要写\"点\"类,也需要写\"圆\"类,两者的关系就是复合关系,每一个圆对象内都包含有一个点对象,这个点对象就是圆心\n  class CPoint{ double x,y; friend class CCircle; //便于CCircle类操作其圆心 }; class CCircle{ double r; CPoint center; };   复合关系的使用\n如果要写一个小区养狗管理程序， 需要写一个“业主”类，还需要写一个“狗”类。 而狗是有 “主人” 的，主人当然是业主(假定狗只有 一个主人，但一个业主可以有最多10条狗）\n    凑合的写法\n//为狗类设一个业主类的对象指针 //为业主类设一个狗类的对象数组  class CMaster; //CMaster必须提前声明,不能先写CMaster再写CDog类  class CDog{ CMaster* pm; }; class CMaster{ CDog dogs[10]; }; /*这种写法的缺陷: 1.对象的成员变量理论上应是该对象的不可分割的组成部分,但主人对于狗并不是这种关系 2.所有的狗对象都被放在一个数组中,对狗的操作必须通过主人来进行   正确的写法\n//为狗类设一个业主类对象指针 //为业主类设一个狗类对象指针数组  class CMaster; class CDog{ CMaster* pm; }; class CMaster{ CDog* dogs[10] };   覆盖和保护成员 覆盖\n派生类可以定义一个和基类成员同名的成员,这叫做覆盖\n在派生类中访问这类成员时,缺省的情况是访问派生类中定义的成员\n要在派生类中访问由基类定义的同名成员时,要使用作用域符号::\n类的保护成员\n  基类的private成员：可以被下列函数访问\n– 基类的成员函数\n– 基类的友元函数\n  基类的public成员：可以被下列函数访问\n– 基类的成员函数\n– 基类的友元函数\n– 派生类的成员函数\n– 派生类的友元函数\n– 其他的函数\n  基类的protected成员：可以被下列函数访问\n– 基类的成员函数\n– 基类的友元函数\n– 派生类的成员函数可以访问当前对象的基类的保护成员\n  派生类的构造函数 class Bug{ private: int nlegs; int ncolor; public: int ntype; Bug(int legs,int color); void PrintBug(){}; }; class FlyBug:public Bug{ private: int nwings; public: FlyBugs(int legs,int color,int wings); } Bug::Bug(int legs,int color) { nlegs=legs; ncolor=color; } 错误的FlyBug构造函数写法:\nFlyBug::FlyBug(int legs,int color,int wings) { nlegs=legs;//不能访问  ncolor=color;//不能访问  //上面的操作是错误的!!!!nlegs,ncolor是基类的私有成员,不能被派生类的成员函数访问!  ntypes=1;//okk  nwings=wings; } 正确的FlyBug构造函数写法:\nFlyBug::FlyBug(int legs,int color,int wings):Bug(legs,color) //初始化列表 { nlegs=legs; ncolor=color; //上面的操作是错误的!!!!nlegs,ncolor是基类的私有成员,不能被派生类的成员函数访问!  nwings=wings; };   在创建派生类的对象时，需要调用基类的构造函数：初始化派生类对象中从基类继承的成员。在执行一个派生类的构造函数 之前，总是先执行基类的构造函数。\n  调用基类构造函数的两种方式\n  显式方式：在派生类的构造函数中，为基类的构造函数提供参数.\nderived::derived(arg_derived-list):base(arg_base-list)\n  隐式方式：在派生类的构造函数中，省略基类构造函数时， 派生类的构造函数则自动调用基类的默认构造函数.\n    派生类的析构函数被执行时，执行完派生类的析构函数后，自动调用基类的析构函数。\n  公有继承的赋值兼容规则 公有继承:class derived: public base{ };\nclass base{}; class derived:public base{}; base b; derived d; 规则:\n  派生类的对象可以赋值给基类对象\nb=d;   派生类对象可以初始化基类的引用\nbase \u0026 br=d;   派生类对象的地址可以赋值给基类指针\nbase * pb=\u0026d;   直接基类和间接基类:\n  声明派生类时,只需要列出其直接基类\n  派生类沿着类的层次向上自动继承他的间接基类\n  派生类的成员包括:\n  直接基类的成员\n  所有间接基类的所有成员\n  自己的成员\n    #includeusing namespace std; class base{ public: int n; base(int i):n(i){ //构造函数有参数,也有初始化列表  //n是成员变量,i是参数表  cout\"base\"n\"constructed\"endl; } ~base(){ cout\"base\"n\"destructed\"endl; } }; class derived:public base{ public: derived(int i):base(i){ //构造函数有参数,也有初始化列表  cout\"derived constructed\"endl; } ~derived(){ cout\"derived destructed\"endl; } }; class morederived:public derived{ public: morederived():derived(4){ //构造函数有参数,也有初始化列表  //只需要直接基类的初始化列表  cout\"morederived constructed\"endl; } ~morederived(){ cout\"morederived destructed\"endl; } }; int main() { morederived obj; return 0; } output:\nbase4constructed derived constructed morederived constructed morederived destructed derived destructed base4destructed 多态 虚函数和多态   虚函数\n在类的定义中,前面有virtual关键字的成员函数\nclass base{ virtual int get(); }; ❗❗virtual关键字只用在类定义里的函数声明中,写函数体时候不用\nint base::get()//不需要在get前面加virtual!!! ❗❗构造函数和静态成员函数不能是虚函数\n❗❗虚函数和普通函数的本质差别:虚函数可以参与多态,静态函数不能\n  多态的表现形式一:指针\n  派生类的对象可以赋给基类指针\n  通过基类指针调用基类和派生类中的同名虚函数时候:\n  若指针指向一个基类的对象,则被调用的是基类的虚函数\n  若指针指向一个派生类的对象,则被调用的是派生类的虚函数\n    class Cbase(){ public: virtual void SomeVirtualFunction(){} }; class Cderived:public Cbase(){ public: virtual void SomeVirtualFunction(){} }; int main(){ Cderived Oderived; Cbase *p= \u0026Oderived; p-SomeVirtualFunction(); //p指向派生类的对象,调用的是派生类的虚函数  return 0; }   多态的表现形式二:对象\n 派生类的对象可以赋给基类引用 通过基类引用调用基类和派生类中的同名虚函数时:  若该引用引得是一个基类的对象,那么被调用的是基类的虚函数 若该引用引得是一个派生类的对象,那么被调用的是派生类的虚函数      class Cbase(){ public: virtual void SomeVirtualFunction(){} }; class Cderived(){ public: virtual void SomeVirtualFunction(){} }; int main(){ Cderived Oderived; Cbase \u0026r=Oderived; r.SomeVirtualFunction();//!!!引用调用函数时用\".\"!!!  //r引用的是派生类的对象,调用派生类的虚函数 }   多态的作用\n增强程序的可扩充性**(程序需要修改或增加功能的时候,需要改动和增加的代码较少)**\n  使用多态的游戏程序示例 几何形体处理程序 #include#include#include using namespace std; //定义基类 class CShape{ public: virtual double Area()=0; //后面写了一个\"=0\",说明这是纯虚函数,连函数体都没有  virtual void PrintInfo()=0; //因为我们要处理的图形只有圆形三角矩形几种,不存在CShape这样一种抽象的形状,所以不需要为CShape编写这两程序,这两程序在派生类中会分别定义 }; //定义派生类 class CRectangle:public CShape{ public: int w,h; virtual double Area(); virtual void PrintInfo(); }; class CCircle:public CShape{ public: int r; virtual double Area(); virtual void PrintInfo(); }; class CTriangle:public CShape{ public: int a,b,c; virtual double Area(); virtual void PrintInfo(); }; //实现派生类的成员函数  double CRectangle::Area(){ return w*h; } void CRectangle::PrintInfo(){ cout\"Rectangle:\"Area()endl;//输出的末尾要加endl!! } double CCircle::Area(){ return 3.14*r*r; } void CCircle::PrintInfo(){ cout\"Circle:\"Area()endl; } double CTriangle::Area(){ double p=(a+b+c)/2.0; return sqrt(p*(p-a)*(p-b)*(p-c)); } void CCircle::PrintInfo(){ cout\"Triangle:\"Area()endl; } //存放不同类型的几何形体 CShape *pShapes[100]; int MyCompare(const void *s1,const void *s2); //用三个数组来存浪费空间,难以增改,难以实现排序等进阶功能 //所以我们使用多态来存储 //pShapes数组中的元素都是基类指针,由于基类指针能够指向派生类对象,我们可以在后面把指针指向new出来的派生类对象  //主函数 int main(){ int i;int n; CRectangle *pr;CCircle *pc;CTriangle *pt; cinn; for(i=0;in;i++){ char c; cinc; switch(c){ case'R': pr=new CRectangle(); cinpr-wpr-h; pShapes[i]=pr; break; case 'C': pc=new CCircle(); cinpc-r; pShapes[i]=pc; break; case'T': pt=new CTriangle(); cinpt-apt-bpt-c; pShapes[i]=pt; break; } } qsort(pShapes,n,sizeof(CShape*),MyCompare); for(i=0;in;i++) pShapes[i]-PrintInfo(); return 0; } //为什么变量前面要加关键字void*?然后可以将指向任何类型数据的指针赋给这个void*类型指针 int MyCompare(const void *s1,const void *s2){ double a1,a2; CShape**p1; CShape**p2; //一定要写两个*,不能用\"*s1\"来取得s1指向的内容  p1=(CShape**)s1; p2=(CShape**)s2; //s1,s2指向数组中的元素,数组中元素的类型是CShape*  //因此p1,p2是指向指针的指针,类型为CShape**  a1=(*p1)-Area();//*p1的类型是CShape*是基类指针  a2=(*p2)-Area(); if(a1a2) return -1; else if(a2a1) return 1; else return 0; } *下面是 qsort() 函数的声明。\nvoid qsort(void *base, size_t nitems, size_t size, int (*compar)(const void *, const void*))  base – 指向要排序的数组的第一个元素的指针。 nitems – 由 base 指向的数组中元素的个数。 size – 数组中每个元素的大小，以字节为单位。 compar – 用来比较两个元素的函数。  虚析构函数,纯虚函数,抽象类 虚析构函数:\nclass son{ public: ~son(){cout\"bye from son\"endl;} }; class grandson:public son{ public: ~grandson(){cout\"bye from grandson\"endl;} }; int main() { son *pson; pson=new grandson(); //new一个对象的时候,如果对象的构造函数不需要参数就要写一对括号,跟new一个数据不一样  delete pson; return 0; } output:\nbye from son new出来的grandson没有被删除!!!!!,反而执行了son的析构函数,然而我们并没有定义son类的对象\n解决办法:\n把基类son的析构函数变成虚函数\n纯虚函数和抽象类:\n  包含纯虚函数的类就是抽象类\n  抽象类不能创建自己的对象\n  抽象类的指针/引用可以指向其派生类的对象\n  在抽象类的成员函数内可以调用纯虚函数，但是在构造函数或析构函数内部 不能调用纯虚函数。\n  如果一个类从抽象类派生而来，那么当且仅当它实现了基类中的所有纯虚函数，它才能成为非抽象类。\n  输入输出和模板 函数模板  例子-求数组最大元素的函数模板  templateclass T T MaxElement(T a[],int size){ T tmpMax=a[0]; for(int i=1;isize;i++) if(tmpMaxa[i]) tmpMax=a[i] return tmpMax; }  例子-不通过参数实例化函数模板  #includeusing namespace std; templateclass T T Inc(T n){ return 1+T; //由于Inc的返回值是T类型的,这里要对+进行重载 } int main(){ coutIncdouble(4)/2; //用直接规定T是double类型 }   函数模板是可以重载的,只要他们的形参表和类型参数表不一样即可\n  函数模板和函数的次序:\n参数匹配+普通函数—–参数匹配模板函数—–参数经自动类型转换后能匹配的普通函数\n  类模板 编写模板是为了实现泛型程序设计,即写出一个类/函数后,可以作用与多种数据类型\n类模板的定义\ntemplatetypename 类型参数,typename 类型参数,... class 模板名字 { 成员变量; 成员函数; } 类模板内成员函数定义\ntemplatetypename 类型参数,typename 类型参数,... (返回值)类型参数 模板名字 类型参数名字,类型参数名字,...::成员函数名字(参数表) { ... } 类模板定义对象的写法\n模板名字实际类型参数表 对象名(构造函数实参表); 示例:Pair类模板\n#include#includeusing namespace std; //类型参数就是这个类需要的参数的类型 //其个数就该类需要的参数个数 templatetypename T1,typename T2 class Pair { public: T1 key;//关键字  T2 value;//值  Pair(T1 k,T2 v):key(k),value(v){}; //构造函数及其初始化列表  bool operator  (const PairT1,T2\u0026p)const; //对\" //我们希望这个\"}; templatetypename T1,typename T2 bool PairT1,T2::operator  (const PairT1,T2\u0026p)const { return keyp.key; } int main() { Pairstring,int student(\"Tom\",19); //对象的名字是:student  //注意:由类模板\"pair\"生成类\"pair\",再由这个类生成对象\"student\"  coutstudent.key\" \"student.value; return 0; } output:\nTom 19   类模板的实例化:编译器由类模板生成类的过程\n  同一个模板实例化出的类是不兼容的,他们根本就是两个类\nPairstring,int *p; Pairstring,double a; p=a;//报错   函数模板作为类模板成员\n#includeusing namespace std; templatetypename T class A { public: //注意这里不能写T,因为这里成员函数的类型参数相对类的类型参数来说是形参  templatetypename T2 void Func(T2 t){coutt;} }; int main() { Aint a; //类模板名: A  //类名: A  //对象名: a,其需要的参数类型为int(虽然下面的定义里我没有用这个参数)  a.Func('K');//成员函数模板Func被实例化,其参数类型为char  a.Func(\"hello\");//成员函数模板Func再次被实例化,其参数类型为const char*  return 0; } output:\nKhello   A这个类通过上面对函数模板Func的两次实例化有了两个名为Func的成员函数:\nFunc(char c);//赋给该函数的值是:K Func(const char* string);//赋给该函数的值是:指向字符串\"hello\"的指针   类模板的类型参数表中可以出现非类型参数:\n![image-20210308125420974](/Users/abigail/OneDrive - sjtu.edu.cn/Abigail/大三下/北大c++笔记/assets/image-20210308125420974.png)\n标准模板库STL 概述 ![image-20210318145751989](/Users/abigail/OneDrive - sjtu.edu.cn/Abigail/大三下/北大c++笔记/assets/image-20210318145751989.png)\n迭代器   用于指向顺序容器/关联容器中的元素\n  用法和指针类似\n  有const和非const两种\n  通过迭代器可以读取其指向的元素\n  通过非const迭代器可以修改其指向的元素\n  代码:\n定义一个容器类的迭代器的方法:\n容器类名::iterator 变量名; 容器类名::const_iterator 变量名; 访问一个迭代器指向的元素:\n*迭代器变量名 迭代器示例:\n#include#includeusing namespace std; int main() { vectorint v; //v是一个存放int类型元素的动态数组,一开始里面没有元素  v.push_back(1); v.push_back(2); v.push_back(3); v.push_back(4); //正向迭代器  vectorint::const_iterator i; //常量迭代器,只能读取元素,不能修改元素  for(i=v.begin();i!=v.end();i++) //begin()获取容器第一个元素的位置  //end()获取容器最后一个元素后面的位置  couti\",\"; coutendl; //反向迭代器  vectorint::reverse_iterator r; for(r=v.rbegin();r!=v.rend;r++) //rbegin()获取容器最后一个元素的位置  //rend()获取容器第一个元素前面的位置  coutr\",\"; coutendl; //非常量迭代器  vectorint::iterator j; for(j=v.begin();j!=v.end();j++) *j=100;//用非常量迭代器修改指向的元素  for(i=v.begin();i!=v.end();i++) couti\",\";//用常量迭代器读取指向的元素  coutendl; } 两种不同的的迭代器：\n  双向迭代器p\u0026p1\n  ++p，p++\n  –p，p–\n  p*（实际上返回值是p指向的对象的引用）**\n  p=p1\n  p==p1；p！=p1\n    随即访问迭代器p\u0026p1\n 双向迭代器的所有操作 p+=i（将p向后移动i个元素） p-=i p+i （p+i的值=指向p后面第i个元素的迭代器） p-i p[i]（p[i]的值=p后面第i个元素的引用） pp1;p=p1    容器 顺序容器 vector(动态数组) vector上的操作\n#include#includeusing namespace std; templateclass T void PrintVector(T s,T e) { for(;s!=e;++s) couts\" \"; coutendl; } int main() { int a[5]={1,2,3,4,5}; vectorint v(a,a+5); //将数组a中下标从0到4的元素都拷贝到v里面  coutv.end()-v.begin(); //vector的迭代器是随即迭代器可以相减  //上面输出的v中元素的个数:5  v.insert(v.begin()+2,13); PrintVector(v.begin(),v.end()); //在v下标为2的位置插入一个元素13,后面的元素全部后推  v.erase(v.begin()+2); PrintVector(v.begin(),v.end()); //删除位于v中下标为2的元素  vectorint v2(4,100); //v2有4个元素,都是100  v2.insert(v2.begin(),v.begin()+1,v.begin()+3); //将v的一段插入v2开头  //v下标为1的元素到v下标为3的元素(不包括v下标为3的元素!!!)  PrintVector(v2.begin(),v2.end()); v.erase(v.begin()+1,v.begin()+3); PrintVector(v.begin(),v.end()); //删除v上的一个区间,即2,3  return 0; } 用vector实现二维数组\n#include#includeusing namespace std; int main() { vectorvectorint v(3); //v中有3个元素,每个元素都是vector空容器  //注意vector后面一定要加一个空格,不然编译器会把两个尖括号当成右移运算符  //下面往v的元素里添加元素  for(int i=0;iv.size();++i) for(int j=0;j4;++j) v[i].push_back(j); //下面显示v的元素里的元素  for(int i=0;iv.size();++i){ for(int j=0;jv[i].size();++j) coutv[i][j]\" \"; coutendl; } return 0; } deque(双向队列)   所有vector的操作都适用于deque\n  deque多了:\npush_front:将元素插入到前面\npop_front:删除最前面的元素\n  list(双向列表) 成员函数\n![image-20210318143445110](/Users/abigail/OneDrive - sjtu.edu.cn/Abigail/大三下/北大c++笔记/assets/image-20210318143445110.png)\nlist上的操作\n#include#include#includeusing namepsace std; class A { private: int n; public: A(int n_){n=n_;} friend bool operator(const A \u0026 a1,const A \u0026 a2); friend bool operator==(const A \u0026 a1,const A \u0026 a2); friend ostream \u0026 operator  (ostream \u0026 o,const A \u0026 a); } bool operator(const A \u0026 a1,const A \u0026 a2) {return a1.na2.n} bool operator==(const A \u0026 a1,const A \u0026 a2) {return a1.n==a2.n} ostream \u0026 operator  (ostream \u0026 o,const A \u0026 a) {oa.n;return o;} //下面定义一个函数模板,其参数是\"类型可变列表的引用\" template class T void PrintList(const listT \u0026 lst)//参数是\"类型可变列表的引用\" { typename listT::const_iterator i; //typename用来说明\"list::const_iterator\"描述的是个类型  i=lst.begin(); for(i=lst.begin();i!=lst.end();i++) couti\",\"; } int main() { listA lst1,lst2; //定义了两个元素为A类对象的列表  ... PrintLsit(lst1); } 容器适配器 容器适配器上没有迭代器\nstack   是后进先出的数据结构，\n  可以\n push插入 pop删除 top返回栈顶元素的引用    可用vector，list，deque来实现，缺省情况下，用deque实现。（vector、deque实现的性能比list好）\ntemplateclass T,class Container=dequeT //第一个类型参数是栈里的元素类型 //第二个类型参数是栈用什么容器来实现，并表示缺省情况下是deque class stack{ ... };   queue   是先进先出的数据结构，\n  可以\n push插入（发生在队尾） pop删除 front返回栈顶元素的引用 back返回队尾元素的引用    可用list，deque来实现，缺省情况下，用deque实现。（vector、deque实现的性能比list好）\ntemplateclass T,class Container=dequeT //第一个类型参数是容器适配器里的元素类型 //第二个类型参数是容器适配器用什么容器来实现，并表示缺省情况下是deque class stack{ ... };   priority_queue   可用vector和deque实现，缺省情况下用vector实现\ntemplateclass T,class Container=vectorT,class Compare=lessT //第一个类型参数是容器适配器里的元素类型 //第二个类型参数是容器适配器用什么容器来实现，并表示缺省情况下是vector //第三个类型参数是优先队列的元素比较器用什么来实现，并表示缺省情况下是小于号 class priority_queue;   priority_queue通常用堆排序技术实现，保证最大的元素总是在最前面，即执行pop操作时，删除的是最大的元素；执行top操作时，返回的是最大元素的引用，默认的元素比较器是less\n  push,pop时间复杂度：O（logn）\n  top时间复杂度：O（1）\n  所有容器适配器中都有成员函数：\n empty（）：用于判断适配器是否为空 size（）：用于返回适配器中元素个数  算法 类型参数Pred 大多重载的算法都是有两个版本的：\n 一个是  用“==”判断元素是否相等 用“   另一个多出来一 个类型参数Pred，以及函数形参Pred op  表达式“op(x,y)”的返回值是ture，则x等于y 表达式“op(x,y)”的返回值是false，则x小于y    不变序列算法（以下图片上传失败）  不会修改算法作用的容器或对象 适用于顺序容器和关联容器 时间复杂度：O（n）  ![image-20210315213723396](/Users/abigail/OneDrive - sjtu.edu.cn/Abigail/大三下/北大c++笔记/assets/image-20210315213723396.png)\n![image-20210315213758362](/Users/abigail/OneDrive - sjtu.edu.cn/Abigail/大三下/北大c++笔记/assets/image-20210315213758362.png)\n![image-20210315213935514](/Users/abigail/OneDrive - sjtu.edu.cn/Abigail/大三下/北大c++笔记/assets/image-20210315213935514.png)\n find很重要  排序算法  需要随机访问迭代器的支持 不适用于关联容器和list 时间复杂度：O(log(n))  ![image-20210315215204555](/Users/abigail/OneDrive - sjtu.edu.cn/Abigail/大三下/北大c++笔记/assets/image-20210315215204555.png)\n![image-20210315215228540](/Users/abigail/OneDrive - sjtu.edu.cn/Abigail/大三下/北大c++笔记/assets/image-20210315215228540.png)\nsort：快速排序\n  模板\ntemplateclass Ranlt void sort(Ranlt first,Ranlt last);  按升序排列 判断x是否应该比y靠前，就看x  templateclass Ranlt,class Pred void sort(Ranlt first,Ranlt last,Pred pr);  按升序排列 判断x是否应该比y靠前，就看pr(x    应用：\n#include#includeusing namespace std; //定义Pred pr class MyLess { public： bool operator()(int n1,int n2) { return(n1%10)(n2%10); } }; int main() { int a[]={14,2,9,111,78}; int i; sort(a,a+5,MyLess());//按个位数大小排序  for(i=0;i5;i++) couta[i]\" \"; coutendl; sort(a,a+5,greaterint());//按降序排序  for(i=0;i5;i++) couta[i]\" \"; } 注意：\n  sort实际上是快速排序，时间复杂度为：O(n*log(n))\n 平均性能最优 最坏的情况性能非常差    stable_sort实际上是归并排序\n 能保证相等元素之间的先后次序 存储空间足够时，时间复杂度：n*log(n) 存储空间不够时，时间复杂度：n*log(n)*log(n)    list只能使用内置的排序算法：list::sort\n ","wordCount":"2189","inLanguage":"zh","datePublished":"2021-03-30T16:58:46+08:00","dateModified":"2021-03-30T16:58:46+08:00","author":{"@type":"Person","name":"Abigail"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://abigail1985.github.io/essay/pkucpp-2/"},"publisher":{"@type":"Organization","name":"de_Abigaïl","logo":{"@type":"ImageObject","url":"https://abigail1985.github.io/images/favicon.png"}}}</script>
+</head>
+<body id=top>
+<script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
+<noscript>
+<style type=text/css>#theme-toggle,.top-link{display:none}</style>
+<style>@media(prefers-color-scheme:dark){:root{--theme:#1d1e20;--entry:#2e2e33;--primary:rgba(255, 255, 255, 0.84);--secondary:rgba(255, 255, 255, 0.56);--tertiary:rgba(255, 255, 255, 0.16);--content:rgba(255, 255, 255, 0.74);--hljs-bg:#2e2e33;--code-bg:#37383e;--border:#333}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
+</noscript>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<a href=https://abigail1985.github.io/ accesskey=h title="de_Abigaïl (Alt + H)">de_Abigaïl</a>
+<span class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)">
+<png id=moon xmlns=http://www.w3.org/2000/png width=24 height=24 viewbox="0 0 24 24" fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round>
+<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+</png>
+<png id=sun xmlns=http://www.w3.org/2000/png width=24 height=24 viewbox="0 0 24 24" fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round>
+<circle cx=12 cy=12 r=5></circle>
+<line x1=12 y1=1 x2=12 y2=3></line>
+<line x1=12 y1=21 x2=12 y2=23></line>
+<line x1=4.22 y1=4.22 x2=5.64 y2=5.64></line>
+<line x1=18.36 y1=18.36 x2=19.78 y2=19.78></line>
+<line x1=1 y1=12 x2=3 y2=12></line>
+<line x1=21 y1=12 x2=23 y2=12></line>
+<line x1=4.22 y1=19.78 x2=5.64 y2=18.36></line>
+<line x1=18.36 y1=5.64 x2=19.78 y2=4.22></line>
+</png>
+</button>
+</span>
+</div>
+<ul id=menu>
+<li>
+<a href=https://abigail1985.github.io/posts/ title=分类>
+<span>分类</span>
+</a>
+</li>
+<li>
+<a href=https://abigail1985.github.io/archives/ title=归档>
+<span>归档</span>
+</a>
+</li>
+<li>
+<a href=https://abigail1985.github.io/tags/ title=标签>
+<span>标签</span>
+</a>
+</li>
+<li>
+<a href=https://abigail1985.github.io/search/ title="搜索 (Alt + /)" accesskey=/>
+<span>搜索</span>
+</a>
+</li>
+</ul>
+</nav>
+</header>
+<main class=main>
+<article class=post-single>
+<header class=post-header>
+<div class=breadcrumbs><a href=https://abigail1985.github.io/>主页</a>&nbsp;»&nbsp;<a href=https://abigail1985.github.io/posts/>分类</a>&nbsp;»&nbsp;<a href=https://abigail1985.github.io/posts/notes/>笔记</a>&nbsp;»&nbsp;<a href=https://abigail1985.github.io/posts/notes/c++/>北大郭玮《程序设计实习c++版》笔记</a></div>
+<h1 class=post-title>
+PKUCpp-2
+</h1>
+<div class=post-meta>March 30, 2021&nbsp;·&nbsp;11 分钟&nbsp;·&nbsp;Abigail
+</div>
+</header> <div class=toc>
+<details open>
+<summary accesskey=c title="(Alt + C)">
+<div class=details>目录</div>
+</summary>
+<div class=inner><ul>
+<li>
+<a href=#%e8%bf%90%e7%ae%97%e7%ac%a6%e9%87%8d%e8%bd%bd aria-label=运算符重载>运算符重载</a><ul>
+<li>
+<a href=#%e8%bf%90%e7%ae%97%e7%ac%a6%e9%87%8d%e8%bd%bd%e7%9a%84%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b5 aria-label=运算符重载的基本概念>运算符重载的基本概念</a></li>
+<li>
+<a href=#%e8%b5%8b%e5%80%bc%e8%bf%90%e7%ae%97%e7%ac%a6%e7%9a%84%e9%87%8d%e8%bd%bd aria-label=赋值运算符的重载>赋值运算符的重载</a><ul>
+<li>
+<a href=#%e4%b8%ba%e4%bb%80%e4%b9%88%e5%bc%95%e5%85%a5%e8%b5%8b%e5%80%bc%e8%bf%90%e7%ae%97%e7%ac%a6%e9%87%8d%e8%bd%bd aria-label=为什么引入赋值运算符重载？>为什么引入赋值运算符重载？</a></li>
+<li>
+<a href=#%e6%b5%85%e6%8b%b7%e8%b4%9d%e5%92%8c%e6%b7%b1%e6%8b%b7%e8%b4%9d aria-label=浅拷贝和深拷贝>浅拷贝和深拷贝</a></li>
+<li>
+<a href=#%e5%af%b9operator%e8%bf%94%e5%9b%9e%e5%80%bc%e7%9a%84%e8%ae%a8%e8%ae%ba aria-label="对operator=返回值的讨论">对operator=返回值的讨论</a></li>
+<li>
+<a href=#%e5%a4%8d%e5%88%b6%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0%e7%9a%84%e7%9b%b8%e5%90%8c%e5%9b%b0%e5%a2%83 aria-label=复制构造函数的相同困境>复制构造函数的相同困境</a></li></ul>
+</li>
+<li>
+<a href=#%e8%bf%90%e7%ae%97%e7%ac%a6%e9%87%8d%e8%bd%bd%e4%b8%ba%e5%8f%8b%e5%85%83%e5%87%bd%e6%95%b0 aria-label=运算符重载为友元函数>运算符重载为友元函数</a></li>
+<li>
+<a href=#%e5%ae%9e%e4%be%8b%e5%8f%af%e5%8f%98%e9%95%bf%e6%95%b0%e7%bb%84%e7%9a%84%e5%ae%9e%e7%8e%b0 aria-label=实例：可变长数组的实现>实例：可变长数组的实现</a></li>
+<li>
+<a href=#%e6%b5%81%e6%8f%92%e5%85%a5%e8%bf%90%e7%ae%97%e7%ac%a6%e5%92%8c%e6%b5%81%e6%8f%90%e5%8f%96%e8%bf%90%e7%ae%97%e7%ac%a6%e7%9a%84%e9%87%8d%e8%bd%bd aria-label=流插入运算符和流提取运算符的重载>流插入运算符和流提取运算符的重载</a><ul>
+<li>
+<a href=#%e6%b5%81%e6%8f%92%e5%85%a5%e8%bf%90%e7%ae%97%e7%ac%a6%e5%b7%a6%e7%a7%bb%e8%bf%90%e7%ae%97%e7%ac%a6 aria-label=流插入运算符(左移运算符)：&amp;laquo;>流插入运算符(左移运算符)：&#171;</a></li></ul>
+</li>
+<li>
+<a href=#%e7%b1%bb%e5%9e%8b%e8%bd%ac%e6%8d%a2%e8%bf%90%e7%ae%97%e7%ac%a6%e7%9a%84%e9%87%8d%e8%bd%bd aria-label=类型转换运算符的重载>类型转换运算符的重载</a></li>
+<li>
+<a href=#%e8%87%aa%e5%a2%9e%e8%87%aa%e5%87%8f%e8%bf%90%e7%ae%97%e7%ac%a6%e7%9a%84%e9%87%8d%e8%bd%bd aria-label=自增自减运算符的重载>自增自减运算符的重载</a></li>
+<li>
+<a href=#%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9 aria-label=注意事项>注意事项</a></li></ul>
+</li>
+<li>
+<a href=#%e7%bb%a7%e6%89%bf aria-label=继承>继承</a><ul>
+<li>
+<a href=#%e7%bb%a7%e6%89%bf%e5%85%b3%e7%b3%bb%e5%92%8c%e5%a4%8d%e5%90%88%e5%85%b3%e7%b3%bb aria-label=继承关系和复合关系>继承关系和复合关系</a></li>
+<li>
+<a href=#%e8%a6%86%e7%9b%96%e5%92%8c%e4%bf%9d%e6%8a%a4%e6%88%90%e5%91%98 aria-label=覆盖和保护成员>覆盖和保护成员</a></li>
+<li>
+<a href=#%e6%b4%be%e7%94%9f%e7%b1%bb%e7%9a%84%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0 aria-label=派生类的构造函数>派生类的构造函数</a></li>
+<li>
+<a href=#%e5%85%ac%e6%9c%89%e7%bb%a7%e6%89%bf%e7%9a%84%e8%b5%8b%e5%80%bc%e5%85%bc%e5%ae%b9%e8%a7%84%e5%88%99 aria-label=公有继承的赋值兼容规则>公有继承的赋值兼容规则</a></li></ul>
+</li>
+<li>
+<a href=#%e5%a4%9a%e6%80%81 aria-label=多态>多态</a><ul>
+<li>
+<a href=#%e8%99%9a%e5%87%bd%e6%95%b0%e5%92%8c%e5%a4%9a%e6%80%81 aria-label=虚函数和多态>虚函数和多态</a></li>
+<li>
+<a href=#%e4%bd%bf%e7%94%a8%e5%a4%9a%e6%80%81%e7%9a%84%e6%b8%b8%e6%88%8f%e7%a8%8b%e5%ba%8f%e7%a4%ba%e4%be%8b aria-label=使用多态的游戏程序示例>使用多态的游戏程序示例</a></li>
+<li>
+<a href=#%e5%87%a0%e4%bd%95%e5%bd%a2%e4%bd%93%e5%a4%84%e7%90%86%e7%a8%8b%e5%ba%8f aria-label=几何形体处理程序>几何形体处理程序</a></li>
+<li>
+<a href=#%e8%99%9a%e6%9e%90%e6%9e%84%e5%87%bd%e6%95%b0%e7%ba%af%e8%99%9a%e5%87%bd%e6%95%b0%e6%8a%bd%e8%b1%a1%e7%b1%bb aria-label=虚析构函数,纯虚函数,抽象类>虚析构函数,纯虚函数,抽象类</a></li></ul>
+</li>
+<li>
+<a href=#%e8%be%93%e5%85%a5%e8%be%93%e5%87%ba%e5%92%8c%e6%a8%a1%e6%9d%bf aria-label=输入输出和模板>输入输出和模板</a><ul>
+<li>
+<a href=#%e5%87%bd%e6%95%b0%e6%a8%a1%e6%9d%bf aria-label=函数模板>函数模板</a></li>
+<li>
+<a href=#%e7%b1%bb%e6%a8%a1%e6%9d%bf aria-label=类模板>类模板</a></li></ul>
+</li>
+<li>
+<a href=#%e6%a0%87%e5%87%86%e6%a8%a1%e6%9d%bf%e5%ba%93stl aria-label=标准模板库STL>标准模板库STL</a><ul>
+<li>
+<a href=#%e6%a6%82%e8%bf%b0 aria-label=概述>概述</a></li>
+<li>
+<a href=#%e8%bf%ad%e4%bb%a3%e5%99%a8 aria-label=迭代器>迭代器</a></li>
+<li>
+<a href=#%e5%ae%b9%e5%99%a8 aria-label=容器>容器</a><ul>
+<li>
+<a href=#%e9%a1%ba%e5%ba%8f%e5%ae%b9%e5%99%a8 aria-label=顺序容器>顺序容器</a><ul>
+<li>
+<a href=#vector%e5%8a%a8%e6%80%81%e6%95%b0%e7%bb%84 aria-label=vector(动态数组)>vector(动态数组)</a></li>
+<li>
+<a href=#deque%e5%8f%8c%e5%90%91%e9%98%9f%e5%88%97 aria-label=deque(双向队列)>deque(双向队列)</a></li>
+<li>
+<a href=#list%e5%8f%8c%e5%90%91%e5%88%97%e8%a1%a8 aria-label=list(双向列表)>list(双向列表)</a></li></ul>
+</li>
+<li>
+<a href=#%e5%ae%b9%e5%99%a8%e9%80%82%e9%85%8d%e5%99%a8 aria-label=容器适配器>容器适配器</a><ul>
+<li>
+<a href=#stack aria-label=stack>stack</a></li>
+<li>
+<a href=#queue aria-label=queue>queue</a></li>
+<li>
+<a href=#priority_queue aria-label=priority_queue>priority_queue</a></li></ul>
+</li></ul>
+</li>
+<li>
+<a href=#%e7%ae%97%e6%b3%95 aria-label=算法>算法</a><ul>
+<li>
+<a href=#%e7%b1%bb%e5%9e%8b%e5%8f%82%e6%95%b0pred aria-label=类型参数Pred>类型参数Pred</a></li>
+<li>
+<a href=#%e4%b8%8d%e5%8f%98%e5%ba%8f%e5%88%97%e7%ae%97%e6%b3%95%e4%bb%a5%e4%b8%8b%e5%9b%be%e7%89%87%e4%b8%8a%e4%bc%a0%e5%a4%b1%e8%b4%a5 aria-label=不变序列算法（以下图片上传失败）>不变序列算法（以下图片上传失败）</a></li>
+<li>
+<a href=#%e6%8e%92%e5%ba%8f%e7%ae%97%e6%b3%95 aria-label=排序算法>排序算法</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</details>
+</div>
+<div class=post-content><p>[TOC]</p>
+<h1 id=运算符重载>运算符重载<a hidden class=anchor aria-hidden=true href=#运算符重载>#</a></h1>
+<h2 id=运算符重载的基本概念>运算符重载的基本概念<a hidden class=anchor aria-hidden=true href=#运算符重载的基本概念>#</a></h2>
+<ol>
+<li>
+<p>为什么引入运算符重载？</p>
+<p>在数学上，两个复数可以直接进行+、-等运算。但在C++中，直接将+或-用于复数对象是不允许的。有时会希望，<strong>让对象也能通过运算符进行运算</strong>。这样代码更简洁，容易理解。</p>
+<p>例如：</p>
+<blockquote>
+<p>complex_a和complex_b是两个复数对象；</p>
+<p>求两个复数的和, 希望能直接写：
+complex_a + complex_b</p>
+</blockquote>
+</li>
+<li>
+<p>运算符重载是什么？</p>
+<ul>
+<li>
+<p>运算符重载，就是对已有的运算符(C++中预定义的运算符)赋予多重的含义，使同一运算符作用于不同类型的数据时导致不同类型的行为。</p>
+</li>
+<li>
+<p>运算符重载的目的是：扩展C++中提供的运算符的适用范围，使之能作用于对象。</p>
+</li>
+<li>
+<p>同一个运算符，对不同类型的操作数，所发生的行为不同。</p>
+<blockquote>
+<p>complex_a + complex_b =新的复数对象</p>
+<p>5 + 4 = 9</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>运算符重载的形式？</p>
+<ul>
+<li>
+<p>本质是函数重载</p>
+</li>
+<li>
+<p>可以重载为<strong>普通函数</strong>，也可以重载为<strong>成员函数</strong></p>
+</li>
+<li>
+<p>把含运算符的表达式转换成对运算符函数的调用。</p>
+</li>
+<li>
+<p>把运算符的操作数转换成运算符函数的参数。</p>
+</li>
+<li>
+<p>运算符被多次重载时，根据实参的类型决定调用哪个运算符函数。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#960050;background-color:#1e0010>返回值类型</span> <span style=color:#66d9ef>operator</span> <span style=color:#960050;background-color:#1e0010>运算符</span> (<span style=color:#960050;background-color:#1e0010>形参表</span>)
+{
+    ...
+}
+</code></pre></div></li>
+</ul>
+</li>
+</ol>
+<p><strong>例子</strong>：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Complex</span>
+{
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+        <span style=color:#66d9ef>double</span> real,imag;
+    Complex(<span style=color:#66d9ef>double</span> r<span style=color:#f92672>=</span><span style=color:#ae81ff>0.0</span>,<span style=color:#66d9ef>double</span> r<span style=color:#f92672>=</span><span style=color:#ae81ff>0.0</span>)<span style=color:#f92672>:</span>real(r),imag(i){}
+    <span style=color:#75715e>//上方的构造函数添加了初始化列表，将real初始化为r，将imag初始化为i，这种风格比在函数体内直接用r，i赋值的风格更好
+</span><span style=color:#75715e></span>};
+
+<span style=color:#75715e>//重载成普通函数，参数个数为运算符目数
+</span><span style=color:#75715e></span>Complex <span style=color:#66d9ef>operator</span><span style=color:#f92672>+</span>(<span style=color:#66d9ef>const</span> Complex<span style=color:#f92672>&amp;</span> a,<span style=color:#66d9ef>const</span> Complex<span style=color:#f92672>&amp;</span> b)
+{<span style=color:#66d9ef>return</span> <span style=color:#a6e22e>Complex</span>(a.real<span style=color:#f92672>+</span>b.real,a.imag<span style=color:#f92672>+</span>b.imag);}
+<span style=color:#75715e>//返回一个Complex类的临时对象
+</span><span style=color:#75715e></span>
+<span style=color:#75715e>//重载成成员函数，参数个数为运算符目数-1,因为此时一个参数已经确定了，就是这个重载归属的那个类定义的对象
+</span><span style=color:#75715e></span>Complex Complex<span style=color:#f92672>::</span><span style=color:#66d9ef>operator</span><span style=color:#f92672>-</span>(<span style=color:#66d9ef>const</span> Complex<span style=color:#f92672>&amp;</span> c)
+{<span style=color:#66d9ef>return</span> <span style=color:#a6e22e>Complex</span>(real<span style=color:#f92672>-</span>c.real,imag<span style=color:#f92672>+</span>c.imag);}
+<span style=color:#75715e>//返回一个Complex类的临时对象
+</span><span style=color:#75715e></span>
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+{
+    Complex a(<span style=color:#ae81ff>4</span>,<span style=color:#ae81ff>4</span>),b(<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>),c;
+    c<span style=color:#f92672>=</span>a<span style=color:#f92672>+</span>b;
+    <span style=color:#75715e>//等价于c=operator+(a,b);
+</span><span style=color:#75715e></span>    cout<span style=color:#f92672>&lt;&lt;</span>c.real<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;,&#34;</span><span style=color:#f92672>&lt;&lt;</span>c.imag<span style=color:#f92672>&lt;&lt;</span>endl;
+    cout<span style=color:#f92672>&lt;&lt;</span>(a<span style=color:#f92672>-</span>b).real<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;,&#34;</span><span style=color:#f92672>&lt;&lt;</span>(a<span style=color:#f92672>-</span>b).imag<span style=color:#f92672>&lt;&lt;</span>endl;
+    <span style=color:#75715e>//a-b等价于a.operator-(b)，operator-被固定的那个变量就是对象a
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><p>Output:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#ae81ff>5</span>,<span style=color:#ae81ff>5</span>
+<span style=color:#ae81ff>3</span>,<span style=color:#ae81ff>3</span>
+</code></pre></div><p>小结：</p>
+<ol>
+<li>
+<p>重载成普通函数，参数个数为运算符目数；</p>
+<p>重载成成员函数，参数个数为运算符目数-1</p>
+</li>
+<li>
+<p><code>c=a+b</code>等价于<code>c=operator+(a,b)</code>;</p>
+<p><code>a-b</code>等价于<code>a.operator-(b)</code></p>
+</li>
+</ol>
+<h2 id=赋值运算符的重载>赋值运算符的重载<a hidden class=anchor aria-hidden=true href=#赋值运算符的重载>#</a></h2>
+<h3 id=为什么引入赋值运算符重载>为什么引入赋值运算符重载？<a hidden class=anchor aria-hidden=true href=#为什么引入赋值运算符重载>#</a></h3>
+<p><strong>有时候希望赋值运算符两边的类型可以不匹配</strong></p>
+<p>比如，把一个int类型变量赋值给一个Complex对象， 或把一个 char * 类型的字符串赋值给一个字符串对象,此时就需要重载赋值运算符“=”。</p>
+<p><font color=red><strong>赋值运算符”=“只能重载为成员函数</strong></font></p>
+<p><strong>例子</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>String</span>
+{
+    <span style=color:#66d9ef>private</span><span style=color:#f92672>:</span><span style=color:#66d9ef>char</span><span style=color:#f92672>*</span> str;
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>String()<span style=color:#f92672>:</span>str(<span style=color:#66d9ef>new</span> <span style=color:#66d9ef>char</span>[<span style=color:#ae81ff>1</span>]){str[<span style=color:#ae81ff>0</span>]<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;}
+           <span style=color:#75715e>//上面的构造函数添加了初始化列表，which new了一个只有一个元素的字符串数组，然后用这个数组的地址初始化str。在构造函数中往str写入一个0。最终str指向一个空字符串
+</span><span style=color:#75715e></span>           <span style=color:#66d9ef>const</span> <span style=color:#66d9ef>char</span><span style=color:#f92672>*</span> <span style=color:#a6e22e>c_str</span>(){<span style=color:#66d9ef>return</span> str;};
+           <span style=color:#75715e>//上面的成员函数没有参数，返回一个指向常量字符串的指针，也就是str
+</span><span style=color:#75715e></span>           String<span style=color:#f92672>&amp;</span> <span style=color:#66d9ef>operator</span><span style=color:#f92672>=</span>(<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>char</span><span style=color:#f92672>*</span> s);
+           <span style=color:#75715e>//将“=”重载为读取一个指向char型数据的指针，返回一个String类临时对象的引用
+</span><span style=color:#75715e></span>           String<span style=color:#f92672>::~</span>String(){<span style=color:#66d9ef>delete</span>[]str;} 
+           <span style=color:#75715e>//由于str指向的字符串数组是被new出来的，所以删除时必须使用delete[]
+</span><span style=color:#75715e></span>};
+
+<span style=color:#75715e>//下面的重载是为了使得obj=&#34;hello&#34;能够成立
+</span><span style=color:#75715e></span>String<span style=color:#f92672>&amp;</span> String<span style=color:#f92672>::</span><span style=color:#66d9ef>operator</span><span style=color:#f92672>=</span>(<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>char</span><span style=color:#f92672>*</span> s)
+{
+    <span style=color:#66d9ef>delete</span>[]str;
+    <span style=color:#75715e>//先删除对象String中变量str原本指向的字符串数组
+</span><span style=color:#75715e></span>    str<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> <span style=color:#66d9ef>char</span>[strlen(s)<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>];
+    <span style=color:#75715e>//初始化str，令str指向一个new出来的字符串数组，该数组大小为“=”参数数组长度+1
+</span><span style=color:#75715e></span>    strcpy(str,s);
+    <span style=color:#75715e>//上上句新建好str后，这句把s的内容拷贝到了str里面
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>return</span> <span style=color:#f92672>*</span><span style=color:#66d9ef>this</span>;
+    <span style=color:#75715e>//返回这个成员函数作用的对象String的引用
+</span><span style=color:#75715e></span>}
+
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+{
+    String s;
+    s<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Good Luck,&#34;</span>;<span style=color:#75715e>//等价于s.operator=(&#34;Good Luck,&#34;);
+</span><span style=color:#75715e></span>    cout<span style=color:#f92672>&lt;&lt;</span>s.c_str()<span style=color:#f92672>&lt;&lt;</span>endl;
+    <span style=color:#75715e>//String s2=&#34;hello!&#34;;
+</span><span style=color:#75715e></span>    <span style=color:#75715e>//这句话不注释掉就会出错，因为这句话不是赋值语句，而是初始化语句，会调用构造函数，但我们之前的构造函数不接受参数
+</span><span style=color:#75715e></span>    s<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Shenzhou 8!&#34;</span>;
+    cout<span style=color:#f92672>&lt;&lt;</span>s.c_str()<span style=color:#f92672>&lt;&lt;</span>endl;
+    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><p>Output:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp>Good Luck,
+Shenzhou <span style=color:#ae81ff>8</span><span style=color:#f92672>!</span>
+</code></pre></div><h3 id=浅拷贝和深拷贝>浅拷贝和深拷贝<a hidden class=anchor aria-hidden=true href=#浅拷贝和深拷贝>#</a></h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>String</span>
+{
+    <span style=color:#66d9ef>private</span><span style=color:#f92672>:</span><span style=color:#66d9ef>char</span><span style=color:#f92672>*</span> str;
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>String()<span style=color:#f92672>:</span>str(<span style=color:#66d9ef>new</span> <span style=color:#66d9ef>char</span>[<span style=color:#ae81ff>1</span>]){str[<span style=color:#ae81ff>0</span>]<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;}
+           <span style=color:#66d9ef>const</span> <span style=color:#66d9ef>char</span><span style=color:#f92672>*</span> <span style=color:#a6e22e>c_str</span>(){<span style=color:#66d9ef>return</span> str;};
+           String<span style=color:#f92672>&amp;</span> <span style=color:#66d9ef>operator</span><span style=color:#f92672>=</span>(<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>char</span><span style=color:#f92672>*</span> s);
+           String<span style=color:#f92672>::~</span>String(){<span style=color:#66d9ef>delete</span>[]str;} 
+};
+
+String<span style=color:#f92672>&amp;</span> String<span style=color:#f92672>::</span><span style=color:#66d9ef>operator</span><span style=color:#f92672>=</span>(<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>char</span><span style=color:#f92672>*</span> s)
+{
+    <span style=color:#66d9ef>delete</span>[]str;
+    str<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> <span style=color:#66d9ef>char</span>[strlen(s)<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>];
+    strcpy(str,s);
+    <span style=color:#66d9ef>return</span> <span style=color:#f92672>*</span><span style=color:#66d9ef>this</span>;
+}
+</code></pre></div><p>还是这个例子，但此时我们想要实现：</p>
+<blockquote>
+<p>String S1，S2；</p>
+<p>S1=“this”；</p>
+<p>S2=“that”；</p>
+<p>S1=S2；</p>
+</blockquote>
+<p>如果不改变上面的代码(也就是<strong>浅拷贝</strong>)，实际执行情况是下面这样的：</p>
+<p><img loading=lazy src=https://i.loli.net/2021/08/29/hHIrEa3uSU69TL5.png alt>
+</p>
+<p>这导致以下几种问题：</p>
+<ul>
+<li>如不定义自己的赋值运算符，那么S1=S2实际上导致 <strong>S1.str和 S2.str 指向同一地方</strong>。原先S1指向的地方无法删除被浪费掉。</li>
+<li>如果S1对象消亡，析构函数将释放 S1.str指向的空间，则S2消亡时还 要释放一次，但一片被new出来的空间只能被delete一次。</li>
+<li>另外，如果执行 S1 = &ldquo;other&rdquo;；会导致S2.str指向的地方被delete</li>
+</ul>
+<p>因此要在 class String里添加成员函数:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp>String<span style=color:#f92672>&amp;</span> <span style=color:#66d9ef>operator</span><span style=color:#f92672>=</span>(<span style=color:#66d9ef>const</span> String<span style=color:#f92672>&amp;</span> s)
+{
+    <span style=color:#66d9ef>delete</span>[]str;
+    str<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> <span style=color:#66d9ef>char</span>[strlen(s.str)<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>];
+    strcpy(str,s.str);
+    <span style=color:#66d9ef>return</span> <span style=color:#f92672>*</span><span style=color:#66d9ef>this</span>;
+}
+</code></pre></div><p>但是这样还不够，考虑下面的语句</p>
+<blockquote>
+<p>String s;</p>
+<p>s = &ldquo;Hello&rdquo;;</p>
+<p>s = s;</p>
+</blockquote>
+<p>如果等号两边的对象一样，=应该什么都不做。所以重载“=”应为：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp>String<span style=color:#f92672>&amp;</span> <span style=color:#66d9ef>operator</span><span style=color:#f92672>=</span>(<span style=color:#66d9ef>const</span> String<span style=color:#f92672>&amp;</span> s)
+{
+    <span style=color:#66d9ef>if</span>(<span style=color:#66d9ef>this</span><span style=color:#f92672>==&amp;</span>s)
+        <span style=color:#66d9ef>return</span> <span style=color:#f92672>*</span><span style=color:#66d9ef>this</span><span style=color:#960050;background-color:#1e0010>；</span>
+        
+    <span style=color:#66d9ef>delete</span>[]str;
+    str<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> <span style=color:#66d9ef>char</span>[strlen(s.str)<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>];
+    strcpy(str,s.str);
+    <span style=color:#66d9ef>return</span> <span style=color:#f92672>*</span><span style=color:#66d9ef>this</span>;
+}
+</code></pre></div><p>上面的重载即实现了<strong>深拷贝</strong>。</p>
+<p>扩展：https://www.zhihu.com/question/36370072/answer/67181275</p>
+<blockquote>
+<p>那么如果原来的物体销毁了，但是现在拷贝的物体还在，那么这时候你拷贝后的物体的成员指针就是一个悬挂指针，指向了不再存在的物体，那么你访问的话，那就不知道会发生什么了。</p>
+<p>而对于深拷贝，这一个勤奋的人，他不会只做表面，他会把每一个细节都照顾好。于是，当他遇到指针的时候，他会知道new出来一块新的内存，然后把原来指针指向的值拿过来，这样才是真正的完成了克隆体和原来的物体的完美分离，如果物体比作人的话，那么原来的人的每一根毛细血管都被完美的拷贝了过来，而绝非只是表面。所以，这样的代价会比浅拷贝耗费的精力更大，付出的努力更多，但是是值得的。当原来的物体销毁后，克隆体也可以活的很好。</p>
+</blockquote>
+<h3 id=对operator返回值的讨论>对operator=返回值的讨论<a hidden class=anchor aria-hidden=true href=#对operator返回值的讨论>#</a></h3>
+<p>对运算符进行重载的时候，好的风格应该<strong>尽量保留运算符原本的特性</strong></p>
+<ul>
+<li>
+<p>返回值为什么不能是void？</p>
+<p><code>a=b=c</code>等价于<code>a.operator=(b.operator=(c))</code></p>
+<p>若<code>b.operator=(c)</code>返回值为void，则a=void，不可</p>
+</li>
+<li>
+<p>返回值为什么不能是String？</p>
+<p><code>(a=b)=c</code>等价于<code>(a.operator=(b)).operator=(c)</code></p>
+<p>若<code>a.operator=(b)</code>返回值是a，下一步就会让a=c的值。也就是这句话先让a=b的值，再让a=c的值，最终b并没有等于a和c，不可</p>
+</li>
+</ul>
+<h3 id=复制构造函数的相同困境>复制构造函数的相同困境<a hidden class=anchor aria-hidden=true href=#复制构造函数的相同困境>#</a></h3>
+<p>为 String类编写复制构造函数的时候，会面临和 = 同样的问 题，用同样的方法处理。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp>String( String <span style=color:#f92672>&amp;</span> s) {
+     str <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>char</span>[strlen(s.str)<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>];              strcpy(str,s.str);
+}
+</code></pre></div><h2 id=运算符重载为友元函数>运算符重载为友元函数<a hidden class=anchor aria-hidden=true href=#运算符重载为友元函数>#</a></h2>
+<ol>
+<li>
+<p>为什么要将运算符重载为友元？</p>
+<p>有时，重载为成员函数不能满足使用要求，重载为普通函数，又不能访问类的私有成员，所以需要将运算符重载为友元。</p>
+<p><strong>例子</strong>：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Complex</span> {
+     <span style=color:#66d9ef>double</span> real,imag; 
+     <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span> Complex( <span style=color:#66d9ef>double</span> r, <span style=color:#66d9ef>double</span> i)<span style=color:#f92672>:</span>real(r),imag(i){ };              Complex <span style=color:#66d9ef>operator</span><span style=color:#f92672>+</span>( <span style=color:#66d9ef>double</span> r );
+};
+Complex Complex<span style=color:#f92672>::</span><span style=color:#66d9ef>operator</span><span style=color:#f92672>+</span>( <span style=color:#66d9ef>double</span> r ) 
+{ <span style=color:#75715e>//能解释 c+5 
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>Complex</span>(real <span style=color:#f92672>+</span> r,imag);
+}
+</code></pre></div><p>经过上述重载后：</p>
+<blockquote>
+<p>Complex c ;</p>
+<p>c = c + 5; //有定义，相当于 c = c.operator +(5);</p>
+<p>c = 5 + c; //编译出错</p>
+</blockquote>
+<p>所以，为了使得上述的表达式能成立，需要将 + 重载为普通函数。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp>Complex <span style=color:#66d9ef>operator</span><span style=color:#f92672>+</span> (<span style=color:#66d9ef>double</span> r,<span style=color:#66d9ef>const</span> Complex <span style=color:#f92672>&amp;</span> c) 
+{
+<span style=color:#75715e>//能解释 5+c 
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>Complex</span>( c.real <span style=color:#f92672>+</span> r, c.imag);
+}
+</code></pre></div><p>但是普通函数又不能访问私有成员，所以，需要将运算符 + 重载为友元。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Complex</span> {
+    <span style=color:#66d9ef>double</span> real,imag; 
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+           Complex( <span style=color:#66d9ef>double</span> r, <span style=color:#66d9ef>double</span> i)<span style=color:#f92672>:</span>real(r),imag(i){ };              Complex <span style=color:#66d9ef>operator</span><span style=color:#f92672>+</span>( <span style=color:#66d9ef>double</span> r ); 
+    <span style=color:#66d9ef>friend</span> Complex <span style=color:#66d9ef>operator</span> <span style=color:#f92672>+</span> (<span style=color:#66d9ef>double</span> r,<span style=color:#66d9ef>const</span> Complex <span style=color:#f92672>&amp;</span> c);
+};
+</code></pre></div></li>
+</ol>
+<h2 id=实例可变长数组的实现>实例：可变长数组的实现<a hidden class=anchor aria-hidden=true href=#实例可变长数组的实现>#</a></h2>
+<p>要编写可变长整型数组类，使之能如下使用</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+{
+    CArray a;<span style=color:#75715e>//开始时数组是空的
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;i<span style=color:#f92672>&lt;</span><span style=color:#ae81ff>5</span>;<span style=color:#f92672>++</span>i)
+        a.push_back(i);
+    <span style=color:#75715e>//❗要用动态分配的内存来存放数组元素，需要一个指针成员变量
+</span><span style=color:#75715e></span>
+    CArray a2,a3;
+    a2<span style=color:#f92672>=</span>a;
+    <span style=color:#75715e>//❗要重载“=”
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;i<span style=color:#f92672>&lt;</span>a.length();<span style=color:#f92672>++</span>i)
+        cout<span style=color:#f92672>&lt;&lt;</span>a2[i]<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34; &#34;</span>;
+    <span style=color:#75715e>//❗要重载中括号[]
+</span><span style=color:#75715e></span>    a2<span style=color:#f92672>=</span>a3;<span style=color:#75715e>//a2变成空的
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;i<span style=color:#f92672>&lt;</span>a2.length();<span style=color:#f92672>++</span>i)<span style=color:#75715e>//此时a2.length返回0
+</span><span style=color:#75715e></span>        cout<span style=color:#f92672>&lt;&lt;</span>a2[i]<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34; &#34;</span>;
+    cout<span style=color:#f92672>&lt;&lt;</span>endl;
+    
+    a[<span style=color:#ae81ff>3</span>]<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>;<span style=color:#75715e>//将数组a的第三个数改为100
+</span><span style=color:#75715e></span>    CArray a4(a);
+    <span style=color:#75715e>//❗要自己写一个复制构造函数，不能用缺省的
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;i<span style=color:#f92672>&lt;</span>a4.length();<span style=color:#f92672>++</span>i)
+        cout<span style=color:#f92672>&lt;&lt;</span>a4[i]<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34; &#34;</span>;
+    
+    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><p>Output:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#ae81ff>0</span> <span style=color:#ae81ff>1</span> <span style=color:#ae81ff>2</span> <span style=color:#ae81ff>3</span> <span style=color:#ae81ff>4</span> 
+<span style=color:#ae81ff>0</span> <span style=color:#ae81ff>1</span> <span style=color:#ae81ff>2</span> <span style=color:#ae81ff>100</span> <span style=color:#ae81ff>4</span>
+</code></pre></div><p><strong>该怎么写这个数组类？？</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CArray</span>
+{
+    <span style=color:#66d9ef>int</span> size;<span style=color:#75715e>//数组元素的个数
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>int</span><span style=color:#f92672>*</span> ptr;<span style=color:#75715e>//指向动态分配的数组
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span>
+        <span style=color:#a6e22e>CArray</span>(<span style=color:#66d9ef>int</span> s<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>);<span style=color:#75715e>//构造函数，s代表数组元素的个数
+</span><span style=color:#75715e></span>        CArray(CArray<span style=color:#f92672>&amp;</span> a);<span style=color:#75715e>//复制构造函数
+</span><span style=color:#75715e></span>        <span style=color:#f92672>~</span>CArray();<span style=color:#75715e>//析构函数
+</span><span style=color:#75715e></span>        <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>push_back</span>(<span style=color:#66d9ef>int</span> v);<span style=color:#75715e>//用于在数组尾部添加一个元素v
+</span><span style=color:#75715e></span>        CArray<span style=color:#f92672>&amp;</span> <span style=color:#66d9ef>operator</span><span style=color:#f92672>=</span>(<span style=color:#66d9ef>const</span> CArray<span style=color:#f92672>&amp;</span> a);<span style=color:#75715e>//用于数组对象间的赋值
+</span><span style=color:#75715e></span>        <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>length</span>(){<span style=color:#66d9ef>return</span> size;}<span style=color:#75715e>//返回数组元素个数
+</span><span style=color:#75715e></span>        
+        <span style=color:#66d9ef>int</span><span style=color:#f92672>&amp;</span> CArray<span style=color:#f92672>::</span><span style=color:#66d9ef>operator</span>[](<span style=color:#66d9ef>int</span> i){<span style=color:#66d9ef>return</span> ptr[i];}
+        <span style=color:#75715e>//用于支持根据下标访问数组元素，如n=a[i]和a[i]=4这样的语句
+</span><span style=color:#75715e></span>        <span style=color:#75715e>//❗❗❗对于返回值的解释，看下面解释
+</span><span style=color:#75715e></span>}
+</code></pre></div><p>对于<code>int& CArray::operator[](int i){return ptr[i];}</code>要注意：</p>
+<p><strong>返回值类型必须是<code>int&</code>，不能是<code>int</code>！！！<font color=red>这是因为如果一个函数的返回值不是引用，不能将它写在等号左边</font>，所以<code>a[i]=4</code>这句话将编译出错</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#75715e>/**********************构造函数**********************************/</span>
+CArray<span style=color:#f92672>::</span>CArray(<span style=color:#66d9ef>int</span> s)<span style=color:#f92672>:</span>size(s)
+<span style=color:#75715e>//这个初始化列表用s初始化size，s的缺省值是0(即不给参数时使用的s值)
+</span><span style=color:#75715e></span>{
+    <span style=color:#66d9ef>if</span>(s<span style=color:#f92672>==</span><span style=color:#ae81ff>0</span>)
+        ptr<span style=color:#f92672>=</span>NULL;
+    <span style=color:#66d9ef>else</span>
+        ptr<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span>[s];
+}
+
+<span style=color:#75715e>/**********************复制构造函数*******************************/</span>
+CArray<span style=color:#f92672>::</span>CArray(CArray<span style=color:#f92672>&amp;</span> a)
+{
+    <span style=color:#75715e>//如果a.ptr指向空数组，就令ptr指向空数组
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>if</span>(<span style=color:#f92672>!</span>a.ptr){
+        ptr<span style=color:#f92672>=</span>NULL;
+        size<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;
+        <span style=color:#66d9ef>return</span>;
+    }
+    <span style=color:#75715e>//如果a.ptr指向非空数组，就创建一个同样大小的空间复制上a.ptr的内容并将地址赋给ptr
+</span><span style=color:#75715e></span>    ptr<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span>[a.size];
+    memcpy(ptr,a.ptr,<span style=color:#66d9ef>sizeof</span>(<span style=color:#66d9ef>int</span>)<span style=color:#f92672>*</span>a.size);
+    size<span style=color:#f92672>=</span>a.size;
+}<span style=color:#75715e>//上面这个复制构造函数完成了深拷贝的工作
+</span><span style=color:#75715e></span>
+
+<span style=color:#75715e>/**********************析构函数**********************************/</span>
+CArray<span style=color:#f92672>::~</span>CArray()
+{
+    <span style=color:#66d9ef>if</span>(ptr)
+        <span style=color:#66d9ef>delete</span>[]ptr;
+}
+
+
+<span style=color:#75715e>/**********************“=”的重载函数*****************************/</span>
+<span style=color:#75715e>//赋值号的作用是使“=”左边对象里存放的数组，大小和内容都和右边的对象一样
+</span><span style=color:#75715e></span>CArray<span style=color:#f92672>&amp;</span> CArray<span style=color:#f92672>::</span><span style=color:#66d9ef>operator</span><span style=color:#f92672>=</span>(<span style=color:#66d9ef>const</span> CArray<span style=color:#f92672>&amp;</span> a)
+{
+    <span style=color:#66d9ef>if</span>(ptr<span style=color:#f92672>==</span>a.ptr)<span style=color:#75715e>//防止a=a这样的赋值出错
+</span><span style=color:#75715e></span>        <span style=color:#66d9ef>return</span> <span style=color:#f92672>*</span><span style=color:#66d9ef>this</span>;
+    <span style=color:#66d9ef>if</span>(a.ptr<span style=color:#f92672>==</span>NULL){<span style=color:#75715e>//如果a里面的数组是空的
+</span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span>(ptr)<span style=color:#75715e>//如果ptr指向的数组不是空的
+</span><span style=color:#75715e></span>            <span style=color:#66d9ef>delete</span>[]ptr;
+        ptr<span style=color:#f92672>=</span>NULL;
+        size<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;
+        <span style=color:#66d9ef>return</span> <span style=color:#f92672>*</span><span style=color:#66d9ef>this</span>;
+    }
+    <span style=color:#66d9ef>if</span>(size<span style=color:#f92672>&lt;</span>a.size){<span style=color:#75715e>//如果原有空间不够用，就需要分配新的空间
+</span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span>(ptr)
+            <span style=color:#66d9ef>delete</span>[]ptr;
+        ptr<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span>[a.size];
+    }
+    memcpy(ptr,a.ptr,<span style=color:#66d9ef>sizeof</span>(<span style=color:#66d9ef>int</span>)<span style=color:#f92672>*</span>a.size); 
+    <span style=color:#75715e>//如果原有空间够大，就不分配新的空间
+</span><span style=color:#75715e></span>    size<span style=color:#f92672>=</span>a.size;
+    <span style=color:#66d9ef>return</span> <span style=color:#f92672>*</span><span style=color:#66d9ef>this</span>;
+}
+
+<span style=color:#75715e>/**********************push_back函数*****************************/</span>
+<span style=color:#66d9ef>void</span> CArrary<span style=color:#f92672>::</span>push_back(<span style=color:#66d9ef>int</span> v)
+{
+    <span style=color:#75715e>/*下面做分配空间的工作*/</span>
+    <span style=color:#66d9ef>if</span>(ptr){<span style=color:#75715e>//原数组不空
+</span><span style=color:#75715e></span>        <span style=color:#66d9ef>int</span><span style=color:#f92672>*</span> tmpPtr<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span>[size<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>];<span style=color:#75715e>//创造一个比原数组多一个空间的数组
+</span><span style=color:#75715e></span>        memcpy(tmpPtr,ptr,<span style=color:#66d9ef>sizeof</span>(<span style=color:#66d9ef>int</span>)<span style=color:#f92672>*</span>size);<span style=color:#75715e>//拷贝原数组到tmpPtr里
+</span><span style=color:#75715e></span>        <span style=color:#66d9ef>delete</span>[]ptr;<span style=color:#75715e>//原数组被复制好后就可以删除释放空间
+</span><span style=color:#75715e></span>        ptr<span style=color:#f92672>=</span>tmpPtr;<span style=color:#75715e>//现在的ptr指向的空间比原来的大1
+</span><span style=color:#75715e></span>    }
+    <span style=color:#66d9ef>else</span><span style=color:#75715e>//原数组是空的
+</span><span style=color:#75715e></span>        ptr<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span>[<span style=color:#ae81ff>1</span>];
+    
+    <span style=color:#75715e>/*下面做加入新的数组元素的工作*/</span>
+    ptr[size<span style=color:#f92672>++</span>]<span style=color:#f92672>=</span>v;
+}
+</code></pre></div><h2 id=流插入运算符和流提取运算符的重载>流插入运算符和流提取运算符的重载<a hidden class=anchor aria-hidden=true href=#流插入运算符和流提取运算符的重载>#</a></h2>
+<h3 id=流插入运算符左移运算符>流插入运算符(左移运算符)：&#171;<a hidden class=anchor aria-hidden=true href=#流插入运算符左移运算符>#</a></h3>
+<p>cout是在iostream中定义的，<strong>ostream类的对象</strong>。“&#171;”能用在cout上是因为再iostream中对“&#171;”进行了重载。</p>
+<ol>
+<li>
+<p><strong>ostream类中对&#171;的重载（头文件中别人已经写好的代码）</strong></p>
+<blockquote>
+<p>考虑怎么重载才能使得下列语句成立：</p>
+</blockquote>
+<blockquote>
+<p>cout&#171;5;</p>
+<p>cout&#171;&ldquo;this&rdquo;;</p>
+<p>cout&#171;5&#171;&ldquo;this&rdquo;;</p>
+</blockquote>
+<p>按照以下方式重载成<strong>ostream类的成员函数</strong>，<strong>返回值是ostream类的引用</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp>ostream<span style=color:#f92672>&amp;</span> ostream<span style=color:#f92672>::</span><span style=color:#66d9ef>operator</span><span style=color:#f92672>&lt;&lt;</span>(<span style=color:#66d9ef>int</span> n)
+{
+    ...<span style=color:#75715e>//输出n的代码
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>return</span> <span style=color:#f92672>*</span><span style=color:#66d9ef>this</span><span style=color:#960050;background-color:#1e0010>；</span>
+}
+
+ostream<span style=color:#f92672>&amp;</span> ostream<span style=color:#f92672>::</span><span style=color:#66d9ef>operator</span><span style=color:#f92672>&lt;&lt;</span>(<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>char</span><span style=color:#f92672>*</span> s)
+{
+    ...<span style=color:#75715e>//输出s的代码
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>return</span> <span style=color:#f92672>*</span><span style=color:#66d9ef>this</span><span style=color:#960050;background-color:#1e0010>；</span>
+}
+</code></pre></div><p><code>cout&lt;&lt;5&lt;&lt;"this"</code>等价于<code>cout.operator&lt;&lt;(5).operator&lt;&lt;("this")</code></p>
+</li>
+<li>
+<p><strong>将&#171;重载为全局函数(需要自己写的）</strong></p>
+<blockquote>
+<p>假定下面程序输出为5hello，我们该如何补写？</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CStudent</span>{ 
+ <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span><span style=color:#66d9ef>int</span> nAge; 
+};
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+{ 
+ CStudent s ; 
+ s.nAge <span style=color:#f92672>=</span> <span style=color:#ae81ff>5</span>; 
+ cout <span style=color:#f92672>&lt;&lt;</span> s <span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;hello&#34;</span>; 
+ <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div></blockquote>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp>ostream<span style=color:#f92672>&amp;</span> ostream<span style=color:#f92672>&lt;&lt;</span>(ostream<span style=color:#f92672>&amp;</span> o,<span style=color:#66d9ef>const</span> CStudent<span style=color:#f92672>&amp;</span> s)
+{
+    o<span style=color:#f92672>&lt;&lt;</span>s.nAge;
+    <span style=color:#66d9ef>return</span> o;
+}
+</code></pre></div><p>正如：</p>
+<blockquote>
+<p>重载成普通函数，参数个数为运算符目数；</p>
+<p>重载成成员函数，参数个数为运算符目数-1</p>
+</blockquote>
+<p>&#171;被重载成全局函数，第一个参数就是<code>cout</code>，因此第一个参数类型必须为<code>ostream</code>或<code>ostream&</code></p>
+<p>由于我们需要继续输出“hello”，因此返回值必须为<code>cout</code>，故返回值类型为<code>ostream&</code></p>
+</li>
+<li>
+<p><strong>将&#171;重载为全局函数，且定义成相关类的友元函数（需要自己写的）</strong></p>
+<p>这样可以访问指定类的私有成员</p>
+<blockquote>
+<p>假定c是Complex复数类的对象，现在希望 写<code>cout &lt;&lt; c;</code>，就能以<code>a+bi</code>的形 式输出c的值，写<code>cin>>c;</code>，就能从键 盘接受<code>a+bi</code>形式的输入，并且使得
+<code>c.real = a,c.imag = b</code></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+{
+Complex c;
+<span style=color:#66d9ef>int</span> n;
+cin<span style=color:#f92672>&gt;&gt;</span>c<span style=color:#f92672>&gt;&gt;</span>n;
+cout<span style=color:#f92672>&lt;&lt;</span>c<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;,&#34;</span><span style=color:#f92672>&lt;&lt;</span>n;
+<span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><p>示例输入/输出</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp>input:<span style=color:#ae81ff>13.2</span><span style=color:#f92672>+</span><span style=color:#ae81ff>133</span>i <span style=color:#ae81ff>87</span>
+output:<span style=color:#ae81ff>13.2</span><span style=color:#f92672>+</span><span style=color:#ae81ff>133</span>i,<span style=color:#ae81ff>87</span>
+</code></pre></div></blockquote>
+<p>我们编写Complex类如下：</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;string&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;cstdlib&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e></span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Complex</span>{
+    <span style=color:#66d9ef>double</span> real,imag;
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+           Complex(<span style=color:#66d9ef>double</span> r<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>,<span style=color:#66d9ef>double</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>)<span style=color:#f92672>:</span>real(r),imag(i){};
+    <span style=color:#66d9ef>friend</span> ostream<span style=color:#f92672>&amp;</span> <span style=color:#66d9ef>operator</span><span style=color:#f92672>&lt;&lt;</span>(ostream<span style=color:#f92672>&amp;</span> os,<span style=color:#66d9ef>const</span> Complex<span style=color:#f92672>&amp;</span> c);
+    <span style=color:#66d9ef>friend</span> istream<span style=color:#f92672>&amp;</span> <span style=color:#66d9ef>operator</span><span style=color:#f92672>&gt;&gt;</span>(istream<span style=color:#f92672>&amp;</span> is,<span style=color:#66d9ef>const</span> Complex<span style=color:#f92672>&amp;</span> c);
+    <span style=color:#75715e>//上面语句将&lt;&lt;,&gt;&gt;重载为Complex类的友元，可以访问Complex类的私有成员real，imag
+</span><span style=color:#75715e></span>};
+
+<span style=color:#75715e>/****************对&lt;&lt;的重载***********************************/</span>
+ostream<span style=color:#f92672>&amp;</span> <span style=color:#66d9ef>operator</span><span style=color:#f92672>&lt;&lt;</span>(ostream<span style=color:#f92672>&amp;</span> os,Complex<span style=color:#f92672>&amp;</span> c)
+{
+    os<span style=color:#f92672>&lt;&lt;</span>c.real<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;+&#34;</span><span style=color:#f92672>&lt;&lt;</span>c.imag<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;i&#34;</span>;<span style=color:#75715e>//以“a+bi”的形式输出
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>return</span> os;
+}
+
+<span style=color:#75715e>/****************对&gt;&gt;的重载***********************************/</span>
+istream<span style=color:#f92672>&amp;</span> <span style=color:#66d9ef>operator</span><span style=color:#f92672>&gt;&gt;</span>(istream<span style=color:#f92672>&amp;</span> is,Complex<span style=color:#f92672>&amp;</span> c)
+{
+    <span style=color:#75715e>//将“a+bi”作为字符串读入，“a+bi”中间不能有空格
+</span><span style=color:#75715e></span>    string s;
+    is<span style=color:#f92672>&gt;&gt;</span>s;
+
+    <span style=color:#75715e>//确定实部和虚部的分界点
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>int</span> pos<span style=color:#f92672>=</span>s.find(<span style=color:#e6db74>&#34;+&#34;</span>,<span style=color:#ae81ff>0</span>);
+
+    <span style=color:#75715e>//分离出代表实部的字符串
+</span><span style=color:#75715e></span>    string sTmp<span style=color:#f92672>=</span>s.substr(<span style=color:#ae81ff>0</span>,pos);
+    c.real<span style=color:#f92672>=</span>atof(sTmp.c_str());
+    <span style=color:#75715e>//atof库函数能将const char*指针指向的内容转换成float
+</span><span style=color:#75715e></span>
+    <span style=color:#75715e>//分离出代表虚部的字符串
+</span><span style=color:#75715e></span>    sTmp<span style=color:#f92672>=</span>s.substr(pos<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>,s.length()<span style=color:#f92672>-</span>pos<span style=color:#f92672>-</span><span style=color:#ae81ff>2</span>);
+    c.imag<span style=color:#f92672>=</span>atof(sTmp.c_str());
+
+    <span style=color:#66d9ef>return</span> is;
+}
+</code></pre></div><p>❗❗❗<code>c_str()</code>：</p>
+<p>该函数返回一个指向正规C字符串的指针常量, 内容与本string串相同。 这是为了与c语言兼容，在c语言中没有string类型，故必须通过string类对象的成员函数c_str()把string 对象转换成c中的字符串</p>
+</li>
+</ol>
+<h2 id=类型转换运算符的重载>类型转换运算符的重载<a hidden class=anchor aria-hidden=true href=#类型转换运算符的重载>#</a></h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e></span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Complex</span>
+{
+    <span style=color:#66d9ef>double</span> real,imag;
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+        Complex(<span style=color:#66d9ef>double</span> r<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>,<span style=color:#66d9ef>double</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>)<span style=color:#f92672>:</span>real(r),imag(i){};
+        <span style=color:#66d9ef>operator</span> <span style=color:#a6e22e>double</span>(){<span style=color:#66d9ef>return</span> real;}
+        <span style=color:#75715e>//重载了 强制类型转换运算符 double
+</span><span style=color:#75715e></span>};
+
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+{
+    Complex c(<span style=color:#ae81ff>1.2</span>,<span style=color:#ae81ff>3.4</span>);
+    
+    <span style=color:#75715e>/*显式转换*/</span>
+    cout<span style=color:#f92672>&lt;&lt;</span>(<span style=color:#66d9ef>double</span>)c<span style=color:#f92672>&lt;&lt;</span>endl;<span style=color:#75715e>//输出1.2
+</span><span style=color:#75715e></span>    
+    <span style=color:#75715e>/*隐式转换*/</span>
+    <span style=color:#66d9ef>double</span> n<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span><span style=color:#f92672>+</span>c;<span style=color:#75715e>//等价于double n=2+c.operator double()
+</span><span style=color:#75715e></span>    cout<span style=color:#f92672>&lt;&lt;</span>n;<span style=color:#75715e>//输出3.2
+</span><span style=color:#75715e></span>}
+</code></pre></div><h2 id=自增自减运算符的重载>自增自减运算符的重载<a hidden class=anchor aria-hidden=true href=#自增自减运算符的重载>#</a></h2>
+<ol>
+<li>
+<p>如何将前置/后置的++，&ndash;区分开？</p>
+<p>自增运算符++、自减运算符&ndash;有前置/后置之分，为了区分所重载的是前置运算符还是后置运算符，C++规定：</p>
+<ul>
+<li>
+<p>前置运算符作为<strong>一元运算符</strong>重载</p>
+<ul>
+<li>
+<p>重载为<strong>成员函数</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp>T<span style=color:#f92672>&amp;</span> <span style=color:#66d9ef>operator</span><span style=color:#f92672>++</span>()
+T<span style=color:#f92672>&amp;</span> <span style=color:#66d9ef>operator</span><span style=color:#f92672>--</span>()
+</code></pre></div></li>
+<li>
+<p>重载为<strong>全局函数</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp>T1<span style=color:#f92672>&amp;</span> <span style=color:#66d9ef>operator</span><span style=color:#f92672>++</span>(T2);
+T1<span style=color:#f92672>&amp;</span> <span style=color:#66d9ef>operator</span><span style=color:#f92672>--</span>(T2);
+<span style=color:#75715e>//重载为全局函数时需要的参数个数比成员函数时多一个
+</span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p>后置运算符作为<strong>二元运算符</strong>重载,<strong>要多写一个没用的参数</strong></p>
+<ul>
+<li>
+<p>重载为<strong>成员函数</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp>T <span style=color:#66d9ef>operator</span><span style=color:#f92672>++</span>(<span style=color:#66d9ef>int</span>);
+T <span style=color:#66d9ef>operator</span><span style=color:#f92672>--</span>(<span style=color:#66d9ef>int</span>);
+</code></pre></div></li>
+<li>
+<p>重载为<strong>全局函数</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp>T1 <span style=color:#66d9ef>operator</span><span style=color:#f92672>++</span>(<span style=color:#66d9ef>int</span>,T2);
+T1 <span style=color:#66d9ef>operator</span><span style=color:#f92672>--</span>(<span style=color:#66d9ef>int</span>,T2);
+<span style=color:#75715e>//重载为全局函数时需要的参数个数比成员函数时多一个
+</span></code></pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>重载运算符的返回值</p>
+<ul>
+<li>重载的原则:<strong>对运算符的重载要尽量维持运算符原本的属性</strong></li>
+<li>c++中内置的++a返回值是<strong>a的引用</strong>, a++返回值是临时变量<strong>a</strong>
+这也是为什么可以有<code>(++a)=1</code>,但不能有<code>(a++)=1</code>,(函数的返回值如果不是引用,不能放在等好的左边)</li>
+<li>为了维持上面那种性质,前置运算符的返回值是对象,后置运算符的返回值是临时变量</li>
+</ul>
+</li>
+</ol>
+<p><strong>例子</strong>:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+{
+    CDemo d(<span style=color:#ae81ff>5</span>);
+    cout<span style=color:#f92672>&lt;&lt;</span>(d<span style=color:#f92672>++</span>)<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;,&#34;</span>;
+    cout<span style=color:#f92672>&lt;&lt;</span>d<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;,&#34;</span>;
+
+    cout<span style=color:#f92672>&lt;&lt;</span>(<span style=color:#f92672>++</span>d)<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;,&#34;</span>;
+    cout<span style=color:#f92672>&lt;&lt;</span>d<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;endl&#34;</span>;
+
+    cout<span style=color:#f92672>&lt;&lt;</span>(d<span style=color:#f92672>--</span>)<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;,&#34;</span>;
+    cout<span style=color:#f92672>&lt;&lt;</span>d<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;,&#34;</span>;
+
+    cout<span style=color:#f92672>&lt;&lt;</span>(<span style=color:#f92672>++</span>d)<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;,&#34;</span>;
+    cout<span style=color:#f92672>&lt;&lt;</span>d<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;endl&#34;</span>;
+    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><p>要求输出结果为</p>
+<blockquote>
+<p>5,6,7,7
+7,6,5,5</p>
+</blockquote>
+<p>该如何编写CDemo?</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Demo</span>
+{
+    <span style=color:#66d9ef>private</span><span style=color:#f92672>:</span>
+        <span style=color:#66d9ef>int</span> n;
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+        CDemo(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>)<span style=color:#f92672>:</span>n(i){}<span style=color:#75715e>//初始化列表用i初始化n
+</span><span style=color:#75715e></span>        <span style=color:#66d9ef>operator</span> <span style=color:#a6e22e>int</span>(){<span style=color:#66d9ef>return</span> n;}s.<span style=color:#66d9ef>int</span>()
+        <span style=color:#75715e>//强制类型转换运算符的重载,使得(int)s等价于s.int()
+</span><span style=color:#75715e></span>        <span style=color:#75715e>//类型强制转换运算符重载时不能写返回值类型,实际上其返回值类型就是该运算符代表的类型
+</span><span style=color:#75715e></span>        
+        CDemo<span style=color:#f92672>&amp;</span> <span style=color:#66d9ef>operator</span><span style=color:#f92672>++</span>();<span style=color:#75715e>//前置成员
+</span><span style=color:#75715e></span>        CDemo <span style=color:#66d9ef>operator</span><span style=color:#f92672>++</span>(<span style=color:#66d9ef>int</span>)<span style=color:#75715e>//后置成员
+</span><span style=color:#75715e></span> <span style=color:#66d9ef>friend</span> CDemo<span style=color:#f92672>&amp;</span> <span style=color:#66d9ef>operator</span><span style=color:#f92672>--</span>(CDemo<span style=color:#f92672>&amp;</span>);<span style=color:#75715e>//前置全局
+</span><span style=color:#75715e></span> <span style=color:#66d9ef>friend</span> CDemo <span style=color:#66d9ef>operator</span><span style=color:#f92672>--</span>(CDemo<span style=color:#f92672>&amp;</span>,<span style=color:#66d9ef>int</span>);<span style=color:#75715e>//后置全局
+</span><span style=color:#75715e></span>};
+<span style=color:#75715e>/*************************++a重载为成员函数*********************************/</span>
+CDemo<span style=color:#f92672>&amp;</span> CDemo<span style=color:#f92672>::</span><span style=color:#66d9ef>operator</span><span style=color:#f92672>++</span>()
+{
+    n<span style=color:#f92672>++</span>;<span style=color:#75715e>//这个n是operator++()作用的那个对象的私有变量n
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>return</span> <span style=color:#f92672>*</span><span style=color:#66d9ef>this</span>;<span style=color:#75715e>//返回修改后的对象的引用
+</span><span style=color:#75715e></span>}
+<span style=color:#75715e>//++s等价于s.operator++()
+</span><span style=color:#75715e></span>
+<span style=color:#75715e>/*************************a++重载为成员函数*********************************/</span>
+CDemo CDemo<span style=color:#f92672>::</span><span style=color:#66d9ef>operator</span><span style=color:#f92672>++</span>(<span style=color:#66d9ef>int</span> k)<span style=color:#75715e>//k是一个没用的参数
+</span><span style=color:#75715e></span>{
+    CDemo <span style=color:#a6e22e>tmp</span>(<span style=color:#f92672>*</span><span style=color:#66d9ef>this</span>);<span style=color:#75715e>//用复制构造函数构造一个临时对象,将修改前的对象的n值赋给他
+</span><span style=color:#75715e></span>    n<span style=color:#f92672>++</span>;
+    <span style=color:#66d9ef>return</span> tmp;<span style=color:#75715e>//返回修改前的对象
+</span><span style=color:#75715e></span>}<span style=color:#75715e>//s++等价于s.operator++(0)
+</span><span style=color:#75715e></span>
+<span style=color:#75715e>/*************************--a重载为全局函数*********************************/</span>
+CDemo<span style=color:#f92672>&amp;</span> <span style=color:#66d9ef>operator</span><span style=color:#f92672>--</span>(CDemo<span style=color:#f92672>&amp;</span> d)<span style=color:#75715e>//对一个全局函数,传进来的参数必须是引用才能修改他的值
+</span><span style=color:#75715e></span>{
+    d.n<span style=color:#f92672>++</span>;
+    <span style=color:#66d9ef>return</span> d;
+}<span style=color:#75715e>//--s等价于operator--(s)
+</span><span style=color:#75715e></span>
+<span style=color:#75715e>/*************************a--重载为全局函数*********************************/</span>
+CDemo <span style=color:#66d9ef>operator</span><span style=color:#f92672>--</span>(CDemo<span style=color:#f92672>&amp;</span> d)
+{
+    CDemo <span style=color:#a6e22e>tmp</span>(d);
+    n<span style=color:#f92672>++</span>;
+    <span style=color:#66d9ef>return</span> tmp;
+}<span style=color:#75715e>//s--等价于operator--(s,0)
+</span></code></pre></div><h2 id=注意事项>注意事项<a hidden class=anchor aria-hidden=true href=#注意事项>#</a></h2>
+<ol>
+<li>C++不允许定义新的运算符 ；</li>
+<li>重载后运算符的含义应该符合日常习惯:
+<ul>
+<li>complex_a + complex_b</li>
+<li>word_a > word_b</li>
+<li>date_b = date_a + n</li>
+</ul>
+</li>
+<li>运算符重载不改变运算符的优先级；</li>
+<li>以下运算符不能被重载：“.”、“.*”、“::”、“?:”、sizeof；</li>
+<li>重载运算符()、[]、->或者赋值运算符=时，运算符重载函数必须声明为
+类的成员函数。</li>
+</ol>
+<h1 id=继承>继承<a hidden class=anchor aria-hidden=true href=#继承>#</a></h1>
+<ul>
+<li>
+<p>继承:</p>
+<ul>
+<li>在定义一个新的类B时,如果该类与某个已有的类A相似(指的是B拥有A的全部特点),那么可以把A作为一个<strong>基类</strong>而把B作为基类的一个<strong>派生类</strong></li>
+</ul>
+<p><font color=red>这是为了避免重复定义相似的类的麻烦</font></p>
+</li>
+<li>
+<p>派生类的性质:</p>
+<ul>
+<li>
+<p>派生类中可以添加新的成员变量和成员函数</p>
+</li>
+<li>
+<p>派生类一经定义可以独立使用</p>
+</li>
+<li>
+<p>派生类拥有基类的全部成员**(但是依旧不能访问private)**</p>
+</li>
+</ul>
+</li>
+<li>
+<p>例子-学生管理系统</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CStudent</span>{
+    <span style=color:#66d9ef>private</span><span style=color:#f92672>:</span>
+    string sName;
+    <span style=color:#66d9ef>int</span> nAge;
+
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+    <span style=color:#66d9ef>bool</span> IsThreeGood(){};
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>SetName</span>(<span style=color:#66d9ef>const</span> string <span style=color:#f92672>&amp;</span>name)<span style=color:#75715e>//&amp;表示引用
+</span><span style=color:#75715e></span>    {sName<span style=color:#f92672>=</span>name;}
+};
+
+<span style=color:#75715e>//派生类的写法:类名:public基类名
+</span><span style=color:#75715e></span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CundergraduateStudent</span><span style=color:#f92672>:</span><span style=color:#66d9ef>public</span> CStudent{
+    <span style=color:#66d9ef>private</span><span style=color:#f92672>:</span>
+    <span style=color:#66d9ef>int</span> nDepartement;
+
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+    <span style=color:#66d9ef>bool</span> IsThreeGood(){...};<span style=color:#75715e>//这个新的成员函数将基类的覆盖了
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>bool</span> <span style=color:#a6e22e>CanBaoYan</span>(){...};
+};
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CGraduatedStudent</span><span style=color:#f92672>:</span><span style=color:#66d9ef>public</span> CStudent{
+    <span style=color:#66d9ef>private</span><span style=color:#f92672>:</span>
+    <span style=color:#66d9ef>int</span> nDepartement;
+    <span style=color:#66d9ef>char</span> szMentorName[<span style=color:#ae81ff>20</span>];
+
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+    <span style=color:#66d9ef>int</span> CountSalary(){...};
+};
+</code></pre></div></li>
+<li>
+<p>派生类对象的内存空间:</p>
+<p><code>派生类对象体积=基类对象体积+派生类对象自己的成员变量体积</code></p>
+<p>基类对象的存储位置位于派生类对象新增成员变量之前</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CBase</span>{
+    <span style=color:#66d9ef>int</span> v1,v2;
+};
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CDerived</span><span style=color:#f92672>:</span><span style=color:#66d9ef>public</span> CBase{
+    <span style=color:#66d9ef>int</span> v3;
+}
+
+<span style=color:#75715e>//CDerived体积为12个字节
+</span></code></pre></div></li>
+<li>
+<p>继承示例程序:学籍管理</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;string&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e></span>
+<span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CStudent</span>{
+    <span style=color:#66d9ef>private</span><span style=color:#f92672>:</span>
+    string name;
+    string id;
+    <span style=color:#66d9ef>char</span> gender;
+    <span style=color:#66d9ef>int</span> age;
+
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+    <span style=color:#66d9ef>void</span> PrintInfo();
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>Setnfo</span>(<span style=color:#66d9ef>const</span> string <span style=color:#f92672>&amp;</span> name_,<span style=color:#66d9ef>const</span> string <span style=color:#f92672>&amp;</span> id_,<span style=color:#66d9ef>int</span> age_.<span style=color:#66d9ef>char</span> gender_);
+    <span style=color:#75715e>//&amp;参数是引用
+</span><span style=color:#75715e></span>    string <span style=color:#a6e22e>GetName</span>(){<span style=color:#66d9ef>return</span> name;}
+};
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CUndergraduateStudent</span><span style=color:#f92672>:</span><span style=color:#66d9ef>public</span> CStudent{
+    <span style=color:#66d9ef>private</span><span style=color:#f92672>:</span>
+  string department;
+
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+    <span style=color:#66d9ef>void</span> QualifiedForBaoyan(){
+        cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;qualified for baoyan&#34;</span><span style=color:#f92672>&lt;&lt;</span>endl;
+    }
+
+    <span style=color:#75715e>//PrintInfo对于基类的同名函数是覆盖的关系
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>PrintInfo</span>(){
+        CStudent<span style=color:#f92672>::</span>PrintInfo();<span style=color:#75715e>//调用基类的
+</span><span style=color:#75715e></span>        cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;Department:&#34;</span><span style=color:#f92672>&lt;&lt;</span>departement<span style=color:#f92672>&lt;&lt;</span>endl;
+
+        <span style=color:#66d9ef>void</span> SetInfo(<span style=color:#66d9ef>const</span> string<span style=color:#f92672>&amp;</span> name_,<span style=color:#66d9ef>const</span> string<span style=color:#f92672>&amp;</span> id_,<span style=color:#66d9ef>int</span> age_,<span style=color:#66d9ef>char</span> gender_,<span style=color:#66d9ef>const</span> string<span style=color:#f92672>&amp;</span> department_){
+            CStudent<span style=color:#f92672>::</span>SetInfo(name_,id_,age_,gender_);<span style=color:#75715e>//调用基类的
+</span><span style=color:#75715e></span>            department<span style=color:#f92672>=</span>department_;
+        }
+    }
+};
+</code></pre></div></li>
+</ul>
+<h2 id=继承关系和复合关系>继承关系和复合关系<a hidden class=anchor aria-hidden=true href=#继承关系和复合关系>#</a></h2>
+<ul>
+<li>
+<p>继承:"<strong>是</strong>&ldquo;关系</p>
+<p>A是基类,B是A的派生类</p>
+<p>逻辑上要求:<strong>一个B对象也是一个A对象</strong></p>
+</li>
+<li>
+<p>复合:"<strong>有</strong>&ldquo;关系</p>
+<p>逻辑上要求:<strong>A对象是B对象的成员变量</strong></p>
+<p>例子:几何形体程序中,需要写"点"类,也需要写"圆"类,两者的关系就是复合关系,每一个圆对象内都包含<strong>有</strong>一个点对象,这个点对象就是圆心</p>
+</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CPoint</span>{
+    <span style=color:#66d9ef>double</span> x,y;
+    <span style=color:#66d9ef>friend</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CCircle</span>;
+    <span style=color:#75715e>//便于CCircle类操作其圆心
+</span><span style=color:#75715e></span>};
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CCircle</span>{
+    <span style=color:#66d9ef>double</span> r;
+    CPoint center;
+};
+</code></pre></div><ul>
+<li>
+<p><strong>复合关系的使用</strong></p>
+<p>如果要写一个小区养狗管理程序， 需要写一个“业主”类，还需要写一个“狗”类。
+而狗是有 “主人” 的，主人当然是业主(假定狗只有
+一个主人，但一个业主可以有最多10条狗）</p>
+</li>
+</ul>
+<ol>
+<li>
+<p>凑合的写法</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#75715e>//为狗类设一个业主类的对象指针
+</span><span style=color:#75715e>//为业主类设一个狗类的对象数组
+</span><span style=color:#75715e></span>
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CMaster</span>;
+<span style=color:#75715e>//CMaster必须提前声明,不能先写CMaster再写CDog类
+</span><span style=color:#75715e></span>
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CDog</span>{
+    CMaster<span style=color:#f92672>*</span> pm;
+};
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CMaster</span>{
+    CDog dogs[<span style=color:#ae81ff>10</span>];
+};
+<span style=color:#75715e>/*这种写法的缺陷:
+</span><span style=color:#75715e>1.对象的成员变量理论上应是该对象的不可分割的组成部分,但主人对于狗并不是这种关系
+</span><span style=color:#75715e>2.所有的狗对象都被放在一个数组中,对狗的操作必须通过主人来进行
+</span></code></pre></div></li>
+<li>
+<p>正确的写法</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#75715e>//为狗类设一个业主类对象指针
+</span><span style=color:#75715e>//为业主类设一个狗类对象指针数组
+</span><span style=color:#75715e></span>
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CMaster</span>;
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CDog</span>{
+    CMaster<span style=color:#f92672>*</span> pm;
+};
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CMaster</span>{
+    CDog<span style=color:#f92672>*</span> dogs[<span style=color:#ae81ff>10</span>]
+};
+</code></pre></div><p><img loading=lazy src=https://i.loli.net/2021/08/29/XqBuM3QblPL8TAz.png alt=image-20210304144737070>
+</p>
+</li>
+</ol>
+<h2 id=覆盖和保护成员>覆盖和保护成员<a hidden class=anchor aria-hidden=true href=#覆盖和保护成员>#</a></h2>
+<p><strong>覆盖</strong></p>
+<p>派生类可以定义一个和基类成员同名的成员,这叫做<strong>覆盖</strong></p>
+<p>在派生类中访问这类成员时,<strong>缺省的情况是访问派生类中定义的成员</strong></p>
+<p>要在派生类中访问由基类定义的同名成员时,要使用<strong>作用域符号::</strong></p>
+<p><strong>类的保护成员</strong></p>
+<ul>
+<li>
+<p>基类的private成员：可以被下列函数访问</p>
+<p>– 基类的成员函数</p>
+<p>– 基类的友元函数</p>
+</li>
+<li>
+<p>基类的public成员：可以被下列函数访问</p>
+<p>– 基类的成员函数</p>
+<p>– 基类的友元函数</p>
+<p>– 派生类的成员函数</p>
+<p>– 派生类的友元函数</p>
+<p>– 其他的函数</p>
+</li>
+<li>
+<p>基类的protected成员：可以被下列函数访问</p>
+<p>– 基类的成员函数</p>
+<p>– 基类的友元函数</p>
+<p>– 派生类的成员函数可以访问<strong>当前对象</strong>的基类的保护成员</p>
+</li>
+</ul>
+<h2 id=派生类的构造函数>派生类的构造函数<a hidden class=anchor aria-hidden=true href=#派生类的构造函数>#</a></h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Bug</span>{
+    <span style=color:#66d9ef>private</span><span style=color:#f92672>:</span>
+    <span style=color:#66d9ef>int</span> nlegs;
+    <span style=color:#66d9ef>int</span> ncolor;
+    
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+    <span style=color:#66d9ef>int</span> ntype;
+    Bug(<span style=color:#66d9ef>int</span> legs,<span style=color:#66d9ef>int</span> color);
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>PrintBug</span>(){};
+};
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FlyBug</span><span style=color:#f92672>:</span><span style=color:#66d9ef>public</span> Bug{
+    <span style=color:#66d9ef>private</span><span style=color:#f92672>:</span>
+    <span style=color:#66d9ef>int</span> nwings;
+    
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+    FlyBugs(<span style=color:#66d9ef>int</span> legs,<span style=color:#66d9ef>int</span> color,<span style=color:#66d9ef>int</span> wings);
+}
+
+Bug<span style=color:#f92672>::</span>Bug(<span style=color:#66d9ef>int</span> legs,<span style=color:#66d9ef>int</span> color)
+{
+    nlegs<span style=color:#f92672>=</span>legs;
+    ncolor<span style=color:#f92672>=</span>color;
+}
+</code></pre></div><p>错误的FlyBug构造函数写法:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>FlyBug<span style=color:#f92672>::</span>FlyBug(<span style=color:#66d9ef>int</span> legs,<span style=color:#66d9ef>int</span> color,<span style=color:#66d9ef>int</span> wings)
+{
+    nlegs<span style=color:#f92672>=</span>legs;<span style=color:#75715e>//不能访问
+</span><span style=color:#75715e></span>    ncolor<span style=color:#f92672>=</span>color;<span style=color:#75715e>//不能访问
+</span><span style=color:#75715e></span>    <span style=color:#75715e>//上面的操作是错误的!!!!nlegs,ncolor是基类的私有成员,不能被派生类的成员函数访问!
+</span><span style=color:#75715e></span>    ntypes<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>;<span style=color:#75715e>//okk
+</span><span style=color:#75715e></span>    nwings<span style=color:#f92672>=</span>wings;
+}
+</code></pre></div><p>正确的FlyBug构造函数写法:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>FlyBug<span style=color:#f92672>::</span>FlyBug(<span style=color:#66d9ef>int</span> legs,<span style=color:#66d9ef>int</span> color,<span style=color:#66d9ef>int</span> wings)<span style=color:#f92672>:</span>Bug(legs,color)
+<span style=color:#75715e>//初始化列表
+</span><span style=color:#75715e></span>{
+    nlegs<span style=color:#f92672>=</span>legs;
+    ncolor<span style=color:#f92672>=</span>color;
+    <span style=color:#75715e>//上面的操作是错误的!!!!nlegs,ncolor是基类的私有成员,不能被派生类的成员函数访问!
+</span><span style=color:#75715e></span>    
+    nwings<span style=color:#f92672>=</span>wings;
+};
+</code></pre></div><ul>
+<li>
+<p>在创建派生类的对象时，需要调用基类的构造函数：初始化派生类对象中从基类继承的成员。在执行一个派生类的构造函数 之前，总是先执行基类的构造函数。</p>
+</li>
+<li>
+<p>调用基类构造函数的两种方式</p>
+<ul>
+<li>
+<p>显式方式：在派生类的构造函数中，为基类的构造函数提供参数.</p>
+<p><code>derived::derived(arg_derived-list):base(arg_base-list)</code></p>
+</li>
+<li>
+<p>隐式方式：在派生类的构造函数中，省略基类构造函数时， 派生类的构造函数则自动调用基类的默认构造函数.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>派生类的析构函数被执行时，执行完派生类的析构函数后，自动调用基类的析构函数。</p>
+</li>
+</ul>
+<h2 id=公有继承的赋值兼容规则>公有继承的赋值兼容规则<a hidden class=anchor aria-hidden=true href=#公有继承的赋值兼容规则>#</a></h2>
+<p>公有继承:class derived: <strong>public</strong> base{ };</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>base</span>{};
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>derived</span><span style=color:#f92672>:</span><span style=color:#66d9ef>public</span> base{};
+base b;
+derived d;
+</code></pre></div><p><strong>规则</strong>:</p>
+<ol>
+<li>
+<p>派生类的对象可以赋值给基类对象</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>b<span style=color:#f92672>=</span>d;
+</code></pre></div></li>
+<li>
+<p>派生类对象可以初始化基类的引用</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>base <span style=color:#f92672>&amp;</span> br<span style=color:#f92672>=</span>d;
+</code></pre></div></li>
+<li>
+<p>派生类对象的地址可以赋值给基类指针</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>base <span style=color:#f92672>*</span> pb<span style=color:#f92672>=&amp;</span>d;
+</code></pre></div></li>
+</ol>
+<p><strong>直接基类和间接基类</strong>:</p>
+<p><img loading=lazy src=https://i.loli.net/2021/08/29/fTwX61rDIyngQKq.png alt=image-20210307215222740>
+</p>
+<ul>
+<li>
+<p>声明派生类时,<strong>只需要列出其直接基类</strong></p>
+</li>
+<li>
+<p>派生类沿着类的层次向上自动继承他的间接基类</p>
+</li>
+<li>
+<p>派生类的成员包括:</p>
+<ul>
+<li>
+<p>直接基类的成员</p>
+</li>
+<li>
+<p><strong>所有间接基类的所有成员</strong></p>
+</li>
+<li>
+<p>自己的成员</p>
+</li>
+</ul>
+</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e></span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>base</span>{
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+    <span style=color:#66d9ef>int</span> n;
+    base(<span style=color:#66d9ef>int</span> i)<span style=color:#f92672>:</span>n(i){
+        <span style=color:#75715e>//构造函数有参数,也有初始化列表
+</span><span style=color:#75715e></span>        <span style=color:#75715e>//n是成员变量,i是参数表
+</span><span style=color:#75715e></span>        cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;base&#34;</span><span style=color:#f92672>&lt;&lt;</span>n<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;constructed&#34;</span><span style=color:#f92672>&lt;&lt;</span>endl;
+    }
+    <span style=color:#f92672>~</span>base(){
+        cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;base&#34;</span><span style=color:#f92672>&lt;&lt;</span>n<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;destructed&#34;</span><span style=color:#f92672>&lt;&lt;</span>endl;
+    }
+};
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>derived</span><span style=color:#f92672>:</span><span style=color:#66d9ef>public</span> base{
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+    derived(<span style=color:#66d9ef>int</span> i)<span style=color:#f92672>:</span>base(i){
+        <span style=color:#75715e>//构造函数有参数,也有初始化列表
+</span><span style=color:#75715e></span>        cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;derived constructed&#34;</span><span style=color:#f92672>&lt;&lt;</span>endl;
+    }
+    <span style=color:#f92672>~</span>derived(){
+        cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;derived destructed&#34;</span><span style=color:#f92672>&lt;&lt;</span>endl;    
+    }
+};
+    
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>morederived</span><span style=color:#f92672>:</span><span style=color:#66d9ef>public</span> derived{
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+    morederived()<span style=color:#f92672>:</span>derived(<span style=color:#ae81ff>4</span>){
+        <span style=color:#75715e>//构造函数有参数,也有初始化列表
+</span><span style=color:#75715e></span>        <span style=color:#75715e>//只需要直接基类的初始化列表
+</span><span style=color:#75715e></span>        cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;morederived constructed&#34;</span><span style=color:#f92672>&lt;&lt;</span>endl;
+    }
+    <span style=color:#f92672>~</span>morederived(){
+        cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;morederived destructed&#34;</span><span style=color:#f92672>&lt;&lt;</span>endl;    
+    }
+};
+    
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+{
+    morederived obj;
+    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><p>output:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>base4constructed
+derived constructed
+morederived constructed
+morederived destructed
+derived destructed
+base4destructed
+</code></pre></div><h1 id=多态>多态<a hidden class=anchor aria-hidden=true href=#多态>#</a></h1>
+<h2 id=虚函数和多态>虚函数和多态<a hidden class=anchor aria-hidden=true href=#虚函数和多态>#</a></h2>
+<ul>
+<li>
+<p><strong>虚函数</strong></p>
+<p>在类的定义中,前面有virtual关键字的成员函数</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>base</span>{
+    <span style=color:#66d9ef>virtual</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>get</span>();
+};
+</code></pre></div><p>❗❗<font color=red>virtual关键字只用在类定义里的函数声明中,写函数体时候不用</font></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>int</span> base<span style=color:#f92672>::</span>get()<span style=color:#75715e>//不需要在get前面加virtual!!!
+</span></code></pre></div><p>❗❗<strong>构造函数和静态成员函数</strong>不能是虚函数</p>
+<p>❗❗虚函数和普通函数的本质差别:<strong>虚函数可以参与多态,静态函数不能</strong></p>
+</li>
+<li>
+<p><strong>多态的表现形式一:指针</strong></p>
+<ul>
+<li>
+<p>派生类的对象可以赋给基类指针</p>
+</li>
+<li>
+<p>通过基类指针调用基类和派生类中的<strong>同名虚函数</strong>时候:</p>
+<ul>
+<li>
+<p>若指针指向一个基类的对象,则被调用的是基类的<strong>虚函数</strong></p>
+</li>
+<li>
+<p>若指针指向一个派生类的对象,则被调用的是派生类的<strong>虚函数</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Cbase</span>(){
+ <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+       <span style=color:#66d9ef>virtual</span> <span style=color:#66d9ef>void</span> SomeVirtualFunction(){}
+};
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Cderived</span><span style=color:#f92672>:</span><span style=color:#66d9ef>public</span> Cbase(){
+ <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+       <span style=color:#66d9ef>virtual</span> <span style=color:#66d9ef>void</span> SomeVirtualFunction(){}
+};
+
+
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(){
+ Cderived Oderived;
+ Cbase <span style=color:#f92672>*</span>p<span style=color:#f92672>=</span> <span style=color:#f92672>&amp;</span>Oderived;
+ p<span style=color:#f92672>-&gt;</span>SomeVirtualFunction();
+ <span style=color:#75715e>//p指向派生类的对象,调用的是派生类的虚函数
+</span><span style=color:#75715e></span> <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div></li>
+<li>
+<p><strong>多态的表现形式二:对象</strong></p>
+<ul>
+<li>派生类的对象可以赋给基类引用</li>
+<li>通过基类引用调用基类和派生类中的同名虚函数时:
+<ul>
+<li>若该引用引得是一个基类的对象,那么被调用的是基类的虚函数</li>
+<li>若该引用引得是一个派生类的对象,那么被调用的是派生类的虚函数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Cbase</span>(){
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+    <span style=color:#66d9ef>virtual</span> <span style=color:#66d9ef>void</span> SomeVirtualFunction(){}
+};
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Cderived</span>(){
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+    <span style=color:#66d9ef>virtual</span> <span style=color:#66d9ef>void</span> SomeVirtualFunction(){}
+};
+
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(){
+    Cderived Oderived;
+    Cbase <span style=color:#f92672>&amp;</span>r<span style=color:#f92672>=</span>Oderived;
+    r.SomeVirtualFunction();<span style=color:#75715e>//!!!引用调用函数时用&#34;.&#34;!!!
+</span><span style=color:#75715e></span>    <span style=color:#75715e>//r引用的是派生类的对象,调用派生类的虚函数
+</span><span style=color:#75715e></span>}
+
+</code></pre></div><ul>
+<li>
+<p>多态的作用</p>
+<p>增强程序的可扩充性**(程序需要修改或增加功能的时候,需要改动和增加的代码较少)**</p>
+</li>
+</ul>
+<h2 id=使用多态的游戏程序示例>使用多态的游戏程序示例<a hidden class=anchor aria-hidden=true href=#使用多态的游戏程序示例>#</a></h2>
+<h2 id=几何形体处理程序>几何形体处理程序<a hidden class=anchor aria-hidden=true href=#几何形体处理程序>#</a></h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;stdlib.h&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;math.h&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e></span>
+<span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+
+<span style=color:#75715e>//定义基类
+</span><span style=color:#75715e></span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CShape</span>{
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+    <span style=color:#66d9ef>virtual</span> <span style=color:#66d9ef>double</span> Area()<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;
+    <span style=color:#75715e>//后面写了一个&#34;=0&#34;,说明这是纯虚函数,连函数体都没有
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>virtual</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>PrintInfo</span>()<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;
+    <span style=color:#75715e>//因为我们要处理的图形只有圆形三角矩形几种,不存在CShape这样一种抽象的形状,所以不需要为CShape编写这两程序,这两程序在派生类中会分别定义
+</span><span style=color:#75715e></span>};
+
+<span style=color:#75715e>//定义派生类
+</span><span style=color:#75715e></span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CRectangle</span><span style=color:#f92672>:</span><span style=color:#66d9ef>public</span> CShape{
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+    <span style=color:#66d9ef>int</span> w,h;
+    <span style=color:#66d9ef>virtual</span> <span style=color:#66d9ef>double</span> <span style=color:#a6e22e>Area</span>();
+    <span style=color:#66d9ef>virtual</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>PrintInfo</span>();
+};
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CCircle</span><span style=color:#f92672>:</span><span style=color:#66d9ef>public</span> CShape{
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+    <span style=color:#66d9ef>int</span> r;
+    <span style=color:#66d9ef>virtual</span> <span style=color:#66d9ef>double</span> <span style=color:#a6e22e>Area</span>();
+    <span style=color:#66d9ef>virtual</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>PrintInfo</span>();
+};
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CTriangle</span><span style=color:#f92672>:</span><span style=color:#66d9ef>public</span> CShape{
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+    <span style=color:#66d9ef>int</span> a,b,c;
+    <span style=color:#66d9ef>virtual</span> <span style=color:#66d9ef>double</span> <span style=color:#a6e22e>Area</span>();
+    <span style=color:#66d9ef>virtual</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>PrintInfo</span>();
+};
+
+
+<span style=color:#75715e>//实现派生类的成员函数
+</span><span style=color:#75715e></span>
+<span style=color:#66d9ef>double</span> CRectangle<span style=color:#f92672>::</span>Area(){
+    <span style=color:#66d9ef>return</span> w<span style=color:#f92672>*</span>h;
+}
+<span style=color:#66d9ef>void</span> CRectangle<span style=color:#f92672>::</span>PrintInfo(){
+    cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;Rectangle:&#34;</span><span style=color:#f92672>&lt;&lt;</span>Area()<span style=color:#f92672>&lt;&lt;</span>endl;<span style=color:#75715e>//输出的末尾要加endl!!
+</span><span style=color:#75715e></span>}
+
+<span style=color:#66d9ef>double</span> CCircle<span style=color:#f92672>::</span>Area(){
+    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>3.14</span><span style=color:#f92672>*</span>r<span style=color:#f92672>*</span>r;
+}
+<span style=color:#66d9ef>void</span> CCircle<span style=color:#f92672>::</span>PrintInfo(){
+    cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;Circle:&#34;</span><span style=color:#f92672>&lt;&lt;</span>Area()<span style=color:#f92672>&lt;&lt;</span>endl;
+}
+
+<span style=color:#66d9ef>double</span> CTriangle<span style=color:#f92672>::</span>Area(){
+    <span style=color:#66d9ef>double</span> p<span style=color:#f92672>=</span>(a<span style=color:#f92672>+</span>b<span style=color:#f92672>+</span>c)<span style=color:#f92672>/</span><span style=color:#ae81ff>2.0</span>;
+    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>sqrt</span>(p<span style=color:#f92672>*</span>(p<span style=color:#f92672>-</span>a)<span style=color:#f92672>*</span>(p<span style=color:#f92672>-</span>b)<span style=color:#f92672>*</span>(p<span style=color:#f92672>-</span>c));
+}
+<span style=color:#66d9ef>void</span> CCircle<span style=color:#f92672>::</span>PrintInfo(){
+    cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;Triangle:&#34;</span><span style=color:#f92672>&lt;&lt;</span>Area()<span style=color:#f92672>&lt;&lt;</span>endl;
+}
+
+<span style=color:#75715e>//存放不同类型的几何形体
+</span><span style=color:#75715e></span>CShape <span style=color:#f92672>*</span>pShapes[<span style=color:#ae81ff>100</span>];
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>MyCompare</span>(<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>void</span> <span style=color:#f92672>*</span>s1,<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>void</span> <span style=color:#f92672>*</span>s2);
+<span style=color:#75715e>//用三个数组来存浪费空间,难以增改,难以实现排序等进阶功能
+</span><span style=color:#75715e>//所以我们使用多态来存储
+</span><span style=color:#75715e>//pShapes数组中的元素都是基类指针,由于基类指针能够指向派生类对象,我们可以在后面把指针指向new出来的派生类对象
+</span><span style=color:#75715e></span>
+
+<span style=color:#75715e>//主函数
+</span><span style=color:#75715e></span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(){
+    <span style=color:#66d9ef>int</span> i;<span style=color:#66d9ef>int</span> n;
+    CRectangle <span style=color:#f92672>*</span>pr;CCircle <span style=color:#f92672>*</span>pc;CTriangle <span style=color:#f92672>*</span>pt;
+    
+    cin<span style=color:#f92672>&gt;&gt;</span>n;
+    <span style=color:#66d9ef>for</span>(i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;i<span style=color:#f92672>&lt;</span>n;i<span style=color:#f92672>++</span>){
+        <span style=color:#66d9ef>char</span> c;
+        cin<span style=color:#f92672>&gt;&gt;</span>c;
+        <span style=color:#66d9ef>switch</span>(c){
+            <span style=color:#66d9ef>case</span><span style=color:#e6db74>&#39;R&#39;</span><span style=color:#f92672>:</span>
+                    pr<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> CRectangle();
+                    cin<span style=color:#f92672>&gt;&gt;</span>pr<span style=color:#f92672>-&gt;</span>w<span style=color:#f92672>&gt;&gt;</span>pr<span style=color:#f92672>-&gt;</span>h;
+                    pShapes[i]<span style=color:#f92672>=</span>pr;
+                    <span style=color:#66d9ef>break</span>;
+            <span style=color:#66d9ef>case</span> <span style=color:#e6db74>&#39;C&#39;</span><span style=color:#f92672>:</span>
+                    pc<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> CCircle();                                   cin<span style=color:#f92672>&gt;&gt;</span>pc<span style=color:#f92672>-&gt;</span>r;
+                    pShapes[i]<span style=color:#f92672>=</span>pc;
+                    <span style=color:#66d9ef>break</span>;
+            <span style=color:#66d9ef>case</span><span style=color:#e6db74>&#39;T&#39;</span><span style=color:#f92672>:</span>
+                pt<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> CTriangle();
+                cin<span style=color:#f92672>&gt;&gt;</span>pt<span style=color:#f92672>-&gt;</span>a<span style=color:#f92672>&gt;&gt;</span>pt<span style=color:#f92672>-&gt;</span>b<span style=color:#f92672>&gt;&gt;</span>pt<span style=color:#f92672>-&gt;</span>c;
+                pShapes[i]<span style=color:#f92672>=</span>pt;
+                <span style=color:#66d9ef>break</span>;
+                    
+        }
+    }
+    qsort(pShapes,n,<span style=color:#66d9ef>sizeof</span>(CShape<span style=color:#f92672>*</span>),MyCompare);
+    <span style=color:#66d9ef>for</span>(i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;i<span style=color:#f92672>&lt;</span>n;i<span style=color:#f92672>++</span>)
+        pShapes[i]<span style=color:#f92672>-&gt;</span>PrintInfo();
+    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+<span style=color:#75715e>//为什么变量前面要加关键字void*?然后可以将指向任何类型数据的指针赋给这个void*类型指针
+</span><span style=color:#75715e></span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>MyCompare</span>(<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>void</span> <span style=color:#f92672>*</span>s1,<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>void</span> <span style=color:#f92672>*</span>s2){
+    <span style=color:#66d9ef>double</span> a1,a2;
+    CShape<span style=color:#f92672>**</span>p1;
+    CShape<span style=color:#f92672>**</span>p2;
+    <span style=color:#75715e>//一定要写两个*,不能用&#34;*s1&#34;来取得s1指向的内容
+</span><span style=color:#75715e></span>    p1<span style=color:#f92672>=</span>(CShape<span style=color:#f92672>**</span>)s1;
+    p2<span style=color:#f92672>=</span>(CShape<span style=color:#f92672>**</span>)s2;
+    <span style=color:#75715e>//s1,s2指向数组中的元素,数组中元素的类型是CShape*
+</span><span style=color:#75715e></span>    <span style=color:#75715e>//因此p1,p2是指向指针的指针,类型为CShape**
+</span><span style=color:#75715e></span>    a1<span style=color:#f92672>=</span>(<span style=color:#f92672>*</span>p1)<span style=color:#f92672>-&gt;</span>Area();<span style=color:#75715e>//*p1的类型是CShape*是基类指针
+</span><span style=color:#75715e></span>    a2<span style=color:#f92672>=</span>(<span style=color:#f92672>*</span>p2)<span style=color:#f92672>-&gt;</span>Area();
+    <span style=color:#66d9ef>if</span>(a1<span style=color:#f92672>&lt;</span>a2)
+        <span style=color:#66d9ef>return</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>;
+    <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span>(a2<span style=color:#f92672>&lt;</span>a1)
+        <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>1</span>;
+    <span style=color:#66d9ef>else</span>
+        <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><p>*下面是 <code>qsort() </code>函数的声明。</p>
+<pre><code>void qsort(void *base, size_t nitems, size_t size, int (*compar)(const void *, const void*))
+</code></pre><ul>
+<li><strong>base</strong> &ndash; 指向要排序的数组的第一个元素的指针。</li>
+<li><strong>nitems</strong> &ndash; 由 base 指向的数组中元素的个数。</li>
+<li><strong>size</strong> &ndash; 数组中每个元素的大小，以字节为单位。</li>
+<li><strong>compar</strong> &ndash; 用来比较两个元素的函数。</li>
+</ul>
+<h2 id=虚析构函数纯虚函数抽象类>虚析构函数,纯虚函数,抽象类<a hidden class=anchor aria-hidden=true href=#虚析构函数纯虚函数抽象类>#</a></h2>
+<p><strong>虚析构函数</strong>:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>son</span>{
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+    <span style=color:#f92672>~</span>son(){cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;bye from son&#34;</span><span style=color:#f92672>&lt;&lt;</span>endl;}
+};
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>grandson</span><span style=color:#f92672>:</span><span style=color:#66d9ef>public</span> son{
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+    <span style=color:#f92672>~</span>grandson(){cout<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;bye from grandson&#34;</span><span style=color:#f92672>&lt;&lt;</span>endl;}
+};
+
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+{
+    son <span style=color:#f92672>*</span>pson;
+    pson<span style=color:#f92672>=</span><span style=color:#66d9ef>new</span> grandson();
+    <span style=color:#75715e>//new一个对象的时候,如果对象的构造函数不需要参数就要写一对括号,跟new一个数据不一样
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>delete</span> pson;
+    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><p>output:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>bye from son
+</code></pre></div><p><strong><font color=red>new出来的grandson没有被删除!!!!!,反而执行了son的析构函数,然而我们并没有定义son类的对象</font></strong></p>
+<p>解决办法:</p>
+<p><strong><font color=red>把基类son的析构函数变成虚函数</font></strong></p>
+<p><strong>纯虚函数和抽象类</strong>:</p>
+<ul>
+<li>
+<p>包含纯虚函数的类就是抽象类</p>
+</li>
+<li>
+<p>抽象类不能创建自己的对象</p>
+</li>
+<li>
+<p>抽象类的指针/引用可以指向其派生类的对象</p>
+</li>
+<li>
+<p>在抽象类的成员函数内可以调用纯虚函数，但是<strong>在构造函数或析构函数内部 不能调用纯虚函数</strong>。</p>
+</li>
+<li>
+<p>如果一个类从抽象类派生而来，那么当且仅当它实现了基类中的所有纯虚函数，它才能成为非抽象类。</p>
+</li>
+</ul>
+<h1 id=输入输出和模板>输入输出和模板<a hidden class=anchor aria-hidden=true href=#输入输出和模板>#</a></h1>
+<h2 id=函数模板>函数模板<a hidden class=anchor aria-hidden=true href=#函数模板>#</a></h2>
+<ul>
+<li>例子-求数组最大元素的函数模板</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>template</span><span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>T</span><span style=color:#f92672>&gt;</span>
+T MaxElement(T a[],<span style=color:#66d9ef>int</span> size){
+    T tmpMax<span style=color:#f92672>=</span>a[<span style=color:#ae81ff>0</span>];
+    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>;i<span style=color:#f92672>&lt;</span>size;i<span style=color:#f92672>++</span>)
+        <span style=color:#66d9ef>if</span>(tmpMax<span style=color:#f92672>&lt;</span>a[i])
+            tmpMax<span style=color:#f92672>=</span>a[i]
+    <span style=color:#66d9ef>return</span> tmpMax;        
+}
+</code></pre></div><ul>
+<li>例子-不通过参数实例化函数模板</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e></span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+<span style=color:#66d9ef>template</span><span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>T</span><span style=color:#f92672>&gt;</span>
+T Inc(T n){
+    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>1</span><span style=color:#f92672>+</span>T;
+    <span style=color:#75715e>//由于Inc的返回值是T类型的,这里要对+进行重载
+</span><span style=color:#75715e></span>}
+
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(){
+    cout<span style=color:#f92672>&lt;&lt;</span>Inc<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span><span style=color:#f92672>&gt;</span>(<span style=color:#ae81ff>4</span>)<span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>;
+    <span style=color:#75715e>//用&lt;double&gt;直接规定T是double类型
+</span><span style=color:#75715e></span>}
+</code></pre></div><ul>
+<li>
+<p>函数模板是可以<strong>重载</strong>的,只要他们的形参表和类型参数表不一样即可</p>
+</li>
+<li>
+<p>函数模板和函数的<strong>次序</strong>:</p>
+<p>参数匹配+普通函数&mdash;&ndash;>参数匹配模板函数&mdash;&ndash;>参数经自动类型转换后能匹配的普通函数</p>
+</li>
+</ul>
+<h2 id=类模板>类模板<a hidden class=anchor aria-hidden=true href=#类模板>#</a></h2>
+<p>编写模板是为了实现<strong>泛型程序设计</strong>,即写出一个类/函数后,可以作用与多种<strong>数据类型</strong></p>
+<p><strong>类模板的定义</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>template</span><span style=color:#f92672>&lt;</span><span style=color:#66d9ef>typename</span> <span style=color:#960050;background-color:#1e0010>类型参数</span>,<span style=color:#66d9ef>typename</span> <span style=color:#960050;background-color:#1e0010>类型参数</span>,...<span style=color:#f92672>&gt;</span>
+<span style=color:#66d9ef>class</span> <span style=color:#960050;background-color:#1e0010>模板名字</span>
+{
+    <span style=color:#960050;background-color:#1e0010>成员变量</span>;
+    <span style=color:#960050;background-color:#1e0010>成员函数</span>;
+}
+</code></pre></div><p><strong>类模板内成员函数定义</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>template</span><span style=color:#f92672>&lt;</span><span style=color:#66d9ef>typename</span> <span style=color:#960050;background-color:#1e0010>类型参数</span>,<span style=color:#66d9ef>typename</span> <span style=color:#960050;background-color:#1e0010>类型参数</span>,...<span style=color:#f92672>&gt;</span>
+(<span style=color:#960050;background-color:#1e0010>返回值</span>)<span style=color:#960050;background-color:#1e0010>类型参数</span> <span style=color:#960050;background-color:#1e0010>模板名字</span> <span style=color:#f92672>&lt;</span><span style=color:#960050;background-color:#1e0010>类型参数名字</span>,<span style=color:#960050;background-color:#1e0010>类型参数名字</span>,...<span style=color:#f92672>&gt;::</span><span style=color:#960050;background-color:#1e0010>成员函数名字</span>(<span style=color:#960050;background-color:#1e0010>参数表</span>)
+{
+    ...
+}
+</code></pre></div><p><strong>类模板定义对象的写法</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#960050;background-color:#1e0010>模板名字</span><span style=color:#f92672>&lt;</span><span style=color:#960050;background-color:#1e0010>实际类型参数表</span><span style=color:#f92672>&gt;</span> <span style=color:#960050;background-color:#1e0010>对象名</span>(<span style=color:#960050;background-color:#1e0010>构造函数实参表</span>);
+</code></pre></div><p><strong>示例:Pair类模板</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;string.h&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e></span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+<span style=color:#75715e>//类型参数就是这个类需要的参数的类型
+</span><span style=color:#75715e>//其个数就该类需要的参数个数
+</span><span style=color:#75715e></span><span style=color:#66d9ef>template</span><span style=color:#f92672>&lt;</span><span style=color:#66d9ef>typename</span> T1,<span style=color:#66d9ef>typename</span> T2<span style=color:#f92672>&gt;</span>
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Pair</span>
+{
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+    T1 key;<span style=color:#75715e>//关键字
+</span><span style=color:#75715e></span>    T2 value;<span style=color:#75715e>//值
+</span><span style=color:#75715e></span>    Pair(T1 k,T2 v)<span style=color:#f92672>:</span>key(k),value(v){};
+    <span style=color:#75715e>//构造函数及其初始化列表
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>bool</span> <span style=color:#66d9ef>operator</span> <span style=color:#f92672>&lt;</span> (<span style=color:#66d9ef>const</span> Pair<span style=color:#f92672>&lt;</span>T1,T2<span style=color:#f92672>&gt;&amp;</span>p)<span style=color:#66d9ef>const</span>;
+    <span style=color:#75715e>//对&#34;&lt;&#34;进行重载,其形参是pair模板定义的类的常引用
+</span><span style=color:#75715e></span>    <span style=color:#75715e>//我们希望这个&#34;&lt;&#34;是不变的,最后加个const
+</span><span style=color:#75715e></span>};
+
+<span style=color:#66d9ef>template</span><span style=color:#f92672>&lt;</span><span style=color:#66d9ef>typename</span> T1,<span style=color:#66d9ef>typename</span> T2<span style=color:#f92672>&gt;</span>
+<span style=color:#66d9ef>bool</span> Pair<span style=color:#f92672>&lt;</span>T1,T2<span style=color:#f92672>&gt;::</span><span style=color:#66d9ef>operator</span> <span style=color:#f92672>&lt;</span> (<span style=color:#66d9ef>const</span> Pair<span style=color:#f92672>&lt;</span>T1,T2<span style=color:#f92672>&gt;&amp;</span>p)<span style=color:#66d9ef>const</span>
+{
+    <span style=color:#66d9ef>return</span> key<span style=color:#f92672>&lt;</span>p.key;
+}
+
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+{
+    Pair<span style=color:#f92672>&lt;</span>string,<span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> student(<span style=color:#e6db74>&#34;Tom&#34;</span>,<span style=color:#ae81ff>19</span>);
+    <span style=color:#75715e>//对象的名字是:student
+</span><span style=color:#75715e></span>    <span style=color:#75715e>//注意:由类模板&#34;pair&#34;生成类&#34;pair&lt;string,int&gt;&#34;,再由这个类生成对象&#34;student&#34;
+</span><span style=color:#75715e></span>     cout<span style=color:#f92672>&lt;&lt;</span>student.key<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34; &#34;</span><span style=color:#f92672>&lt;&lt;</span>student.value;
+     <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><p>output:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>Tom <span style=color:#ae81ff>19</span>
+</code></pre></div><ul>
+<li>
+<p><strong>类模板的实例化</strong>:编译器由类模板生成类的过程</p>
+</li>
+<li>
+<p>同一个模板实例化出的类是不兼容的,他们根本就是两个类</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>Pair<span style=color:#f92672>&lt;</span>string,<span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> <span style=color:#f92672>*</span>p;
+Pair<span style=color:#f92672>&lt;</span>string,<span style=color:#66d9ef>double</span><span style=color:#f92672>&gt;</span> a;
+p<span style=color:#f92672>=</span>a;<span style=color:#75715e>//报错
+</span></code></pre></div></li>
+</ul>
+<p><strong>函数模板作为类模板成员</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e></span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+
+<span style=color:#66d9ef>template</span><span style=color:#f92672>&lt;</span><span style=color:#66d9ef>typename</span> T<span style=color:#f92672>&gt;</span>
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>A</span>
+{
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+    
+    <span style=color:#75715e>//注意这里不能写T,因为这里成员函数的类型参数相对类的类型参数来说是形参
+</span><span style=color:#75715e></span>    
+    <span style=color:#66d9ef>template</span><span style=color:#f92672>&lt;</span><span style=color:#66d9ef>typename</span> T2<span style=color:#f92672>&gt;</span>
+    <span style=color:#66d9ef>void</span> Func(T2 t){cout<span style=color:#f92672>&lt;&lt;</span>t;}
+    
+};
+
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+{
+    A<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> a;
+    <span style=color:#75715e>//类模板名: A
+</span><span style=color:#75715e></span>    <span style=color:#75715e>//类名: A&lt;int&gt;
+</span><span style=color:#75715e></span>    <span style=color:#75715e>//对象名: a,其需要的参数类型为int(虽然下面的定义里我没有用这个参数)
+</span><span style=color:#75715e></span>    
+    a.Func(<span style=color:#e6db74>&#39;K&#39;</span>);<span style=color:#75715e>//成员函数模板Func被实例化,其参数类型为char
+</span><span style=color:#75715e></span>    a.Func(<span style=color:#e6db74>&#34;hello&#34;</span>);<span style=color:#75715e>//成员函数模板Func再次被实例化,其参数类型为const char*
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><p>output:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>Khello
+</code></pre></div><ul>
+<li>
+<p><code>A&lt;int></code>这个类通过上面对函数模板<code>Func</code>的两次实例化有了两个名为<code>Func</code>的成员函数:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>Func(<span style=color:#66d9ef>char</span> c);<span style=color:#75715e>//赋给该函数的值是:K
+</span><span style=color:#75715e></span>Func(<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>char</span><span style=color:#f92672>*</span> string);<span style=color:#75715e>//赋给该函数的值是:指向字符串&#34;hello&#34;的指针
+</span></code></pre></div></li>
+</ul>
+<p><strong>类模板的类型参数表中可以出现非类型参数</strong>:</p>
+<p>![image-20210308125420974](/Users/abigail/OneDrive - sjtu.edu.cn/Abigail/大三下/北大c++笔记/assets/image-20210308125420974.png)</p>
+<h1 id=标准模板库stl>标准模板库STL<a hidden class=anchor aria-hidden=true href=#标准模板库stl>#</a></h1>
+<h2 id=概述>概述<a hidden class=anchor aria-hidden=true href=#概述>#</a></h2>
+<p><img loading=lazy src=https://i.loli.net/2021/08/29/Hag6OzqUTBW4ZYc.png alt=image-20210318145622473>
+</p>
+<p><img loading=lazy src=https://i.loli.net/2021/08/29/m8OETAvNQIzCL4d.png alt=image-20210318145709507>
+</p>
+<p>![image-20210318145751989](/Users/abigail/OneDrive - sjtu.edu.cn/Abigail/大三下/北大c++笔记/assets/image-20210318145751989.png)</p>
+<h2 id=迭代器>迭代器<a hidden class=anchor aria-hidden=true href=#迭代器>#</a></h2>
+<ul>
+<li>
+<p>用于指向顺序容器/关联容器中的元素</p>
+</li>
+<li>
+<p>用法和指针类似</p>
+</li>
+<li>
+<p>有const和非const两种</p>
+</li>
+<li>
+<p>通过迭代器可以读取其指向的元素</p>
+</li>
+<li>
+<p>通过非const迭代器可以修改其指向的元素</p>
+</li>
+</ul>
+<p><strong>代码</strong>:</p>
+<p>定义一个容器类的迭代器的方法:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#960050;background-color:#1e0010>容器类名</span><span style=color:#f92672>::</span>iterator <span style=color:#960050;background-color:#1e0010>变量名</span>;
+<span style=color:#960050;background-color:#1e0010>容器类名</span><span style=color:#f92672>::</span>const_iterator <span style=color:#960050;background-color:#1e0010>变量名</span>;
+</code></pre></div><p>访问一个迭代器指向的元素:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#f92672>*</span><span style=color:#960050;background-color:#1e0010>迭代器变量名</span>
+</code></pre></div><p><strong>迭代器示例</strong>:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;vector&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e></span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+{
+    
+    vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> v;
+    <span style=color:#75715e>//v是一个存放int类型元素的动态数组,一开始里面没有元素
+</span><span style=color:#75715e></span>    v.push_back(<span style=color:#ae81ff>1</span>);
+    v.push_back(<span style=color:#ae81ff>2</span>);
+    v.push_back(<span style=color:#ae81ff>3</span>);
+    v.push_back(<span style=color:#ae81ff>4</span>);
+    
+    
+    <span style=color:#75715e>//正向迭代器
+</span><span style=color:#75715e></span>    vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;::</span>const_iterator i;
+    <span style=color:#75715e>//常量迭代器,只能读取元素,不能修改元素
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>for</span>(i<span style=color:#f92672>=</span>v.begin();i<span style=color:#f92672>!=</span>v.end();i<span style=color:#f92672>++</span>)
+    <span style=color:#75715e>//begin()获取容器第一个元素的位置
+</span><span style=color:#75715e></span>    <span style=color:#75715e>//end()获取容器最后一个元素后面的位置
+</span><span style=color:#75715e></span>        cout<span style=color:#f92672>&lt;&lt;*</span>i<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;,&#34;</span>;
+    cout<span style=color:#f92672>&lt;&lt;</span>endl;
+    
+    <span style=color:#75715e>//反向迭代器
+</span><span style=color:#75715e></span>    vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;::</span>reverse_iterator r;
+    <span style=color:#66d9ef>for</span>(r<span style=color:#f92672>=</span>v.rbegin();r<span style=color:#f92672>!=</span>v.rend;r<span style=color:#f92672>++</span>)
+    <span style=color:#75715e>//rbegin()获取容器最后一个元素的位置
+</span><span style=color:#75715e></span>    <span style=color:#75715e>//rend()获取容器第一个元素前面的位置
+</span><span style=color:#75715e></span>        cout<span style=color:#f92672>&lt;&lt;*</span>r<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;,&#34;</span>;
+    cout<span style=color:#f92672>&lt;&lt;</span>endl;
+    
+    <span style=color:#75715e>//非常量迭代器
+</span><span style=color:#75715e></span>    vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;::</span>iterator j;
+    <span style=color:#66d9ef>for</span>(j<span style=color:#f92672>=</span>v.begin();j<span style=color:#f92672>!=</span>v.end();j<span style=color:#f92672>++</span>)
+        <span style=color:#f92672>*</span>j<span style=color:#f92672>=</span><span style=color:#ae81ff>100</span>;<span style=color:#75715e>//用非常量迭代器修改指向的元素
+</span><span style=color:#75715e></span>    
+    <span style=color:#66d9ef>for</span>(i<span style=color:#f92672>=</span>v.begin();i<span style=color:#f92672>!=</span>v.end();i<span style=color:#f92672>++</span>)
+        cout<span style=color:#f92672>&lt;&lt;*</span>i<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;,&#34;</span>;<span style=color:#75715e>//用常量迭代器读取指向的元素
+</span><span style=color:#75715e></span>    cout<span style=color:#f92672>&lt;&lt;</span>endl;    
+}
+</code></pre></div><p><strong>两种不同的的迭代器</strong>：</p>
+<ul>
+<li>
+<p>双向迭代器p&p1</p>
+<ul>
+<li>
+<p>++p，p++</p>
+</li>
+<li>
+<p>&ndash;p，p&ndash;</p>
+</li>
+<li>
+<p><em>p</em>*（实际上返回值是p指向的对象的引用）**</p>
+</li>
+<li>
+<p>p=p1</p>
+</li>
+<li>
+<p>p==p1；p！=p1</p>
+</li>
+</ul>
+</li>
+<li>
+<p>随即访问迭代器p&p1</p>
+<ul>
+<li>双向迭代器的所有操作</li>
+<li>p+=i（将p向后移动i个元素）</li>
+<li>p-=i</li>
+<li>p+i （p+i的值=指向p后面第i个元素的迭代器）</li>
+<li>p-i</li>
+<li>p[i]（p[i]的值=p后面第i个元素的引用）</li>
+<li>p&lt;p1;p&lt;=p1;p>p1;p>=p1</li>
+</ul>
+</li>
+</ul>
+<h2 id=容器>容器<a hidden class=anchor aria-hidden=true href=#容器>#</a></h2>
+<h3 id=顺序容器>顺序容器<a hidden class=anchor aria-hidden=true href=#顺序容器>#</a></h3>
+<h4 id=vector动态数组>vector(动态数组)<a hidden class=anchor aria-hidden=true href=#vector动态数组>#</a></h4>
+<p><strong>vector上的操作</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;vector&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e></span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+<span style=color:#66d9ef>template</span><span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>T</span><span style=color:#f92672>&gt;</span>
+<span style=color:#66d9ef>void</span> PrintVector(T s,T e)
+{
+    <span style=color:#66d9ef>for</span>(;s<span style=color:#f92672>!=</span>e;<span style=color:#f92672>++</span>s)
+        cout<span style=color:#f92672>&lt;&lt;*</span>s<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34; &#34;</span>;
+    cout<span style=color:#f92672>&lt;&lt;</span>endl;
+}
+
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+{
+    <span style=color:#66d9ef>int</span> a[<span style=color:#ae81ff>5</span>]<span style=color:#f92672>=</span>{<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>2</span>,<span style=color:#ae81ff>3</span>,<span style=color:#ae81ff>4</span>,<span style=color:#ae81ff>5</span>};
+    vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> v(a,a<span style=color:#f92672>+</span><span style=color:#ae81ff>5</span>);
+    <span style=color:#75715e>//将数组a中下标从0到4的元素都拷贝到v里面
+</span><span style=color:#75715e></span>    
+    cout<span style=color:#f92672>&lt;&lt;</span>v.end()<span style=color:#f92672>-</span>v.begin();
+    <span style=color:#75715e>//vector的迭代器是随即迭代器可以相减
+</span><span style=color:#75715e></span>    <span style=color:#75715e>//上面输出的v中元素的个数:5
+</span><span style=color:#75715e></span>    
+    v.insert(v.begin()<span style=color:#f92672>+</span><span style=color:#ae81ff>2</span>,<span style=color:#ae81ff>13</span>);
+    PrintVector(v.begin(),v.end());
+    <span style=color:#75715e>//在v下标为2的位置插入一个元素13,后面的元素全部后推
+</span><span style=color:#75715e></span>    
+    v.erase(v.begin()<span style=color:#f92672>+</span><span style=color:#ae81ff>2</span>);
+    PrintVector(v.begin(),v.end());
+    <span style=color:#75715e>//删除位于v中下标为2的元素
+</span><span style=color:#75715e></span>    
+    vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> v2(<span style=color:#ae81ff>4</span>,<span style=color:#ae81ff>100</span>);
+    <span style=color:#75715e>//v2有4个元素,都是100
+</span><span style=color:#75715e></span>    v2.insert(v2.begin(),v.begin()<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>,v.begin()<span style=color:#f92672>+</span><span style=color:#ae81ff>3</span>);
+    <span style=color:#75715e>//将v的一段插入v2开头
+</span><span style=color:#75715e></span>    <span style=color:#75715e>//v下标为1的元素到v下标为3的元素(不包括v下标为3的元素!!!)
+</span><span style=color:#75715e></span>    PrintVector(v2.begin(),v2.end());
+    
+    v.erase(v.begin()<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>,v.begin()<span style=color:#f92672>+</span><span style=color:#ae81ff>3</span>);
+    PrintVector(v.begin(),v.end());
+    <span style=color:#75715e>//删除v上的一个区间,即2,3
+</span><span style=color:#75715e></span>    
+    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><p><strong>用vector实现二维数组</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;vector&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e></span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+{
+    vector<span style=color:#f92672>&lt;</span>vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> <span style=color:#f92672>&gt;</span>v(<span style=color:#ae81ff>3</span>);
+    <span style=color:#75715e>//v中有3个元素,每个元素都是vector&lt;int&gt;空容器
+</span><span style=color:#75715e></span>    <span style=color:#75715e>//注意vector&lt;int&gt;后面一定要加一个空格,不然编译器会把两个尖括号当成右移运算符
+</span><span style=color:#75715e></span>    
+    <span style=color:#75715e>//下面往v的元素里添加元素
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;i<span style=color:#f92672>&lt;</span>v.size();<span style=color:#f92672>++</span>i)
+        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;j<span style=color:#f92672>&lt;</span><span style=color:#ae81ff>4</span>;<span style=color:#f92672>++</span>j)
+            v[i].push_back(j);
+    
+    <span style=color:#75715e>//下面显示v的元素里的元素
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;i<span style=color:#f92672>&lt;</span>v.size();<span style=color:#f92672>++</span>i){
+        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;j<span style=color:#f92672>&lt;</span>v[i].size();<span style=color:#f92672>++</span>j)
+            cout<span style=color:#f92672>&lt;&lt;</span>v[i][j]<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34; &#34;</span>;
+        cout<span style=color:#f92672>&lt;&lt;</span>endl;
+    }
+    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><h4 id=deque双向队列>deque(双向队列)<a hidden class=anchor aria-hidden=true href=#deque双向队列>#</a></h4>
+<ul>
+<li>
+<p>所有vector的操作都适用于deque</p>
+</li>
+<li>
+<p>deque多了:</p>
+<p><code>push_front</code>:将元素插入到前面</p>
+<p><code>pop_front</code>:删除最前面的元素</p>
+</li>
+</ul>
+<h4 id=list双向列表>list(双向列表)<a hidden class=anchor aria-hidden=true href=#list双向列表>#</a></h4>
+<p><strong>成员函数</strong></p>
+<p>![image-20210318143445110](/Users/abigail/OneDrive - sjtu.edu.cn/Abigail/大三下/北大c++笔记/assets/image-20210318143445110.png)</p>
+<p><strong>list上的操作</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;list&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;algorithm&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e></span><span style=color:#66d9ef>using</span> namepsace std;
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>A</span>
+{
+    <span style=color:#66d9ef>private</span><span style=color:#f92672>:</span>
+    <span style=color:#66d9ef>int</span> n;
+    
+    <span style=color:#66d9ef>public</span><span style=color:#f92672>:</span>
+    A(<span style=color:#66d9ef>int</span> n_){n<span style=color:#f92672>=</span>n_;}
+    <span style=color:#66d9ef>friend</span> <span style=color:#66d9ef>bool</span> <span style=color:#66d9ef>operator</span><span style=color:#f92672>&lt;</span>(<span style=color:#66d9ef>const</span> A <span style=color:#f92672>&amp;</span> a1,<span style=color:#66d9ef>const</span> A <span style=color:#f92672>&amp;</span> a2);
+    <span style=color:#66d9ef>friend</span> <span style=color:#66d9ef>bool</span> <span style=color:#66d9ef>operator</span><span style=color:#f92672>==</span>(<span style=color:#66d9ef>const</span> A <span style=color:#f92672>&amp;</span> a1,<span style=color:#66d9ef>const</span> A <span style=color:#f92672>&amp;</span> a2);
+    <span style=color:#66d9ef>friend</span> ostream <span style=color:#f92672>&amp;</span> <span style=color:#66d9ef>operator</span> <span style=color:#f92672>&lt;&lt;</span> (ostream <span style=color:#f92672>&amp;</span> o,<span style=color:#66d9ef>const</span> A <span style=color:#f92672>&amp;</span> a);
+}
+<span style=color:#66d9ef>bool</span> <span style=color:#66d9ef>operator</span><span style=color:#f92672>&lt;</span>(<span style=color:#66d9ef>const</span> A <span style=color:#f92672>&amp;</span> a1,<span style=color:#66d9ef>const</span> A <span style=color:#f92672>&amp;</span> a2)
+{<span style=color:#66d9ef>return</span> a1.n<span style=color:#f92672>&lt;</span>a2.n}
+<span style=color:#66d9ef>bool</span> <span style=color:#66d9ef>operator</span><span style=color:#f92672>==</span>(<span style=color:#66d9ef>const</span> A <span style=color:#f92672>&amp;</span> a1,<span style=color:#66d9ef>const</span> A <span style=color:#f92672>&amp;</span> a2)
+{<span style=color:#66d9ef>return</span> a1.n<span style=color:#f92672>==</span>a2.n}
+ostream <span style=color:#f92672>&amp;</span> <span style=color:#66d9ef>operator</span> <span style=color:#f92672>&lt;&lt;</span> (ostream <span style=color:#f92672>&amp;</span> o,<span style=color:#66d9ef>const</span> A <span style=color:#f92672>&amp;</span> a)
+{o<span style=color:#f92672>&lt;&lt;</span>a.n;<span style=color:#66d9ef>return</span> o;}
+
+<span style=color:#75715e>//下面定义一个函数模板,其参数是&#34;类型可变列表的引用&#34;
+</span><span style=color:#75715e></span><span style=color:#66d9ef>template</span> <span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>T</span><span style=color:#f92672>&gt;</span>
+<span style=color:#66d9ef>void</span> PrintList(<span style=color:#66d9ef>const</span> list<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span> <span style=color:#f92672>&amp;</span> lst)<span style=color:#75715e>//参数是&#34;类型可变列表的引用&#34;
+</span><span style=color:#75715e></span>{
+    <span style=color:#66d9ef>typename</span> list<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;::</span>const_iterator i;
+    <span style=color:#75715e>//typename用来说明&#34;list&lt;T&gt;::const_iterator&#34;描述的是个类型
+</span><span style=color:#75715e></span>    i<span style=color:#f92672>=</span>lst.begin();
+    <span style=color:#66d9ef>for</span>(i<span style=color:#f92672>=</span>lst.begin();i<span style=color:#f92672>!=</span>lst.end();i<span style=color:#f92672>++</span>)
+        cout<span style=color:#f92672>&lt;&lt;*</span>i<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34;,&#34;</span>;
+}
+
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+{
+    list<span style=color:#f92672>&lt;</span>A<span style=color:#f92672>&gt;</span> lst1,lst2;
+    <span style=color:#75715e>//定义了两个元素为A类对象的列表
+</span><span style=color:#75715e></span>    
+    ...
+        
+    PrintLsit(lst1);
+}
+</code></pre></div><h3 id=容器适配器>容器适配器<a hidden class=anchor aria-hidden=true href=#容器适配器>#</a></h3>
+<p>容器适配器上没有<strong>迭代器</strong></p>
+<h4 id=stack>stack<a hidden class=anchor aria-hidden=true href=#stack>#</a></h4>
+<ul>
+<li>
+<p>是<strong>后进先出</strong>的数据结构，</p>
+</li>
+<li>
+<p>可以</p>
+<ul>
+<li><code>push</code>插入</li>
+<li><code>pop</code>删除</li>
+<li><code>top</code>返回栈顶元素的引用</li>
+</ul>
+</li>
+<li>
+<p>可用vector，list，deque来实现，<strong>缺省情况下，用deque实现</strong>。（vector、deque实现的性能比list好）</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>template</span><span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>T</span>,<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Container</span><span style=color:#f92672>=</span>deque<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;&gt;</span>
+<span style=color:#75715e>//第一个类型参数是栈里的元素类型
+</span><span style=color:#75715e>//第二个类型参数是栈用什么容器来实现，并表示缺省情况下是deque
+</span><span style=color:#75715e></span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>stack</span>{
+    ...
+};
+</code></pre></div></li>
+</ul>
+<h4 id=queue>queue<a hidden class=anchor aria-hidden=true href=#queue>#</a></h4>
+<ul>
+<li>
+<p>是<strong>先进先出</strong>的数据结构，</p>
+</li>
+<li>
+<p>可以</p>
+<ul>
+<li><code>push</code>插入（发生在队尾）</li>
+<li><code>pop</code>删除</li>
+<li><code>front</code>返回栈顶元素的引用</li>
+<li><code>back</code>返回队尾元素的引用</li>
+</ul>
+</li>
+<li>
+<p>可用list，deque来实现，<strong>缺省情况下，用deque实现</strong>。（vector、deque实现的性能比list好）</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>template</span><span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>T</span>,<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Container</span><span style=color:#f92672>=</span>deque<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;&gt;</span>
+<span style=color:#75715e>//第一个类型参数是容器适配器里的元素类型
+</span><span style=color:#75715e>//第二个类型参数是容器适配器用什么容器来实现，并表示缺省情况下是deque
+</span><span style=color:#75715e></span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>stack</span>{
+    ...
+};
+</code></pre></div></li>
+</ul>
+<h4 id=priority_queue>priority_queue<a hidden class=anchor aria-hidden=true href=#priority_queue>#</a></h4>
+<ul>
+<li>
+<p>可用vector和deque实现，<strong>缺省情况下用vector实现</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>template</span><span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>T</span>,<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Container</span><span style=color:#f92672>=</span>vector<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;</span>,<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Compare</span><span style=color:#f92672>=</span>less<span style=color:#f92672>&lt;</span>T<span style=color:#f92672>&gt;&gt;</span>
+<span style=color:#75715e>//第一个类型参数是容器适配器里的元素类型
+</span><span style=color:#75715e>//第二个类型参数是容器适配器用什么容器来实现，并表示缺省情况下是vector
+</span><span style=color:#75715e>//第三个类型参数是优先队列的元素比较器用什么来实现，并表示缺省情况下是小于号
+</span><span style=color:#75715e></span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>priority_queue</span>;
+</code></pre></div></li>
+<li>
+<p>priority_queue通常用<strong>堆排序</strong>技术实现，保证最大的元素总是在最前面，即执行pop操作时，删除的是最大的元素；执行top操作时，返回的是最大元素的引用，默认的元素比较器是less</p>
+</li>
+<li>
+<p><code>push</code>,<code>pop</code>时间复杂度：O（logn）</p>
+</li>
+<li>
+<p><code>top</code>时间复杂度：O（1）</p>
+</li>
+</ul>
+<p>所有容器适配器中都有成员函数：</p>
+<ol>
+<li>empty（）：用于判断适配器是否为空</li>
+<li>size（）：用于返回适配器中元素个数</li>
+</ol>
+<h2 id=算法>算法<a hidden class=anchor aria-hidden=true href=#算法>#</a></h2>
+<h3 id=类型参数pred>类型参数Pred<a hidden class=anchor aria-hidden=true href=#类型参数pred>#</a></h3>
+<p>大多重载的算法都是有两个版本的：</p>
+<ol>
+<li>一个是
+<ul>
+<li>用“==”判断元素是否相等</li>
+<li>用“&lt;”来比较大小</li>
+</ul>
+</li>
+<li>另一个多出来一 个类型参数<code>Pred</code>，以及函数形参<code>Pred op</code>
+<ul>
+<li>表达式“op(x,y)”的返回值是ture，则x等于y</li>
+<li>表达式“op(x,y)”的返回值是false，则x小于y</li>
+</ul>
+</li>
+</ol>
+<h3 id=不变序列算法以下图片上传失败>不变序列算法（以下图片上传失败）<a hidden class=anchor aria-hidden=true href=#不变序列算法以下图片上传失败>#</a></h3>
+<ul>
+<li>不会修改算法作用的容器或对象</li>
+<li>适用于顺序容器和关联容器</li>
+<li>时间复杂度：O（n）</li>
+</ul>
+<p>![image-20210315213723396](/Users/abigail/OneDrive - sjtu.edu.cn/Abigail/大三下/北大c++笔记/assets/image-20210315213723396.png)</p>
+<p>![image-20210315213758362](/Users/abigail/OneDrive - sjtu.edu.cn/Abigail/大三下/北大c++笔记/assets/image-20210315213758362.png)</p>
+<p>![image-20210315213935514](/Users/abigail/OneDrive - sjtu.edu.cn/Abigail/大三下/北大c++笔记/assets/image-20210315213935514.png)</p>
+<ul>
+<li><code>find</code>很重要</li>
+</ul>
+<h3 id=排序算法>排序算法<a hidden class=anchor aria-hidden=true href=#排序算法>#</a></h3>
+<ul>
+<li>需要随机访问迭代器的支持</li>
+<li>不适用于关联容器和list</li>
+<li>时间复杂度：O(log(n))</li>
+</ul>
+<p>![image-20210315215204555](/Users/abigail/OneDrive - sjtu.edu.cn/Abigail/大三下/北大c++笔记/assets/image-20210315215204555.png)</p>
+<p>![image-20210315215228540](/Users/abigail/OneDrive - sjtu.edu.cn/Abigail/大三下/北大c++笔记/assets/image-20210315215228540.png)</p>
+<p><strong>sort：快速排序</strong></p>
+<ul>
+<li>
+<p>模板</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>template</span><span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Ranlt</span><span style=color:#f92672>&gt;</span>
+<span style=color:#66d9ef>void</span> sort(Ranlt first,Ranlt last);
+</code></pre></div><ol>
+<li>按升序排列</li>
+<li>判断x是否应该比y靠前，就看x&lt;y是否为true</li>
+</ol>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>template</span><span style=color:#f92672>&lt;</span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Ranlt</span>,<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Pred</span><span style=color:#f92672>&gt;</span>
+<span style=color:#66d9ef>void</span> sort(Ranlt first,Ranlt last,Pred pr);
+</code></pre></div><ol>
+<li>按升序排列</li>
+<li>判断x是否应该比y靠前，就看pr(x&lt;y)是否为true</li>
+</ol>
+</li>
+</ul>
+<p><strong>应用：</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span><span style=color:#75715e>&lt;algorithm&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e></span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+
+<span style=color:#75715e>//定义Pred pr
+</span><span style=color:#75715e></span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyLess</span>
+{
+    <span style=color:#66d9ef>public</span><span style=color:#960050;background-color:#1e0010>：</span>
+    <span style=color:#66d9ef>bool</span> <span style=color:#66d9ef>operator</span>()(<span style=color:#66d9ef>int</span> n1,<span style=color:#66d9ef>int</span> n2)
+    {
+        <span style=color:#66d9ef>return</span>(n1<span style=color:#f92672>%</span><span style=color:#ae81ff>10</span>)<span style=color:#f92672>&lt;</span>(n2<span style=color:#f92672>%</span><span style=color:#ae81ff>10</span>);
+    }   
+};
+
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+{
+    <span style=color:#66d9ef>int</span> a[]<span style=color:#f92672>=</span>{<span style=color:#ae81ff>14</span>,<span style=color:#ae81ff>2</span>,<span style=color:#ae81ff>9</span>,<span style=color:#ae81ff>111</span>,<span style=color:#ae81ff>78</span>};
+    <span style=color:#66d9ef>int</span> i;
+    
+    sort(a,a<span style=color:#f92672>+</span><span style=color:#ae81ff>5</span>,MyLess());<span style=color:#75715e>//按个位数大小排序
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>for</span>(i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;i<span style=color:#f92672>&lt;</span><span style=color:#ae81ff>5</span>;i<span style=color:#f92672>++</span>)
+        cout<span style=color:#f92672>&lt;&lt;</span>a[i]<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34; &#34;</span>;
+    cout<span style=color:#f92672>&lt;&lt;</span>endl;
+    
+    sort(a,a<span style=color:#f92672>+</span><span style=color:#ae81ff>5</span>,greater<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span>());<span style=color:#75715e>//按降序排序
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>for</span>(i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>;i<span style=color:#f92672>&lt;</span><span style=color:#ae81ff>5</span>;i<span style=color:#f92672>++</span>)
+        cout<span style=color:#f92672>&lt;&lt;</span>a[i]<span style=color:#f92672>&lt;&lt;</span><span style=color:#e6db74>&#34; &#34;</span>;
+}
+</code></pre></div><p><strong>注意：</strong></p>
+<ul>
+<li>
+<p>sort实际上是快速排序，时间复杂度为：O(n*log(n))</p>
+<ul>
+<li>平均性能最优</li>
+<li>最坏的情况性能非常差</li>
+</ul>
+</li>
+<li>
+<p>stable_sort实际上是归并排序</p>
+<ul>
+<li>能保证相等元素之间的先后次序</li>
+<li>存储空间足够时，时间复杂度：n*log(n)</li>
+<li>存储空间不够时，时间复杂度：n*log(n)*log(n)</li>
+</ul>
+</li>
+<li>
+<p>list只能使用内置的排序算法：<code>list::sort</code></p>
+</li>
+</ul>
+</div>
+<footer class=post-footer>
+<ul class=post-tags>
+<li><a href=https://abigail1985.github.io/tags/c++/>C++ </a></li>
+</ul>
+<nav class=paginav>
+<a class=prev href=https://abigail1985.github.io/essay/the-history-of-the-decline-and-fall-of-roman/>
+<span class=title>« 上一页</span>
+<br>
+<span>《罗马帝国衰亡史》书摘</span>
+</a>
+<a class=next href=https://abigail1985.github.io/essay/pkucpp-1/>
+<span class=title>下一页 »</span>
+<br>
+<span>PKUCpp-1</span>
+</a>
+</nav>
+<div class=share-buttons>
+<a target=_blank rel="noopener noreferrer" aria-label="share PKUCpp-2 on twitter" href="https://twitter.com/intent/tweet/?text=PKUCpp-2&url=https%3a%2f%2fabigail1985.github.io%2fessay%2fpkucpp-2%2f&hashtags=C%2b%2b">
+<png version=1.1 viewbox="0 0 512 512" xml:space=preserve>
+<path d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z">
+</png>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share PKUCpp-2 on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fabigail1985.github.io%2fessay%2fpkucpp-2%2f&title=PKUCpp-2&summary=PKUCpp-2&source=https%3a%2f%2fabigail1985.github.io%2fessay%2fpkucpp-2%2f">
+<png version=1.1 viewbox="0 0 512 512" xml:space=preserve>
+<path d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z">
+</png>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share PKUCpp-2 on reddit" href="https://reddit.com/submit?url=https%3a%2f%2fabigail1985.github.io%2fessay%2fpkucpp-2%2f&title=PKUCpp-2">
+<png version=1.1 viewbox="0 0 512 512" xml:space=preserve>
+<path d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z">
+</png>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share PKUCpp-2 on facebook" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fabigail1985.github.io%2fessay%2fpkucpp-2%2f">
+<png version=1.1 viewbox="0 0 512 512" xml:space=preserve>
+<path d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z">
+</png>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share PKUCpp-2 on whatsapp" href="https://api.whatsapp.com/send?text=PKUCpp-2%20-%20https%3a%2f%2fabigail1985.github.io%2fessay%2fpkucpp-2%2f">
+<png version=1.1 viewbox="0 0 512 512" xml:space=preserve>
+<path d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z">
+</png>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share PKUCpp-2 on telegram" href="https://telegram.me/share/url?text=PKUCpp-2&url=https%3a%2f%2fabigail1985.github.io%2fessay%2fpkucpp-2%2f">
+<png version=1.1 xml:space=preserve viewbox="2 2 28 28">
+<path d=M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z>
+</png>
+</a>
+</div>
+</footer><script src=https://cdn.jsdelivr.net/npm/@waline/client></script>
+<div id=waline></div>
+<script>Waline({el:'#waline',serverURL:'https://blog-api-theta.vercel.app/',copyright:!1,login:'force',dark:'.dark',locale:{placeholder:'登录以评论'}})</script>
+</article>
+</main>
+<footer class=footer>
+<span>&copy; 2022 <a href=https://abigail1985.github.io/>de_Abigaïl</a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
+</span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)">
+<button class=top-link id=top-link type=button accesskey=g>
+<png xmlns=http://www.w3.org/2000/png viewbox="0 0 12 6" fill=currentColor>
+<path d="M12 6H0l6-6z">
+</png>
+</button>
+</a>
+<script>let menu=document.getElementById('menu');menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+<script>document.querySelectorAll('pre > code').forEach(b=>{const c=b.parentNode.parentNode,a=document.createElement('button');a.classList.add('copy-code'),a.innerText='复制';function d(){a.innerText='已复制！',setTimeout(()=>{a.innerText='复制'},2e3)}a.addEventListener('click',e=>{if('clipboard'in navigator){navigator.clipboard.writeText(b.textContent),d();return}const a=document.createRange();a.selectNodeContents(b);const c=window.getSelection();c.removeAllRanges(),c.addRange(a);try{document.execCommand('copy'),d()}catch(a){}c.removeRange(a)}),c.classList.contains("highlight")?c.appendChild(a):c.parentNode.firstChild==c||(b.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?b.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(a):b.parentNode.appendChild(a))})</script>
+</body>
+</html>
