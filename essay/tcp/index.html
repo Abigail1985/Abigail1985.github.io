@@ -1,0 +1,488 @@
+<!doctype html><html lang=zh dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>TCP协议 | de_Abigaïl</title>
+<meta name=keywords content="network ">
+<meta name=description content="TCP协议 - de_Abigaïl">
+<meta name=author content="Abigail">
+<link rel=canonical href=https://abigail1985.github.io/essay/tcp/>
+<link crossorigin=anonymous href=/assets/css/stylesheet.min.842c2a49f4946cd14e0b90c75dd69c37283b7c5e3fd3e7fb5bb176d096f2e306.css integrity="sha256-hCwqSfSUbNFOC5DHXdacNyg7fF4/0+f7W7F20Jby4wY=" rel="preload stylesheet" as=style>
+<script defer crossorigin=anonymous src=/assets/js/highlight.min.a3f672ba2597cf5d0a97d35c02ca273c23ffd63073757c9e0d4f13bd63f2b00a.js integrity="sha256-o/ZyuiWXz10Kl9NcAsonPCP/1jBzdXyeDU8TvWPysAo=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=https://abigail1985.github.io/images/favicon.png>
+<link rel=icon type=image/png sizes=16x16 href=https://abigail1985.github.io/images/favicon.png>
+<link rel=icon type=image/png sizes=32x32 href=https://abigail1985.github.io/images/favicon.png>
+<link rel=apple-touch-icon href=https://abigail1985.github.io/images/favicon.png>
+<link rel=mask-icon href=https://abigail1985.github.io/images/favicon.png>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<meta name=generator content="Hugo 0.87.0">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css integrity=sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X crossorigin=anonymous>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js integrity=sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4 crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js integrity=sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa crossorigin=anonymous onload=renderMathInElement(document.body)></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-163991976-1','auto'),ga('send','pageview'))</script><meta property="og:title" content="TCP协议">
+<meta property="og:description" content>
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://abigail1985.github.io/essay/tcp/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-03-29T16:58:46+08:00">
+<meta property="article:modified_time" content="2021-03-29T16:58:46+08:00"><meta property="og:site_name" content="de_Abigaïl">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="TCP协议">
+<meta name=twitter:description content>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"分类","item":"https://abigail1985.github.io/posts/"},{"@type":"ListItem","position":2,"name":"笔记","item":"https://abigail1985.github.io/posts/notes/"},{"@type":"ListItem","position":3,"name":"计算机网络学习笔记","item":"https://abigail1985.github.io/posts/notes/network/"},{"@type":"ListItem","position":4,"name":"TCP协议","item":"https://abigail1985.github.io/essay/tcp/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"TCP协议","name":"TCP协议","description":"","keywords":["network "],"articleBody":"[TOC]\nTCP概述 TCP的特点  点对点 可靠，按顺序的字节流 流水线机制 发送方/接收方缓存 全双工（full-duplex）连接（同一连接中能够传输双向数据流） 面向连接的  通信双方在发送数据之前必须建立连接。 连接状态只在连接的两端中维护，在沿途节点中并不维护状态。 TCP连接包括：两台主机上的缓存、连接状态变量、socket等   流量控制机制  TCP段结构   序列号\n 序列号指的是segment中第一个字节的编号，而不是segment的编号 建立TCP连接时，双方随机选择序列号    ACK\n 希望接收到的下一个字节的序列号（所以TCP不是百分百的GBN也不是百分百的SR） 累计确认：该序列号之前的所有字节均已被正确接收到    TCP可靠数据传输  TCP在IP层提供的不可靠服务基础上实现可靠数据传输服务 流水线机制 累积确认 TCP使用单一重传定时器 触发重传的事件  超时 收到重复ACK    TCP的超时重传时间选择 RTT：round trip time\nRTO：retransmission time out\n先计算RTTs   不能直接使用某次测量得到的RTT样本（比如RTT1，RTT0）来计算超时重传时间RTO.\n  利用每次测量得到的RTT样本，计算加权平均往返时间RTTs（又称为平滑的往返时间） $$ R T T_{s 1}=R T T_{1}\\\n\\text { 新的 } R T T_{S}=(1-\\alpha) \\times \\text { 旧的 } R T T_{S}+\\alpha \\times \\text { 新的 } R T T \\text { 样本 } $$ 在上式中, $0 \\leq \\alpha 若 $\\alpha$ 很接近于 0 ，则新RTT样本对RTT 的影响不大;\n  若 $\\alpha$ 很接近于 1 ，则新RTT样本对RTT 的影响较大;\n已成为建议标准的RFC6298推苃的 $\\alpha$ 值为 $1 / 8$ ，即 $0.125$ 。      用这种方法得出的加权平均往返时间RTTs就比测量出的RTT值更加平滑。\n  显然，超时重传时间RTO应略大于加权平均往返时间RTTS。\n  再计算RTO 往返时间RTT的测量比较复杂 针对出现超时重传时无法测准往返时间RTT的问题，Karn提出了一个算法：\n在计算加权平均往返时间RTTs时，只要报文段重传了，就不采用其往返时间RTT样本。也 就是出现重传时，不重新计算RTTs，进而超时重传时间RTO也不会重新计算。\n  这又引起了新的问题。设想出现这样的情况：报文段的时延突然增大了很多，并且之后很长一段时间都会保持这种时延。\n因此在原来得出的重传时间内，不会收到确认报文段。于是就重传报文段。\n但根据Karn算法，不考虑重传的报文段的往返时间样本。这样，超时重传时间就无法更新。这会导致报文段反复被重传。\n  因此，要对Karn算法进行修正。方法是：\n报文段每重传一次，就把超时重传时间RTO增大一些。典型的做法是将新RTO的值取为旧RTO值的2倍，如下所示：\nTCP滑动窗口原理 快速重传机制   TCP的实现中，如果发生超时，超时时间间隔将重新设置，即将超时时间间隔加倍，导致其很大\n  如果某个分组丢失，可能会引发多个重复的ACK\n  如果sender收到对同一数据的3个ACK，则假定该数据之后的段己经丢失\n  TCP流量控制 功能 接收方会为TCP连接分配Buffer，有时候上层应用处理buffer中数据速度可能较慢，TCP的流量控制会控制发送方传输的速度，不要太快以至于淹没接收方（buffer溢出），流量控制是一种速度匹配机制。\n原理   Buffer中的可用空间(spare room)=RcvWindow=RcvBuffer-[LastByteRcvd-LastByteRead]\n  Receiver在Segment的头部字段将RcvWindow 的值告诉Sender\n  Sender收到后会限制自己已经发送的但还未收到ACK的数据不超过接收方的空闲Revwindow尺寸\n  过程 TCP连接管理 建立连接：三次握手  SYN=1的两个报文段不能携带信息，但是要占用序列号 seq=x是客户随机选择的初始序列号 seq=y是服务器随机选择的自己的初始序列号  为什么不能简化为两次握手 释放连接：四次挥手 为什么不能简化为两次挥手 TCP拥塞控制 概述 在某段时间，若对网络中某一资源的需求超过了该资源所能提供的可用部分，网络性能就要变坏。 这种情况就叫做拥塞(congestion)。\n 在计算机网络中的链路容量（即带宽）、交换结点中的缓存和处理机等，都是网络的资源。  若出现拥塞而不进行控制，整个网络的吞吐量将随输入负荷的增大而下降。\n拥塞控制算法 假定条件 数据是单方向传送，而另一个方向只传送确认。\n接收方总是有足够大的缓存空间，因而发送方发送窗口的大小由网络的拥塞程度来决定。\n以最大报文段MSS的个数为讨论问题的单位，而不是以字节为单位。\n发送方事件 慢开始和拥塞避免 传输轮次：\n 发送方给接收方发送数据报文段后，接收方给发送方发发回相应的确认报文段 一个传输轮次所经历的时间其实就是往返时间RTT，往返时间并非是恒定的数值 使用传输轮次是为了强调把拥塞窗口所允许发送的报文段都连续发送出去，并受到了对已发送的最后一个报文段的确认  快重传和快恢复   慢开始和拥塞避免算法是1988年提出的TCP拥塞控制算法(TCP Tahoe版本）。\n  1990年又增加了两个新的拥塞控制算法(改进TCP的性能），这就是快重传和快恢复（TCP Reno版本）\n 有时，个别报文段会在网络中丢失，但实际上网络并未发生拥塞。这将导致发送方超时重传，并误认为网络发生了拥塞；发送方把拥塞窗口cwnd又设置为最小值1，并错误地启动慢开始算法，因而降低了传输效率。 采用快重传算法可以让发送方尽早知道发生了个别报文段的丢失。    快重传 所谓快重传，就是使发送方尽快进行重传，而不是等超时重传计时器超时再重传。\n 要求接收方不要等待自己发送数据时才进行捎带确认，而是要立即发送确认； 即使收到了失序的报文段也要立即发出对已收到的报文段的重复确认。 发送方一旦收到3个连续的重复确认，就将相应的报文段立即重传，而不是等该报文段的超时重传计时器超时再重传。 对于个别丢失的报文段，发送方不会出现超时重传，也就不会误认为出现了拥塞（进而降低拥塞窗口cwnd为1）。使用快重传可以使整个网络的吞吐量提高约20%。  快恢复 发送方一旦收到3个重复确认，就知道现在只是丢失了个别的报文段。于是不启动慢开始算法，而执行快恢复算法：\n  发送方将慢开始门限ssthresh值和拥塞窗口cwnd值调整为当前窗口的一半；开始执行拥塞避免算法。\n  也有的快恢复实现是把快恢复开始时的拥塞窗口cwnd值再增大一些，\n即等于新的ssthresh + 3。\n 既然发送方收到3个重复的确认，就表明有3个数据报文段已经离开了网络； 这3个报文段不再消耗网络资源而是停留在接收方的接收缓存中； 可见现在网络中不是堆积了报文段而是减少了3个报文段。因此可以适当把拥鑫窗口扩大些。    总结 ","wordCount":"175","inLanguage":"zh","datePublished":"2021-03-29T16:58:46+08:00","dateModified":"2021-03-29T16:58:46+08:00","author":{"@type":"Person","name":"Abigail"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://abigail1985.github.io/essay/tcp/"},"publisher":{"@type":"Organization","name":"de_Abigaïl","logo":{"@type":"ImageObject","url":"https://abigail1985.github.io/images/favicon.png"}}}</script>
+</head>
+<body id=top>
+<script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
+<noscript>
+<style type=text/css>#theme-toggle,.top-link{display:none}</style>
+<style>@media(prefers-color-scheme:dark){:root{--theme:#1d1e20;--entry:#2e2e33;--primary:rgba(255, 255, 255, 0.84);--secondary:rgba(255, 255, 255, 0.56);--tertiary:rgba(255, 255, 255, 0.16);--content:rgba(255, 255, 255, 0.74);--hljs-bg:#2e2e33;--code-bg:#37383e;--border:#333}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
+</noscript>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<a href=https://abigail1985.github.io/ accesskey=h title="de_Abigaïl (Alt + H)">de_Abigaïl</a>
+<span class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)">
+<png id=moon xmlns=http://www.w3.org/2000/png width=24 height=24 viewbox="0 0 24 24" fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round>
+<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+</png>
+<png id=sun xmlns=http://www.w3.org/2000/png width=24 height=24 viewbox="0 0 24 24" fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round>
+<circle cx=12 cy=12 r=5></circle>
+<line x1=12 y1=1 x2=12 y2=3></line>
+<line x1=12 y1=21 x2=12 y2=23></line>
+<line x1=4.22 y1=4.22 x2=5.64 y2=5.64></line>
+<line x1=18.36 y1=18.36 x2=19.78 y2=19.78></line>
+<line x1=1 y1=12 x2=3 y2=12></line>
+<line x1=21 y1=12 x2=23 y2=12></line>
+<line x1=4.22 y1=19.78 x2=5.64 y2=18.36></line>
+<line x1=18.36 y1=5.64 x2=19.78 y2=4.22></line>
+</png>
+</button>
+</span>
+</div>
+<ul id=menu>
+<li>
+<a href=https://abigail1985.github.io/posts/ title=分类>
+<span>分类</span>
+</a>
+</li>
+<li>
+<a href=https://abigail1985.github.io/archives/ title=归档>
+<span>归档</span>
+</a>
+</li>
+<li>
+<a href=https://abigail1985.github.io/tags/ title=标签>
+<span>标签</span>
+</a>
+</li>
+<li>
+<a href=https://abigail1985.github.io/search/ title="搜索 (Alt + /)" accesskey=/>
+<span>搜索</span>
+</a>
+</li>
+</ul>
+</nav>
+</header>
+<main class=main>
+<article class=post-single>
+<header class=post-header>
+<div class=breadcrumbs><a href=https://abigail1985.github.io/>主页</a>&nbsp;»&nbsp;<a href=https://abigail1985.github.io/posts/>分类</a>&nbsp;»&nbsp;<a href=https://abigail1985.github.io/posts/notes/>笔记</a>&nbsp;»&nbsp;<a href=https://abigail1985.github.io/posts/notes/network/>计算机网络学习笔记</a></div>
+<h1 class=post-title>
+TCP协议
+</h1>
+<div class=post-meta>March 29, 2021&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;Abigail
+</div>
+</header> <div class=toc>
+<details open>
+<summary accesskey=c title="(Alt + C)">
+<div class=details>目录</div>
+</summary>
+<div class=inner><ul>
+<li>
+<a href=#tcp%e6%a6%82%e8%bf%b0 aria-label=TCP概述>TCP概述</a><ul>
+<li>
+<a href=#tcp%e7%9a%84%e7%89%b9%e7%82%b9 aria-label=TCP的特点>TCP的特点</a></li>
+<li>
+<a href=#tcp%e6%ae%b5%e7%bb%93%e6%9e%84 aria-label=TCP段结构>TCP段结构</a></li></ul>
+</li>
+<li>
+<a href=#tcp%e5%8f%af%e9%9d%a0%e6%95%b0%e6%8d%ae%e4%bc%a0%e8%be%93 aria-label=TCP可靠数据传输>TCP可靠数据传输</a><ul>
+<li>
+<a href=#tcp%e7%9a%84%e8%b6%85%e6%97%b6%e9%87%8d%e4%bc%a0%e6%97%b6%e9%97%b4%e9%80%89%e6%8b%a9 aria-label=TCP的超时重传时间选择>TCP的超时重传时间选择</a><ul>
+<li>
+<a href=#%e5%85%88%e8%ae%a1%e7%ae%97rtts aria-label=先计算RTTs>先计算RTTs</a></li>
+<li>
+<a href=#%e5%86%8d%e8%ae%a1%e7%ae%97rto aria-label=再计算RTO>再计算RTO</a></li>
+<li>
+<a href=#%e5%be%80%e8%bf%94%e6%97%b6%e9%97%b4rtt%e7%9a%84%e6%b5%8b%e9%87%8f%e6%af%94%e8%be%83%e5%a4%8d%e6%9d%82 aria-label=往返时间RTT的测量比较复杂>往返时间RTT的测量比较复杂</a></li></ul>
+</li>
+<li>
+<a href=#tcp%e6%bb%91%e5%8a%a8%e7%aa%97%e5%8f%a3%e5%8e%9f%e7%90%86 aria-label=TCP滑动窗口原理>TCP滑动窗口原理</a></li>
+<li>
+<a href=#%e5%bf%ab%e9%80%9f%e9%87%8d%e4%bc%a0%e6%9c%ba%e5%88%b6 aria-label=快速重传机制>快速重传机制</a></li></ul>
+</li>
+<li>
+<a href=#tcp%e6%b5%81%e9%87%8f%e6%8e%a7%e5%88%b6 aria-label=TCP流量控制>TCP流量控制</a><ul>
+<li>
+<a href=#%e5%8a%9f%e8%83%bd aria-label=功能>功能</a></li>
+<li>
+<a href=#%e5%8e%9f%e7%90%86 aria-label=原理>原理</a></li>
+<li>
+<a href=#%e8%bf%87%e7%a8%8b aria-label=过程>过程</a></li></ul>
+</li>
+<li>
+<a href=#tcp%e8%bf%9e%e6%8e%a5%e7%ae%a1%e7%90%86 aria-label=TCP连接管理>TCP连接管理</a><ul>
+<li>
+<a href=#%e5%bb%ba%e7%ab%8b%e8%bf%9e%e6%8e%a5%e4%b8%89%e6%ac%a1%e6%8f%a1%e6%89%8b aria-label=建立连接：三次握手>建立连接：三次握手</a><ul>
+<li>
+<a href=#%e4%b8%ba%e4%bb%80%e4%b9%88%e4%b8%8d%e8%83%bd%e7%ae%80%e5%8c%96%e4%b8%ba%e4%b8%a4%e6%ac%a1%e6%8f%a1%e6%89%8b aria-label=为什么不能简化为两次握手>为什么不能简化为两次握手</a></li></ul>
+</li>
+<li>
+<a href=#%e9%87%8a%e6%94%be%e8%bf%9e%e6%8e%a5%e5%9b%9b%e6%ac%a1%e6%8c%a5%e6%89%8b aria-label=释放连接：四次挥手>释放连接：四次挥手</a><ul>
+<li>
+<a href=#%e4%b8%ba%e4%bb%80%e4%b9%88%e4%b8%8d%e8%83%bd%e7%ae%80%e5%8c%96%e4%b8%ba%e4%b8%a4%e6%ac%a1%e6%8c%a5%e6%89%8b aria-label=为什么不能简化为两次挥手>为什么不能简化为两次挥手</a></li></ul>
+</li></ul>
+</li>
+<li>
+<a href=#tcp%e6%8b%a5%e5%a1%9e%e6%8e%a7%e5%88%b6 aria-label=TCP拥塞控制>TCP拥塞控制</a><ul>
+<li>
+<a href=#%e6%a6%82%e8%bf%b0 aria-label=概述>概述</a></li>
+<li>
+<a href=#%e6%8b%a5%e5%a1%9e%e6%8e%a7%e5%88%b6%e7%ae%97%e6%b3%95 aria-label=拥塞控制算法>拥塞控制算法</a><ul>
+<li>
+<a href=#%e5%81%87%e5%ae%9a%e6%9d%a1%e4%bb%b6 aria-label=假定条件>假定条件</a></li>
+<li>
+<a href=#%e5%8f%91%e9%80%81%e6%96%b9%e4%ba%8b%e4%bb%b6 aria-label=发送方事件>发送方事件</a></li>
+<li>
+<a href=#%e6%85%a2%e5%bc%80%e5%a7%8b%e5%92%8c%e6%8b%a5%e5%a1%9e%e9%81%bf%e5%85%8d aria-label=慢开始和拥塞避免>慢开始和拥塞避免</a></li>
+<li>
+<a href=#%e5%bf%ab%e9%87%8d%e4%bc%a0%e5%92%8c%e5%bf%ab%e6%81%a2%e5%a4%8d aria-label=快重传和快恢复>快重传和快恢复</a><ul>
+<li>
+<a href=#%e5%bf%ab%e9%87%8d%e4%bc%a0 aria-label=快重传>快重传</a></li>
+<li>
+<a href=#%e5%bf%ab%e6%81%a2%e5%a4%8d aria-label=快恢复>快恢复</a></li></ul>
+</li>
+<li>
+<a href=#%e6%80%bb%e7%bb%93 aria-label=总结>总结</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</details>
+</div>
+<div class=post-content><p>[TOC]</p>
+<h1 id=tcp概述>TCP概述<a hidden class=anchor aria-hidden=true href=#tcp概述>#</a></h1>
+<h2 id=tcp的特点>TCP的特点<a hidden class=anchor aria-hidden=true href=#tcp的特点>#</a></h2>
+<ol>
+<li>点对点</li>
+<li>可靠，按顺序的字节流</li>
+<li>流水线机制</li>
+<li>发送方/接收方缓存</li>
+<li>全双工（full-duplex）连接（同一连接中能够传输双向数据流）</li>
+<li>面向连接的
+<ul>
+<li>通信双方在发送数据之前必须建立连接。</li>
+<li>连接状态只在连接的两端中维护，在沿途节点中并不维护状态。</li>
+<li>TCP连接包括：两台主机上的缓存、连接状态变量、socket等</li>
+</ul>
+</li>
+<li>流量控制机制</li>
+</ol>
+<h2 id=tcp段结构>TCP段结构<a hidden class=anchor aria-hidden=true href=#tcp段结构>#</a></h2>
+<p><img loading=lazy src=%e7%ac%94%e8%ae%b0-TCP%e5%8d%8f%e8%ae%ae.assets/image-20221215232812472.png alt=image-20221215232812472>
+</p>
+<p><img loading=lazy src=TCP.assets/N8ivrpdCSbxD6PE-20230313193734885.png alt=image-20211116195434784>
+</p>
+<ul>
+<li>
+<p>序列号</p>
+<ul>
+<li>序列号指的是segment中第一个字节的编号，而不是segment的编号</li>
+<li>建立TCP连接时，双方随机选择序列号</li>
+</ul>
+</li>
+<li>
+<p>ACK</p>
+<ul>
+<li>希望接收到的<strong>下一个字节的序列号</strong>（所以TCP不是百分百的GBN也不是百分百的SR）</li>
+<li>累计确认：该序列号之前的所有字节均已被正确接收到</li>
+</ul>
+</li>
+</ul>
+<h1 id=tcp可靠数据传输>TCP可靠数据传输<a hidden class=anchor aria-hidden=true href=#tcp可靠数据传输>#</a></h1>
+<ul>
+<li>TCP在IP层提供的不可靠服务基础上实现可靠数据传输服务</li>
+<li>流水线机制</li>
+<li>累积确认</li>
+<li>TCP使用单一重传定时器</li>
+<li>触发重传的事件
+<ul>
+<li>超时</li>
+<li>收到重复ACK</li>
+</ul>
+</li>
+</ul>
+<h2 id=tcp的超时重传时间选择>TCP的超时重传时间选择<a hidden class=anchor aria-hidden=true href=#tcp的超时重传时间选择>#</a></h2>
+<p>RTT：round trip time</p>
+<p>RTO：retransmission time out</p>
+<p><img loading=lazy src=TCP.assets/JqHdbGZ3txaemUg-20230313193733193.png alt=image-20211122211637950>
+</p>
+<h3 id=先计算rtts>先计算RTTs<a hidden class=anchor aria-hidden=true href=#先计算rtts>#</a></h3>
+<ul>
+<li>
+<p><strong>不能直接使用某次测量得到的RTT样本（比如RTT1，RTT0）来计算超时重传时间RTO.</strong></p>
+</li>
+<li>
+<p>利用每次测量得到的RTT样本，计算<strong>加权平均往返时间RTTs</strong>（又称为平滑的往返时间）
+$$
+R T T_{s 1}=R T T_{1}\<br>
+\text { 新的 } R T T_{S}=(1-\alpha) \times \text { 旧的 } R T T_{S}+\alpha \times \text { 新的 } R T T \text { 样本 }
+$$
+在上式中, $0 \leq \alpha&lt;1$ :</p>
+<ul>
+<li>
+<p>若 $\alpha$ 很接近于 0 ，则新RTT样本对RTT 的影响不大;</p>
+</li>
+<li>
+<p>若 $\alpha$ 很接近于 1 ，则新RTT样本对RTT 的影响较大;</p>
+<pre><code>已成为建议标准的RFC6298推苃的 $\alpha$ 值为 $1 / 8$ ，即 $0.125$ 。
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>用这种方法得出的加权平均往返时间RTTs就比测量出的RTT值更加平滑。</p>
+</li>
+<li>
+<p>显然，超时重传时间RTO应略大于加权平均往返时间RTTS。</p>
+</li>
+</ul>
+<h3 id=再计算rto>再计算RTO<a hidden class=anchor aria-hidden=true href=#再计算rto>#</a></h3>
+<p><img loading=lazy src=TCP.assets/wn3lB1CcPHuSafU-20230313193733179.png alt=img>
+</p>
+<h3 id=往返时间rtt的测量比较复杂>往返时间RTT的测量比较复杂<a hidden class=anchor aria-hidden=true href=#往返时间rtt的测量比较复杂>#</a></h3>
+<p><img loading=lazy src=TCP.assets/nEgj1LRY7Cd4v59-20230313193733507.png alt=image-20211122212302674>
+</p>
+<p>针对出现<strong>超时重传时无法测准往返时间RTT</strong>的问题，Karn提出了一个算法：</p>
+<p>在计算加权平均往返时间RTTs时，<strong>只要报文段重传了，就不采用其往返时间RTT样本</strong>。也
+就是出现重传时，不重新计算RTTs，进而超时重传时间RTO也不会重新计算。</p>
+<ul>
+<li>
+<p>这又引起了新的问题。设想出现这样的情况：报文段的时延突然增大了很多，并且之后很长一段时间都会保持这种时延。</p>
+<p>因此在原来得出的重传时间内，不会收到确认报文段。于是就重传报文段。</p>
+<p>但根据Karn算法，不考虑重传的报文段的往返时间样本。这样，超时重传时间就无法更新。这会导致报文段反复被重传。</p>
+</li>
+</ul>
+<p>因此，要对Karn算法进行修正。方法是：</p>
+<p><strong>报文段每重传一次，就把超时重传时间RTO增大一些</strong>。典型的做法是将新RTO的值取为旧RTO值的2倍，如下所示：</p>
+<p><img loading=lazy src=TCP.assets/FWrphVkYdInfKwX-20230313193733766.png alt=img>
+</p>
+<h2 id=tcp滑动窗口原理>TCP滑动窗口原理<a hidden class=anchor aria-hidden=true href=#tcp滑动窗口原理>#</a></h2>
+<p><img loading=lazy src=TCP.assets/LrIgMTyFYn68iHV-20230313193733295.png alt=img>
+</p>
+<p><img loading=lazy src=TCP.assets/HQWT1zgCRorEOhN-20230313193734278.png alt=img>
+</p>
+<p><img loading=lazy src=TCP.assets/RhdQ35DbEeurUk8-20230313193734229.png alt=img>
+</p>
+<h2 id=快速重传机制>快速重传机制<a hidden class=anchor aria-hidden=true href=#快速重传机制>#</a></h2>
+<ul>
+<li>
+<p>TCP的实现中，如果发生超时，超时时间间隔将重新设置，即将超时时间间隔加倍，导致其很大</p>
+</li>
+<li>
+<p>如果某个分组丢失，可能会引发多个重复的ACK</p>
+</li>
+<li>
+<p>如果sender收到对同一数据的3个ACK，则假定该数据之后的段己经丢失</p>
+</li>
+</ul>
+<h1 id=tcp流量控制>TCP流量控制<a hidden class=anchor aria-hidden=true href=#tcp流量控制>#</a></h1>
+<h2 id=功能>功能<a hidden class=anchor aria-hidden=true href=#功能>#</a></h2>
+<p>接收方会为TCP连接分配Buffer，有时候上层应用处理buffer中数据速度可能较慢，TCP的流量控制会控制发送方传输的速度，不要太快以至于淹没接收方（buffer溢出），流量控制是一种速度匹配机制。</p>
+<p><img loading=lazy src=TCP.assets/2iFjksIuUMZ7SWq-20230313193733983.png alt=image-20211120193819507>
+</p>
+<h2 id=原理>原理<a hidden class=anchor aria-hidden=true href=#原理>#</a></h2>
+<ul>
+<li>
+<p><strong>Buffer中的可用空间(spare room)</strong>=RcvWindow=RcvBuffer-[LastByteRcvd-LastByteRead]</p>
+</li>
+<li>
+<p>Receiver在Segment的头部字段将RcvWindow 的值告诉Sender</p>
+</li>
+<li>
+<p>Sender收到后会限制自己已经发送的但还未收到ACK的数据不超过接收方的空闲Revwindow尺寸</p>
+</li>
+</ul>
+<h2 id=过程>过程<a hidden class=anchor aria-hidden=true href=#过程>#</a></h2>
+<p><img loading=lazy src=%e7%ac%94%e8%ae%b0-TCP%e5%8d%8f%e8%ae%ae.assets/image-20221216011202202.png alt=image-20221216011202202>
+</p>
+<p><img loading=lazy src=%e7%ac%94%e8%ae%b0-TCP%e5%8d%8f%e8%ae%ae.assets/image-20221216011230198.png alt=image-20221216011230198>
+</p>
+<h1 id=tcp连接管理>TCP连接管理<a hidden class=anchor aria-hidden=true href=#tcp连接管理>#</a></h1>
+<h2 id=建立连接三次握手>建立连接：三次握手<a hidden class=anchor aria-hidden=true href=#建立连接三次握手>#</a></h2>
+<p><img loading=lazy src=TCP.assets/image-20211120210305251.png alt=image-20211120210305251>
+</p>
+<ul>
+<li>SYN=1的两个报文段不能携带信息，但是要占用序列号</li>
+<li>seq=x是客户随机选择的初始序列号</li>
+<li>seq=y是服务器随机选择的自己的初始序列号</li>
+</ul>
+<h3 id=为什么不能简化为两次握手>为什么不能简化为两次握手<a hidden class=anchor aria-hidden=true href=#为什么不能简化为两次握手>#</a></h3>
+<p><img loading=lazy src=TCP.assets/kiUeox2h14zpvON-20230313193733848.png alt=image-20211120205402224>
+</p>
+<h2 id=释放连接四次挥手>释放连接：四次挥手<a hidden class=anchor aria-hidden=true href=#释放连接四次挥手>#</a></h2>
+<p><img loading=lazy src=TCP.assets/dRXuWip5bFYlecs-20230313193735419.png alt=image-20211122151422057>
+</p>
+<h3 id=为什么不能简化为两次挥手>为什么不能简化为两次挥手<a hidden class=anchor aria-hidden=true href=#为什么不能简化为两次挥手>#</a></h3>
+<p><img loading=lazy src=TCP.assets/v35wHlPdtMVbsXo-20230313193734456.png alt=image-20211122151319932>
+</p>
+<h1 id=tcp拥塞控制>TCP拥塞控制<a hidden class=anchor aria-hidden=true href=#tcp拥塞控制>#</a></h1>
+<h2 id=概述>概述<a hidden class=anchor aria-hidden=true href=#概述>#</a></h2>
+<p><img loading=lazy src=TCP.assets/9MSfDIkyQJU8utd-20230313193734579.png alt=image-20211122152625889>
+</p>
+<p>在某段时间，若对网络中某一资源的需求超过了该资源所能提供的可用部分，网络性能就要变坏。
+这种情况就叫做<strong>拥塞(congestion)</strong>。</p>
+<ul>
+<li>在计算机网络中的链路容量（即带宽）、交换结点中的缓存和处理机等，都是网络的资源。</li>
+</ul>
+<p><strong>若出现拥塞而不进行控制，整个网络的吞吐量将随输入负荷的增大而下降。</strong></p>
+<h2 id=拥塞控制算法>拥塞控制算法<a hidden class=anchor aria-hidden=true href=#拥塞控制算法>#</a></h2>
+<h3 id=假定条件>假定条件<a hidden class=anchor aria-hidden=true href=#假定条件>#</a></h3>
+<p>数据是单方向传送，而另一个方向只传送确认。</p>
+<p>接收方总是有足够大的缓存空间，因而发送方发送窗口的大小由网络的拥塞程度来决定。</p>
+<p>以最大报文段MSS的个数为讨论问题的单位，而不是以字节为单位。</p>
+<h3 id=发送方事件>发送方事件<a hidden class=anchor aria-hidden=true href=#发送方事件>#</a></h3>
+<p><img loading=lazy src=%e7%ac%94%e8%ae%b0-TCP%e5%8d%8f%e8%ae%ae.assets/GuSmwdc2NqofOpB.png alt=image-20211122153133450>
+</p>
+<h3 id=慢开始和拥塞避免>慢开始和拥塞避免<a hidden class=anchor aria-hidden=true href=#慢开始和拥塞避免>#</a></h3>
+<p><img loading=lazy src=TCP.assets/ud3JCm1vzENPqgH-20230313193735027.png alt=image-20211122154054092>
+</p>
+<p>传输轮次：</p>
+<ul>
+<li>发送方给接收方发送数据报文段后，接收方给发送方发发回相应的确认报文段</li>
+<li><strong>一个传输轮次所经历的时间其实就是往返时间RTT</strong>，往返时间并非是恒定的数值</li>
+<li>使用传输轮次是为了强调把拥塞窗口所允许发送的报文段都连续发送出去，并受到了对已发送的最后一个报文段的确认</li>
+</ul>
+<h3 id=快重传和快恢复>快重传和快恢复<a hidden class=anchor aria-hidden=true href=#快重传和快恢复>#</a></h3>
+<ul>
+<li>
+<p>慢开始和拥塞避免算法是1988年提出的TCP拥塞控制算法(<strong>TCP Tahoe</strong>版本）。</p>
+</li>
+<li>
+<p>1990年又增加了两个新的拥塞控制算法(改进TCP的性能），这就是快重传和快恢复（<strong>TCP Reno</strong>版本）</p>
+<ul>
+<li>有时，个别报文段会在网络中丢失，但实际上网络并未发生拥塞。这将导致发送方超时重传，并误认为网络发生了拥塞；发送方把拥塞窗口cwnd又设置为最小值1，并错误地启动慢开始算法，因而降低了传输效率。</li>
+<li>采用快重传算法可以<strong>让发送方尽早知道发生了个别报文段的丢失</strong>。</li>
+</ul>
+</li>
+</ul>
+<h4 id=快重传>快重传<a hidden class=anchor aria-hidden=true href=#快重传>#</a></h4>
+<p>所谓快重传，就是使发送方<strong>尽快进行重传</strong>，而不是等超时重传计时器超时再重传。</p>
+<ul>
+<li>要求接收方不要等待自己发送数据时才进行捎带确认，而是要<strong>立即发送确认</strong>；</li>
+<li>即使收到了失序的报文段也要立即发出对已收到的报文段的<strong>重复确认</strong>。</li>
+<li>发送方一旦收到<strong>3个连续的重复确认</strong>，就将相应的报文段立即重传，而不是等该报文段的超时重传计时器超时再重传。</li>
+<li>对于个别丢失的报文段，发送方不会出现超时重传，也就不会误认为出现了拥塞（进而降低拥塞窗口cwnd为1）。<strong>使用快重传可以使整个网络的吞吐量提高约20%</strong>。</li>
+</ul>
+<p><img loading=lazy src=TCP.assets/sWGJlIOn9KqX78y-20230313193734745.png alt=image-20211122204148203>
+</p>
+<h4 id=快恢复>快恢复<a hidden class=anchor aria-hidden=true href=#快恢复>#</a></h4>
+<p>发送方一旦收到3个重复确认，就知道现在只是丢失了个别的报文段。于是不启动慢开始算法，而执行快恢复算法：</p>
+<ul>
+<li>
+<p><strong>发送方将慢开始门限ssthresh值和拥塞窗口cwnd值调整为当前窗口的一半；开始执行拥塞避免算法。</strong></p>
+</li>
+<li>
+<p>也有的快恢复实现是把快恢复开始时的拥塞窗口cwnd值再增大一些，</p>
+<p>即等于新的ssthresh + 3。</p>
+<ul>
+<li>既然发送方收到3个重复的确认，就表明有3个数据报文段已经离开了网络；</li>
+<li>这3个报文段不再消耗网络资源而是停留在接收方的接收缓存中；</li>
+<li>可见现在网络中不是堆积了报文段而是减少了3个报文段。因此可以适当把拥鑫窗口扩大些。</li>
+</ul>
+</li>
+</ul>
+<h3 id=总结>总结<a hidden class=anchor aria-hidden=true href=#总结>#</a></h3>
+<p><img loading=lazy src=TCP.assets/1VcIj7v9ATgSshu-20230313193734786.png alt=image-20211122204702073>
+</p>
+</div>
+<footer class=post-footer>
+<ul class=post-tags>
+<li><a href=https://abigail1985.github.io/tags/network/>network </a></li>
+</ul>
+<nav class=paginav>
+<a class=prev href=https://abigail1985.github.io/essay/pkucpp-1/>
+<span class=title>« 上一页</span>
+<br>
+<span>PKUCpp-1</span>
+</a>
+<a class=next href=https://abigail1985.github.io/essay/obsidian-devonthink/>
+<span class=title>下一页 »</span>
+<br>
+<span>Devonthink+Obsidian管理知识体系</span>
+</a>
+</nav>
+<div class=share-buttons>
+<a target=_blank rel="noopener noreferrer" aria-label="share TCP协议 on twitter" href="https://twitter.com/intent/tweet/?text=TCP%e5%8d%8f%e8%ae%ae&url=https%3a%2f%2fabigail1985.github.io%2fessay%2ftcp%2f&hashtags=network">
+<png version=1.1 viewbox="0 0 512 512" xml:space=preserve>
+<path d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z">
+</png>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share TCP协议 on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fabigail1985.github.io%2fessay%2ftcp%2f&title=TCP%e5%8d%8f%e8%ae%ae&summary=TCP%e5%8d%8f%e8%ae%ae&source=https%3a%2f%2fabigail1985.github.io%2fessay%2ftcp%2f">
+<png version=1.1 viewbox="0 0 512 512" xml:space=preserve>
+<path d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z">
+</png>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share TCP协议 on reddit" href="https://reddit.com/submit?url=https%3a%2f%2fabigail1985.github.io%2fessay%2ftcp%2f&title=TCP%e5%8d%8f%e8%ae%ae">
+<png version=1.1 viewbox="0 0 512 512" xml:space=preserve>
+<path d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z">
+</png>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share TCP协议 on facebook" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fabigail1985.github.io%2fessay%2ftcp%2f">
+<png version=1.1 viewbox="0 0 512 512" xml:space=preserve>
+<path d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z">
+</png>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share TCP协议 on whatsapp" href="https://api.whatsapp.com/send?text=TCP%e5%8d%8f%e8%ae%ae%20-%20https%3a%2f%2fabigail1985.github.io%2fessay%2ftcp%2f">
+<png version=1.1 viewbox="0 0 512 512" xml:space=preserve>
+<path d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z">
+</png>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share TCP协议 on telegram" href="https://telegram.me/share/url?text=TCP%e5%8d%8f%e8%ae%ae&url=https%3a%2f%2fabigail1985.github.io%2fessay%2ftcp%2f">
+<png version=1.1 xml:space=preserve viewbox="2 2 28 28">
+<path d=M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z>
+</png>
+</a>
+</div>
+</footer><script src=https://cdn.jsdelivr.net/npm/@waline/client></script>
+<div id=waline></div>
+<script>Waline({el:'#waline',serverURL:'https://blog-api-theta.vercel.app/',copyright:!1,login:'force',dark:'.dark',locale:{placeholder:'登录以评论'}})</script>
+</article>
+</main>
+<footer class=footer>
+<span>&copy; 2023 <a href=https://abigail1985.github.io/>de_Abigaïl</a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
+</span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)">
+<button class=top-link id=top-link type=button accesskey=g>
+<png xmlns=http://www.w3.org/2000/png viewbox="0 0 12 6" fill=currentColor>
+<path d="M12 6H0l6-6z">
+</png>
+</button>
+</a>
+<script>let menu=document.getElementById('menu');menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+<script>document.querySelectorAll('pre > code').forEach(b=>{const c=b.parentNode.parentNode,a=document.createElement('button');a.classList.add('copy-code'),a.innerText='复制';function d(){a.innerText='已复制！',setTimeout(()=>{a.innerText='复制'},2e3)}a.addEventListener('click',e=>{if('clipboard'in navigator){navigator.clipboard.writeText(b.textContent),d();return}const a=document.createRange();a.selectNodeContents(b);const c=window.getSelection();c.removeAllRanges(),c.addRange(a);try{document.execCommand('copy'),d()}catch(a){}c.removeRange(a)}),c.classList.contains("highlight")?c.appendChild(a):c.parentNode.firstChild==c||(b.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?b.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(a):b.parentNode.appendChild(a))})</script>
+</body>
+</html>
